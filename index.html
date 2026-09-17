@@ -1,471 +1,538 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LocalLink | Business Registration</title>
+<title>LocalLink | Local Businesses</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #17202a;
+}
+
+/* =========================
+   SPLASH SCREEN
+========================= */
+
+#splash {
+    position: fixed;
+    inset: 0;
+    background: #111827;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: splashOut 0.7s ease forwards;
+    animation-delay: 2.2s;
+}
+
+.splash-content {
+    text-align: center;
+    animation: logoIn 0.8s ease;
+}
+
+.splash-logo {
+    width: 90px;
+    height: 90px;
+    background: white;
+    color: #111827;
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 52px;
+    font-weight: bold;
+
+    margin: 0 auto 20px;
+}
+
+.splash-name {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.splash-tagline {
+    margin-top: 10px;
+    color: #d1d5db;
+    font-size: 14px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: #111827;
+    color: white;
+    padding: 22px 6%;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 42px;
+    height: 42px;
+
+    background: white;
+    color: #111827;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.brand-name {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.business-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+    padding: 65px 20px 45px;
+    background: white;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #667085;
+    font-size: 17px;
+    margin-bottom: 28px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+    width: 92%;
+    max-width: 650px;
+    margin: auto;
+
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 15px 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #111827;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.section {
+    width: 92%;
+    max-width: 1100px;
+    margin: 45px auto;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.category {
+    background: white;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 14px;
+
+    padding: 22px 15px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.category:hover {
+    transform: translateY(-3px);
+}
+
+/* =========================
+   BUSINESS AREA
+========================= */
+
+.empty-box {
+    background: white;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 14px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    color: #667085;
+}
+
+.business-area {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.register-button {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding: 13px 20px;
+
+    background: #111827;
+    color: white;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 70px;
+
+    background: #111827;
+    color: white;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes logoIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.7);
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #17202a;
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes splashOut {
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+    .hero h1 {
+        font-size: 30px;
     }
 
-    /* LOGO / BRAND */
-    header {
-      background: #111827;
-      color: white;
-      padding: 25px 6%;
-      text-align: center;
+    .search-box {
+        flex-direction: column;
     }
 
-    .logo-box {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+    .search-box button {
+        width: 100%;
     }
 
-    .logo-icon {
-      width: 45px;
-      height: 45px;
-      border-radius: 12px;
-      background: white;
-      color: #111827;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
-      font-weight: bold;
+    .splash-logo {
+        width: 75px;
+        height: 75px;
+        font-size: 43px;
     }
 
-    .logo {
-      font-size: 30px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
+    .splash-name {
+        font-size: 30px;
     }
-
-    .tagline {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #d1d5db;
-    }
-
-    .container {
-      width: 92%;
-      max-width: 750px;
-      margin: 35px auto;
-    }
-
-    .back {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #111827;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .form-card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid #e4e7ec;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    .intro {
-      color: #667085;
-      line-height: 1.5;
-      margin-bottom: 30px;
-    }
-
-    .field {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d0d5dd;
-      border-radius: 9px;
-      font-size: 16px;
-      background: white;
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .submit {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 9px;
-      background: #111827;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .submit:hover {
-      background: #374151;
-    }
-
-    .notice {
-      margin-top: 20px;
-      padding: 15px;
-      background: #f3f4f6;
-      border-radius: 9px;
-      color: #4b5563;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    footer {
-      margin-top: 60px;
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 30px;
-    }
-
-    @media (max-width: 600px) {
-      .form-card {
-        padding: 22px;
-      }
-
-      .logo {
-        font-size: 26px;
-      }
-
-      .logo-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 22px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
 <!-- =========================
-     LOCAL LINK LOGO
+     LOCALINK SPLASH SCREEN
+========================= -->
+
+<div id="splash">
+
+    <div class="splash-content">
+
+        <div class="splash-logo">
+            L
+        </div>
+
+        <div class="splash-name">
+            LocalLink
+        </div>
+
+        <div class="splash-tagline">
+            Connecting customers with local businesses
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
 ========================= -->
 
 <header>
 
-  <div class="logo-box">
+    <div class="header-inner">
 
-    <div class="logo-icon">
-      L
+        <div class="brand">
+
+            <div class="logo-small">
+                L
+            </div>
+
+            <div class="brand-name">
+                LocalLink
+            </div>
+
+        </div>
+
+        <a href="business.html" class="business-link">
+            For Businesses
+        </a>
+
     </div>
-
-    <div class="logo">
-      LocalLink
-    </div>
-
-  </div>
-
-  <div class="tagline">
-    Connecting customers with local businesses
-  </div>
 
 </header>
 
 
 <!-- =========================
-     REGISTRATION
+     HERO
 ========================= -->
 
-<main class="container">
+<section class="hero">
 
-  <a href="index.html" class="back">
-    ← Back to LocalLink
-  </a>
+    <h1>
+        Discover Local Businesses
+    </h1>
 
-
-  <div class="form-card">
-
-    <h1>Register Your Business</h1>
-
-    <p class="intro">
-      Add information about your business so customers can
-      understand what you offer.
+    <p>
+        Find businesses, services and opportunities around you.
     </p>
 
 
-    <form id="businessForm">
-
-
-      <!-- BUSINESS NAME -->
-
-      <div class="field">
-
-        <label for="businessName">
-          Business name
-        </label>
+    <div class="search-box">
 
         <input
-          id="businessName"
-          type="text"
-          placeholder="Example: Sahana Textiles"
-          required
+            type="search"
+            id="searchInput"
+            placeholder="Search businesses or services..."
         >
 
-      </div>
+        <button onclick="searchLocalLink()">
+            Search
+        </button>
+
+    </div>
+
+</section>
 
 
-      <!-- CONTACT PERSON -->
+<!-- =========================
+     CATEGORIES
+========================= -->
 
-      <div class="field">
+<section class="section">
 
-        <label for="contactName">
-          Owner / contact person
-        </label>
+    <h2>
+        Explore Categories
+    </h2>
 
-        <input
-          id="contactName"
-          type="text"
-          placeholder="Enter contact person's name"
-          required
-        >
+    <div class="categories">
 
-      </div>
-
-
-      <!-- EMAIL -->
-
-      <div class="field">
-
-        <label for="email">
-          Business email
-        </label>
-
-        <input
-          id="email"
-          type="email"
-          placeholder="business@example.com"
-          required
-        >
-
-      </div>
-
-
-      <!-- PHONE -->
-
-      <div class="field">
-
-        <label for="phone">
-          Business phone
-        </label>
-
-        <input
-          id="phone"
-          type="tel"
-          placeholder="Enter business phone number"
-          required
-        >
-
-      </div>
-
-
-      <!-- MAIN CATEGORY -->
-
-      <div class="field">
-
-        <label for="mainCategory">
-          Main category
-        </label>
-
-        <select id="mainCategory" required>
-
-          <option value="">
-            Select main category
-          </option>
-
-          <option value="Shopping">
+        <div class="category" onclick="selectCategory('Shopping')">
+            🛍️<br><br>
             Shopping
-          </option>
+        </div>
 
-          <option value="Food">
+        <div class="category" onclick="selectCategory('Food')">
+            🍴<br><br>
             Food
-          </option>
+        </div>
 
-          <option value="Services">
+        <div class="category" onclick="selectCategory('Services')">
+            🔧<br><br>
             Services
-          </option>
+        </div>
 
-          <option value="Transport">
+        <div class="category" onclick="selectCategory('Transport')">
+            🚕<br><br>
             Transport
-          </option>
+        </div>
 
-          <option value="Manufacturing">
+        <div class="category" onclick="selectCategory('Business & Manufacturing')">
+            🏭<br><br>
             Business & Manufacturing
-          </option>
+        </div>
 
-          <option value="Property">
-            Property & Local Services
-          </option>
+        <div class="category" onclick="selectCategory('Property & Local Services')">
+            🏠<br><br>
+            Property
+        </div>
 
-          <option value="Education">
+        <div class="category" onclick="selectCategory('Education')">
+            🎓<br><br>
             Education
-          </option>
+        </div>
 
-          <option value="Professional">
-            Professional Services
-          </option>
+        <div class="category" onclick="selectCategory('Professional Services')">
+            💼<br><br>
+            Professional
+        </div>
 
-          <option value="Agriculture">
+        <div class="category" onclick="selectCategory('Agriculture')">
+            🌾<br><br>
             Agriculture
-          </option>
+        </div>
 
-          <option value="Health">
+        <div class="category" onclick="selectCategory('Health & Wellness')">
+            ❤️<br><br>
             Health & Wellness
-          </option>
+        </div>
 
-          <option value="Entertainment">
+        <div class="category" onclick="selectCategory('Entertainment')">
+            🎮<br><br>
             Entertainment
-          </option>
+        </div>
 
-          <option value="Media">
-            Media, Cinema & Entertainment
-          </option>
+        <div class="category" onclick="selectCategory('Media, Cinema & Entertainment')">
+            🎬<br><br>
+            Media & Cinema
+        </div>
 
-          <option value="Other">
+        <div class="category" onclick="selectCategory('Other')">
+            📦<br><br>
             Other
-          </option>
+        </div>
 
-        </select>
+    </div>
 
-      </div>
-
-
-      <!-- SUBCATEGORY -->
-
-      <div class="field">
-
-        <label for="subCategory">
-          Subcategory
-        </label>
-
-        <select id="subCategory" required>
-
-          <option value="">
-            First select a main category
-          </option>
-
-        </select>
-
-      </div>
+</section>
 
 
-      <!-- CITY -->
+<!-- =========================
+     BUSINESS LISTINGS
+========================= -->
 
-      <div class="field">
+<section class="section">
 
-        <label for="city">
-          City
-        </label>
+    <h2>
+        Local Businesses
+    </h2>
 
-        <input
-          id="city"
-          type="text"
-          placeholder="Enter city"
-          required
-        >
+    <div class="empty-box">
 
-      </div>
+        <p>
+            No businesses are registered yet.
+        </p>
 
+        <div class="business-area">
 
-      <!-- ADDRESS -->
+            <p>
+                Businesses will appear here after secure registration
+                and database connection.
+            </p>
 
-      <div class="field">
+            <a
+                href="business.html"
+                class="register-button"
+            >
+                Register a Business
+            </a>
 
-        <label for="address">
-          Business address
-        </label>
+        </div>
 
-        <textarea
-          id="address"
-          placeholder="Enter the business address"
-          required
-        ></textarea>
+    </div>
 
-      </div>
-
-
-      <!-- DESCRIPTION -->
-
-      <div class="field">
-
-        <label for="description">
-          About the business
-        </label>
-
-        <textarea
-          id="description"
-          placeholder="Tell customers what your business offers"
-          required
-        ></textarea>
-
-      </div>
-
-
-      <!-- SUBMIT -->
-
-      <button
-        type="submit"
-        class="submit"
-      >
-        Continue
-      </button>
-
-
-      <!-- HONEST STATUS -->
-
-      <div class="notice">
-
-        <strong>Current status:</strong>
-        <br><br>
-
-        This is the registration interface only.
-
-        No information is being stored or submitted yet.
-
-        <br><br>
-
-        We will connect secure authentication and a real
-        database before accepting real business registrations.
-
-      </div>
-
-
-    </form>
-
-  </div>
-
-</main>
+</section>
 
 
 <!-- =========================
@@ -474,259 +541,60 @@
 
 <footer>
 
-  <p>
-    <strong>LocalLink</strong>
-  </p>
+    <p>
+        <strong>LocalLink</strong>
+    </p>
 
-  <br>
+    <br>
 
-  <p>
-    Connecting customers with local businesses.
-  </p>
+    <p>
+        Connecting customers with local businesses.
+    </p>
 
 </footer>
 
 
-<!-- =========================
-     CATEGORY SYSTEM
-========================= -->
-
 <script>
 
-  const categories = {
+/* =========================
+   SEARCH
+========================= */
 
-    Shopping: [
-      "Grocery & Supermarket",
-      "Clothing & Fashion",
-      "Electronics",
-      "Mobile & Accessories",
-      "Furniture",
-      "Home & Kitchen",
-      "Jewellery",
-      "Beauty & Personal Care",
-      "Books & Stationery",
-      "Sports & Fitness",
-      "Hardware & Tools",
-      "Automotive"
-    ],
+function searchLocalLink() {
 
+    const search =
+        document.getElementById("searchInput").value.trim();
 
-    Food: [
-      "Restaurant",
-      "Bakery",
-      "Cafe",
-      "Tiffin & Home Food",
-      "Catering",
-      "Food Supplier"
-    ],
+    if (!search) {
 
-
-    Services: [
-      "Electrician",
-      "Plumber",
-      "Carpenter",
-      "AC & Appliance Repair",
-      "Cleaning",
-      "Painting",
-      "Construction",
-      "Photography",
-      "Tailoring",
-      "Printing",
-      "Computer & Mobile Repair"
-    ],
-
-
-    Transport: [
-      "Cab / Taxi",
-      "Auto",
-      "Delivery",
-      "Moving & Packers",
-      "Vehicle Rental",
-      "Logistics"
-    ],
-
-
-    Manufacturing: [
-      "Manufacturer",
-      "Wholesaler",
-      "Distributor",
-      "Industrial Supplier",
-      "Cotton Business",
-      "Oil Business",
-      "Local Manufacturer"
-    ],
-
-
-    Property: [
-      "Real Estate",
-      "Property Rental",
-      "Property Services",
-      "Interior Design",
-      "Security Services"
-    ],
-
-
-    Education: [
-      "School",
-      "Tuition",
-      "Coaching",
-      "Skill Training",
-      "Music & Art Classes"
-    ],
-
-
-    Professional: [
-      "Accounting",
-      "Legal Services",
-      "Consulting",
-      "Marketing",
-      "IT Services",
-      "Design Services"
-    ],
-
-
-    Agriculture: [
-      "Farmer",
-      "Seeds & Plants",
-      "Fertilizer",
-      "Agricultural Equipment",
-      "Farm Products",
-      "Agri Supplier"
-    ],
-
-
-    Health: [
-      "Pharmacy",
-      "Fitness",
-      "Yoga",
-      "Wellness",
-      "Optical",
-      "Other Health Services"
-    ],
-
-
-    Entertainment: [
-      "Events",
-      "Decorations",
-      "Music",
-      "Video",
-      "Gaming",
-      "Other Entertainment"
-    ],
-
-
-    /* =========================
-       MEDIA & CINEMA
-    ========================= */
-
-    Media: [
-      "Cinema / Film Production",
-      "Casting & Auditions",
-      "Advertising & Promotions",
-      "Video Production",
-      "Photography",
-      "Acting & Theatre",
-      "Music",
-      "Dance",
-      "Short Films",
-      "Web Series",
-      "Content Creation",
-      "Makeup & Styling",
-      "Costume & Fashion",
-      "Film Equipment & Services",
-      "Event & Media Services"
-    ],
-
-
-    Other: [
-      "Other Business"
-    ]
-
-  };
-
-
-  /* =========================
-     CATEGORY DROPDOWN
-  ========================= */
-
-  const mainCategory =
-    document.getElementById("mainCategory");
-
-  const subCategory =
-    document.getElementById("subCategory");
-
-
-  mainCategory.addEventListener(
-    "change",
-    function() {
-
-      const selected = this.value;
-
-      subCategory.innerHTML = "";
-
-
-      if (!selected) {
-
-        subCategory.innerHTML =
-          '<option value="">First select a main category</option>';
+        alert("Please enter something to search.");
 
         return;
-
-      }
-
-
-      const defaultOption =
-        document.createElement("option");
-
-      defaultOption.value = "";
-
-      defaultOption.textContent =
-        "Select a subcategory";
-
-      subCategory.appendChild(defaultOption);
-
-
-      categories[selected].forEach(
-        function(item) {
-
-          const option =
-            document.createElement("option");
-
-          option.value = item;
-
-          option.textContent = item;
-
-          subCategory.appendChild(option);
-
-        }
-      );
-
     }
-  );
 
-
-  /* =========================
-     FORM TEST
-  ========================= */
-
-  document
-    .getElementById("businessForm")
-    .addEventListener(
-      "submit",
-      function(event) {
-
-        event.preventDefault();
-
-        alert(
-          "The form is working.\n\n" +
-          "Your information has NOT been submitted or stored yet.\n\n" +
-          "Next we will connect secure authentication and a real database."
-        );
-
-      }
+    alert(
+        "You searched for: " +
+        search +
+        "\n\nReal business results will appear here after the LocalLink database is connected."
     );
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+function selectCategory(category) {
+
+    alert(
+        category +
+        "\n\nBusinesses in this category will appear here once real businesses are registered."
+    );
+
+}
 
 </script>
 
 </body>
 </html>
+
