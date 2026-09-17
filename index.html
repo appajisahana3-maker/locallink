@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,15 +19,44 @@
       color: #17202a;
     }
 
+    /* LOGO / BRAND */
     header {
       background: #111827;
       color: white;
-      padding: 18px 6%;
+      padding: 25px 6%;
+      text-align: center;
+    }
+
+    .logo-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: bold;
     }
 
     .logo {
-      font-size: 25px;
+      font-size: 30px;
       font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .tagline {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #d1d5db;
     }
 
     .container {
@@ -123,16 +153,50 @@
       .form-card {
         padding: 22px;
       }
+
+      .logo {
+        font-size: 26px;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+<!-- =========================
+     LOCAL LINK LOGO
+========================= -->
+
 <header>
-  <div class="logo">LocalLink</div>
+
+  <div class="logo-box">
+
+    <div class="logo-icon">
+      L
+    </div>
+
+    <div class="logo">
+      LocalLink
+    </div>
+
+  </div>
+
+  <div class="tagline">
+    Connecting customers with local businesses
+  </div>
+
 </header>
 
+
+<!-- =========================
+     REGISTRATION
+========================= -->
 
 <main class="container">
 
@@ -153,7 +217,11 @@
 
     <form id="businessForm">
 
+
+      <!-- BUSINESS NAME -->
+
       <div class="field">
+
         <label for="businessName">
           Business name
         </label>
@@ -164,10 +232,14 @@
           placeholder="Example: Sahana Textiles"
           required
         >
+
       </div>
 
 
+      <!-- CONTACT PERSON -->
+
       <div class="field">
+
         <label for="contactName">
           Owner / contact person
         </label>
@@ -178,10 +250,14 @@
           placeholder="Enter contact person's name"
           required
         >
+
       </div>
 
 
+      <!-- EMAIL -->
+
       <div class="field">
+
         <label for="email">
           Business email
         </label>
@@ -192,10 +268,14 @@
           placeholder="business@example.com"
           required
         >
+
       </div>
 
 
+      <!-- PHONE -->
+
       <div class="field">
+
         <label for="phone">
           Business phone
         </label>
@@ -206,10 +286,14 @@
           placeholder="Enter business phone number"
           required
         >
+
       </div>
 
 
+      <!-- MAIN CATEGORY -->
+
       <div class="field">
+
         <label for="mainCategory">
           Main category
         </label>
@@ -264,15 +348,23 @@
             Entertainment
           </option>
 
+          <option value="Media">
+            Media, Cinema & Entertainment
+          </option>
+
           <option value="Other">
             Other
           </option>
 
         </select>
+
       </div>
 
 
+      <!-- SUBCATEGORY -->
+
       <div class="field">
+
         <label for="subCategory">
           Subcategory
         </label>
@@ -284,10 +376,14 @@
           </option>
 
         </select>
+
       </div>
 
 
+      <!-- CITY -->
+
       <div class="field">
+
         <label for="city">
           City
         </label>
@@ -298,10 +394,14 @@
           placeholder="Enter city"
           required
         >
+
       </div>
 
 
+      <!-- ADDRESS -->
+
       <div class="field">
+
         <label for="address">
           Business address
         </label>
@@ -311,10 +411,14 @@
           placeholder="Enter the business address"
           required
         ></textarea>
+
       </div>
 
 
+      <!-- DESCRIPTION -->
+
       <div class="field">
+
         <label for="description">
           About the business
         </label>
@@ -324,8 +428,11 @@
           placeholder="Tell customers what your business offers"
           required
         ></textarea>
+
       </div>
 
+
+      <!-- SUBMIT -->
 
       <button
         type="submit"
@@ -335,15 +442,24 @@
       </button>
 
 
+      <!-- HONEST STATUS -->
+
       <div class="notice">
-        <strong>Current status:</strong><br><br>
+
+        <strong>Current status:</strong>
+        <br><br>
 
         This is the registration interface only.
+
         No information is being stored or submitted yet.
+
+        <br><br>
 
         We will connect secure authentication and a real
         database before accepting real business registrations.
+
       </div>
+
 
     </form>
 
@@ -352,11 +468,28 @@
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-  <p><strong>LocalLink</strong></p>
-  <p>Connecting customers with local businesses.</p>
+
+  <p>
+    <strong>LocalLink</strong>
+  </p>
+
+  <br>
+
+  <p>
+    Connecting customers with local businesses.
+  </p>
+
 </footer>
 
+
+<!-- =========================
+     CATEGORY SYSTEM
+========================= -->
 
 <script>
 
@@ -377,6 +510,7 @@
       "Automotive"
     ],
 
+
     Food: [
       "Restaurant",
       "Bakery",
@@ -385,6 +519,7 @@
       "Catering",
       "Food Supplier"
     ],
+
 
     Services: [
       "Electrician",
@@ -400,6 +535,7 @@
       "Computer & Mobile Repair"
     ],
 
+
     Transport: [
       "Cab / Taxi",
       "Auto",
@@ -408,6 +544,7 @@
       "Vehicle Rental",
       "Logistics"
     ],
+
 
     Manufacturing: [
       "Manufacturer",
@@ -419,6 +556,7 @@
       "Local Manufacturer"
     ],
 
+
     Property: [
       "Real Estate",
       "Property Rental",
@@ -427,6 +565,7 @@
       "Security Services"
     ],
 
+
     Education: [
       "School",
       "Tuition",
@@ -434,6 +573,7 @@
       "Skill Training",
       "Music & Art Classes"
     ],
+
 
     Professional: [
       "Accounting",
@@ -444,6 +584,7 @@
       "Design Services"
     ],
 
+
     Agriculture: [
       "Farmer",
       "Seeds & Plants",
@@ -452,6 +593,7 @@
       "Farm Products",
       "Agri Supplier"
     ],
+
 
     Health: [
       "Pharmacy",
@@ -462,6 +604,7 @@
       "Other Health Services"
     ],
 
+
     Entertainment: [
       "Events",
       "Decorations",
@@ -471,12 +614,40 @@
       "Other Entertainment"
     ],
 
+
+    /* =========================
+       MEDIA & CINEMA
+    ========================= */
+
+    Media: [
+      "Cinema / Film Production",
+      "Casting & Auditions",
+      "Advertising & Promotions",
+      "Video Production",
+      "Photography",
+      "Acting & Theatre",
+      "Music",
+      "Dance",
+      "Short Films",
+      "Web Series",
+      "Content Creation",
+      "Makeup & Styling",
+      "Costume & Fashion",
+      "Film Equipment & Services",
+      "Event & Media Services"
+    ],
+
+
     Other: [
       "Other Business"
     ]
 
   };
 
+
+  /* =========================
+     CATEGORY DROPDOWN
+  ========================= */
 
   const mainCategory =
     document.getElementById("mainCategory");
@@ -485,64 +656,77 @@
     document.getElementById("subCategory");
 
 
-  mainCategory.addEventListener("change", function() {
+  mainCategory.addEventListener(
+    "change",
+    function() {
 
-    const selected = this.value;
+      const selected = this.value;
 
-    subCategory.innerHTML = "";
-
-    if (!selected) {
-
-      subCategory.innerHTML =
-        '<option value="">First select a main category</option>';
-
-      return;
-    }
+      subCategory.innerHTML = "";
 
 
-    const defaultOption =
-      document.createElement("option");
+      if (!selected) {
 
-    defaultOption.value = "";
+        subCategory.innerHTML =
+          '<option value="">First select a main category</option>';
 
-    defaultOption.textContent =
-      "Select a subcategory";
+        return;
 
-    subCategory.appendChild(defaultOption);
+      }
 
 
-    categories[selected].forEach(function(item) {
-
-      const option =
+      const defaultOption =
         document.createElement("option");
 
-      option.value = item;
+      defaultOption.value = "";
 
-      option.textContent = item;
+      defaultOption.textContent =
+        "Select a subcategory";
 
-      subCategory.appendChild(option);
+      subCategory.appendChild(defaultOption);
 
-    });
 
-  });
+      categories[selected].forEach(
+        function(item) {
 
+          const option =
+            document.createElement("option");
+
+          option.value = item;
+
+          option.textContent = item;
+
+          subCategory.appendChild(option);
+
+        }
+      );
+
+    }
+  );
+
+
+  /* =========================
+     FORM TEST
+  ========================= */
 
   document
     .getElementById("businessForm")
-    .addEventListener("submit", function(event) {
+    .addEventListener(
+      "submit",
+      function(event) {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      alert(
-        "The form is working.\n\n" +
-        "Your information has NOT been submitted or stored yet.\n\n" +
-        "Next we will connect secure authentication and a real database."
-      );
+        alert(
+          "The form is working.\n\n" +
+          "Your information has NOT been submitted or stored yet.\n\n" +
+          "Next we will connect secure authentication and a real database."
+        );
 
-    });
+      }
+    );
 
 </script>
 
 </body>
 </html>
-
