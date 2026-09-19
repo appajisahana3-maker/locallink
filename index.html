@@ -606,7 +606,18 @@ window.localLinkSupabase = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 </script>
+<script>
+window.localLinkSupabase.auth.getSession().then(({ data, error }) => {
+  if (error) {
+    alert("Business page: Supabase connection failed.");
+  } else {
+    alert("✅ Business page is connected to Supabase!");
+  }
+});
+</script>
 
+</body>
+</html>
 </body>
 </html>
 
