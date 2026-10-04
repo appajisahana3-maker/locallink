@@ -77,7 +77,7 @@ body {
 header {
     background: #111827;
     color: white;
-    padding: 22px 6%;
+    padding: 18px 6%;
 }
 
 .header-inner {
@@ -87,6 +87,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .brand {
@@ -117,10 +118,40 @@ header {
     font-weight: bold;
 }
 
+/* =========================
+   HEADER ACTIONS
+========================= */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.login-link,
+.signup-link,
 .business-link {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    white-space: nowrap;
+}
+
+.login-link:hover,
+.business-link:hover {
+    text-decoration: underline;
+}
+
+.signup-link {
+    background: white;
+    color: #111827;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.signup-link:hover {
+    background: #e5e7eb;
+    text-decoration: none;
 }
 
 /* =========================
@@ -178,6 +209,10 @@ header {
 
     font-weight: bold;
     cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #374151;
 }
 
 /* =========================
@@ -257,6 +292,10 @@ header {
     font-weight: bold;
 }
 
+.register-button:hover {
+    background: #374151;
+}
+
 /* =========================
    FOOTER
 ========================= */
@@ -302,6 +341,36 @@ footer {
 ========================= */
 
 @media(max-width:600px) {
+
+    .header-inner {
+        align-items: flex-start;
+    }
+
+    .brand-name {
+        font-size: 21px;
+    }
+
+    .logo-small {
+        width: 38px;
+        height: 38px;
+        font-size: 21px;
+    }
+
+    .header-actions {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .login-link,
+    .signup-link,
+    .business-link {
+        font-size: 12px;
+    }
+
+    .signup-link {
+        padding: 8px 10px;
+    }
 
     .hero h1 {
         font-size: 30px;
@@ -375,9 +444,33 @@ footer {
 
         </div>
 
-        <a href="business.html" class="business-link">
-            For Businesses
-        </a>
+
+        <div class="header-actions">
+
+            <a
+                href="auth.html"
+                class="login-link"
+            >
+                Log In
+            </a>
+
+
+            <a
+                href="auth.html?signup=true"
+                class="signup-link"
+            >
+                Sign Up
+            </a>
+
+
+            <a
+                href="business.html"
+                class="business-link"
+            >
+                For Businesses
+            </a>
+
+        </div>
 
     </div>
 
@@ -428,67 +521,118 @@ footer {
 
     <div class="categories">
 
-        <div class="category" onclick="selectCategory('Shopping')">
+        <div
+            class="category"
+            onclick="selectCategory('Shopping')"
+        >
             🛍️<br><br>
             Shopping
         </div>
 
-        <div class="category" onclick="selectCategory('Food')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Food')"
+        >
             🍴<br><br>
             Food
         </div>
 
-        <div class="category" onclick="selectCategory('Services')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Services')"
+        >
             🔧<br><br>
             Services
         </div>
 
-        <div class="category" onclick="selectCategory('Transport')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Transport')"
+        >
             🚕<br><br>
             Transport
         </div>
 
-        <div class="category" onclick="selectCategory('Business & Manufacturing')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Business & Manufacturing')"
+        >
             🏭<br><br>
             Business & Manufacturing
         </div>
 
-        <div class="category" onclick="selectCategory('Property & Local Services')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Property & Local Services')"
+        >
             🏠<br><br>
             Property
         </div>
 
-        <div class="category" onclick="selectCategory('Education')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Education')"
+        >
             🎓<br><br>
             Education
         </div>
 
-        <div class="category" onclick="selectCategory('Professional Services')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Professional Services')"
+        >
             💼<br><br>
             Professional
         </div>
 
-        <div class="category" onclick="selectCategory('Agriculture')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Agriculture')"
+        >
             🌾<br><br>
             Agriculture
         </div>
 
-        <div class="category" onclick="selectCategory('Health & Wellness')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Health & Wellness')"
+        >
             ❤️<br><br>
             Health & Wellness
         </div>
 
-        <div class="category" onclick="selectCategory('Entertainment')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Entertainment')"
+        >
             🎮<br><br>
             Entertainment
         </div>
 
-        <div class="category" onclick="selectCategory('Media, Cinema & Entertainment')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Media, Cinema & Entertainment')"
+        >
             🎬<br><br>
             Media & Cinema
         </div>
 
-        <div class="category" onclick="selectCategory('Other')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Other')"
+        >
             📦<br><br>
             Other
         </div>
@@ -508,11 +652,13 @@ footer {
         Local Businesses
     </h2>
 
+
     <div class="empty-box">
 
         <p>
             No businesses are registered yet.
         </p>
+
 
         <div class="business-area">
 
@@ -520,6 +666,7 @@ footer {
                 Businesses will appear here after secure registration
                 and database connection.
             </p>
+
 
             <a
                 href="business.html"
@@ -554,16 +701,17 @@ footer {
 </footer>
 
 
-<script>
+<!-- =========================
+     SEARCH JAVASCRIPT
+========================= -->
 
-/* =========================
-   SEARCH
-========================= */
+<script>
 
 function searchLocalLink() {
 
     const search =
         document.getElementById("searchInput").value.trim();
+
 
     if (!search) {
 
@@ -572,11 +720,13 @@ function searchLocalLink() {
         return;
     }
 
+
     alert(
         "You searched for: " +
         search +
         "\n\nReal business results will appear here after the LocalLink database is connected."
     );
+
 }
 
 
@@ -595,22 +745,31 @@ function selectCategory(category) {
 
 </script>
 
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
 
-window.localLinkSupabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+const SUPABASE_URL =
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
+
+window.localLinkSupabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
 </script>
 
 
 </body>
 </html>
-
-
-
-
