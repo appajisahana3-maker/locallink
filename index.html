@@ -1,865 +1,1321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LocalLink | Local Businesses</title>
+  <title>LocalLink | Find Local Businesses</title>
 
-<style>
+  <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-    color: #17202a;
-}
-
-#splash {
-    position: fixed;
-    inset: 0;
-    background: #111827;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: splashOut 0.7s ease forwards;
-    animation-delay: 2.2s;
-}
-
-#splash.skip-splash {
-    display: none;
-}
-
-.splash-content {
-    text-align: center;
-    animation: logoIn 0.8s ease;
-}
-
-.splash-logo {
-    width: 90px;
-    height: 90px;
-    background: white;
-    color: #111827;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 52px;
-    font-weight: bold;
-    margin: 0 auto 20px;
-}
-
-.splash-name {
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.splash-tagline {
-    margin-top: 10px;
-    color: #d1d5db;
-    font-size: 14px;
-}
-
-header {
-    background: #111827;
-    color: white;
-    padding: 18px 6%;
-}
-
-.header-inner {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-small {
-    width: 42px;
-    height: 42px;
-    background: white;
-    color: #111827;
-    border-radius: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.brand-name {
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.login-link,
-.signup-link,
-.business-link {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.login-link:hover,
-.business-link:hover {
-    text-decoration: underline;
-}
-
-.signup-link {
-    background: white;
-    color: #111827;
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-
-.signup-link:hover {
-    background: #e5e7eb;
-    text-decoration: none;
-}
-
-.hero {
-    text-align: center;
-    padding: 65px 20px 45px;
-    background: white;
-}
-
-.hero h1 {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    color: #667085;
-    font-size: 17px;
-    margin-bottom: 28px;
-}
-
-.search-box {
-    width: 92%;
-    max-width: 650px;
-    margin: auto;
-    display: flex;
-    gap: 10px;
-}
-
-.search-box input {
-    flex: 1;
-    padding: 15px;
-    border: 1px solid #d0d5dd;
-    border-radius: 10px;
-    font-size: 16px;
-}
-
-.search-box button {
-    padding: 15px 22px;
-    border: none;
-    border-radius: 10px;
-    background: #111827;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.search-box button:hover {
-    background: #374151;
-}
-
-.section {
-    width: 92%;
-    max-width: 1100px;
-    margin: 45px auto;
-}
-
-.section h2 {
-    margin-bottom: 20px;
-}
-
-.categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-}
-
-.category {
-    background: white;
-    border: 1px solid #e4e7ec;
-    border-radius: 14px;
-    padding: 22px 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.category:hover {
-    transform: translateY(-3px);
-}
-
-#businessList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-}
-
-.business-card {
-    background: white;
-    border: 1px solid #e4e7ec;
-    border-radius: 14px;
-    padding: 22px;
-}
-
-.business-card h3 {
-    margin-bottom: 10px;
-}
-
-.business-category {
-    color: #475467;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.business-city {
-    color: #667085;
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
-.business-description {
-    color: #475467;
-    line-height: 1.5;
-}
-
-.empty-box {
-    background: white;
-    border: 1px solid #e4e7ec;
-    border-radius: 14px;
-    padding: 35px 20px;
-    text-align: center;
-    color: #667085;
-}
-
-.loading-box {
-    background: white;
-    border: 1px solid #e4e7ec;
-    border-radius: 14px;
-    padding: 35px 20px;
-    text-align: center;
-    color: #667085;
-}
-
-.register-button {
-    display: inline-block;
-    margin-top: 18px;
-    padding: 13px 20px;
-    background: #111827;
-    color: white;
-    border-radius: 9px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.register-button:hover {
-    background: #374151;
-}
-
-footer {
-    margin-top: 70px;
-    background: #111827;
-    color: white;
-    text-align: center;
-    padding: 30px;
-}
-
-@keyframes logoIn {
-
-    from {
-        opacity: 0;
-        transform: scale(0.7);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #17202a;
     }
 
-}
+    /* =========================
+       SPLASH SCREEN
+    ========================= */
 
-@keyframes splashOut {
-
-    to {
-        opacity: 0;
-        visibility: hidden;
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: #111827;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: splashFade 0.8s ease forwards;
+      animation-delay: 1.5s;
     }
 
-}
-
-@media(max-width:600px) {
-
-    .header-inner {
-        align-items: flex-start;
+    #splash.skip-splash {
+      display: none;
     }
 
-    .brand-name {
-        font-size: 21px;
-    }
-
-    .logo-small {
-        width: 38px;
-        height: 38px;
-        font-size: 21px;
-    }
-
-    .header-actions {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-
-    .login-link,
-    .signup-link,
-    .business-link {
-        font-size: 12px;
-    }
-
-    .signup-link {
-        padding: 8px 10px;
-    }
-
-    .hero h1 {
-        font-size: 30px;
-    }
-
-    .search-box {
-        flex-direction: column;
-    }
-
-    .search-box button {
-        width: 100%;
+    .splash-content {
+      text-align: center;
     }
 
     .splash-logo {
-        width: 75px;
-        height: 75px;
-        font-size: 43px;
+      font-size: 42px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
-    .splash-name {
+    .splash-text {
+      color: #d1d5db;
+      font-size: 16px;
+    }
+
+    @keyframes splashFade {
+
+      from {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      padding: 9px 13px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .nav a:hover {
+      background: #374151;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background: #111827;
+      color: white;
+      padding: 55px 6% 70px;
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #d1d5db;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      outline: none;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 55px;
+    }
+
+    .category-card {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 16px;
+      padding: 30px 15px;
+
+      text-align: center;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .category-icon {
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .category-name {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+
+    /* =========================
+       BUSINESS LIST
+    ========================= */
+
+    .business-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .business-card {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 16px;
+      padding: 25px;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .business-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      border-color: #98a2b3;
+    }
+
+    .business-card h3 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .business-category {
+      color: #475467;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .business-city {
+      color: #667085;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .business-description {
+      color: #475467;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .view-business {
+      border: none;
+      background: #111827;
+      color: white;
+
+      padding: 11px 16px;
+
+      border-radius: 8px;
+
+      font-size: 14px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    .view-business:hover {
+      background: #374151;
+    }
+
+
+    /* =========================
+       STATUS BOXES
+    ========================= */
+
+    .loading-box,
+    .empty-box {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 14px;
+      padding: 25px;
+      text-align: center;
+      color: #667085;
+
+      grid-column: 1 / -1;
+    }
+
+
+    /* =========================
+       BUSINESS REGISTRATION
+    ========================= */
+
+    .business-banner {
+      margin-top: 50px;
+
+      background: #111827;
+      color: white;
+
+      padding: 35px;
+
+      border-radius: 18px;
+
+      text-align: center;
+    }
+
+    .business-banner h2 {
+      margin-bottom: 10px;
+      font-size: 27px;
+    }
+
+    .business-banner p {
+      color: #d1d5db;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .business-button {
+      display: inline-block;
+
+      background: white;
+      color: #111827;
+
+      text-decoration: none;
+
+      padding: 13px 20px;
+
+      border-radius: 9px;
+
+      font-weight: bold;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin-top: 60px;
+
+      background: #111827;
+      color: white;
+
+      text-align: center;
+
+      padding: 35px 20px;
+
+      line-height: 1.8;
+    }
+
+    footer p:first-child {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    footer p:last-child {
+      color: #d1d5db;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .business-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        width: 100%;
+      }
+
+      .nav a {
+        background: #1f2937;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .category-card {
+        padding: 25px 10px;
+      }
+
+      .category-name {
+        font-size: 16px;
+      }
+
+      .hero {
+        padding: 45px 6% 55px;
+      }
+
+      .hero h1 {
         font-size: 30px;
+      }
+
     }
 
-}
-
-</style>
+  </style>
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     SPLASH
+========================= -->
+
 <div id="splash">
 
-    <div class="splash-content">
+  <div class="splash-content">
 
-        <div class="splash-logo">
-            L
-        </div>
-
-        <div class="splash-name">
-            LocalLink
-        </div>
-
-        <div class="splash-tagline">
-            Connecting customers with local businesses
-        </div>
-
+    <div class="splash-logo">
+      LocalLink
     </div>
+
+    <div class="splash-text">
+      Connecting customers with local businesses.
+    </div>
+
+  </div>
 
 </div>
 
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-    <div class="header-inner">
+  <div class="header-inner">
 
-        <div class="brand">
-
-            <div class="logo-small">
-                L
-            </div>
-
-            <div class="brand-name">
-                LocalLink
-            </div>
-
-        </div>
-
-        <div class="header-actions">
-
-            <a href="auth.html" class="login-link">
-                Log In
-            </a>
-
-            <a href="auth.html?signup=true" class="signup-link">
-                Sign Up
-            </a>
-
-            <a href="business.html" class="business-link">
-                For Businesses
-            </a>
-
-        </div>
-
+    <div class="logo">
+      LocalLink
     </div>
+
+    <nav class="nav">
+
+      <a href="auth.html">
+        Log In
+      </a>
+
+      <a href="auth.html?signup=true">
+        Sign Up
+      </a>
+
+      <a href="business.html">
+        For Businesses
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
+
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
+  <div class="hero-inner">
+
     <h1>
-        Discover Local Businesses
+      Find Local Businesses
     </h1>
 
     <p>
-        Find businesses, services and opportunities around you.
+      Discover businesses, services and opportunities around you.
     </p>
+
 
     <div class="search-box">
 
-        <input
-            type="search"
-            id="searchInput"
-            placeholder="Search businesses or services..."
-        >
-
-        <button onclick="searchLocalLink()">
-            Search
-        </button>
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search businesses, categories or cities..."
+        autocomplete="off"
+      >
 
     </div>
 
+  </div>
+
 </section>
 
-<section class="section">
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+  <!-- CATEGORIES -->
+
+  <h2 class="section-title">
+    Explore Categories
+  </h2>
+
+
+  <div class="categories">
+
+
+    <div
+      class="category-card"
+      data-category="Shopping"
+    >
+
+      <div class="category-icon">
+        🛍️
+      </div>
+
+      <div class="category-name">
+        Shopping
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Food"
+    >
+
+      <div class="category-icon">
+        🍴
+      </div>
+
+      <div class="category-name">
+        Food
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Services"
+    >
+
+      <div class="category-icon">
+        🔧
+      </div>
+
+      <div class="category-name">
+        Services
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Transport"
+    >
+
+      <div class="category-icon">
+        🚕
+      </div>
+
+      <div class="category-name">
+        Transport
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Manufacturing"
+    >
+
+      <div class="category-icon">
+        🏭
+      </div>
+
+      <div class="category-name">
+        Business & Manufacturing
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Property"
+    >
+
+      <div class="category-icon">
+        🏠
+      </div>
+
+      <div class="category-name">
+        Property & Local Services
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Education"
+    >
+
+      <div class="category-icon">
+        🎓
+      </div>
+
+      <div class="category-name">
+        Education
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Professional"
+    >
+
+      <div class="category-icon">
+        💼
+      </div>
+
+      <div class="category-name">
+        Professional Services
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Agriculture"
+    >
+
+      <div class="category-icon">
+        🌾
+      </div>
+
+      <div class="category-name">
+        Agriculture
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Health"
+    >
+
+      <div class="category-icon">
+        🏥
+      </div>
+
+      <div class="category-name">
+        Health & Wellness
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Entertainment"
+    >
+
+      <div class="category-icon">
+        🎮
+      </div>
+
+      <div class="category-name">
+        Entertainment
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Media"
+    >
+
+      <div class="category-icon">
+        🎬
+      </div>
+
+      <div class="category-name">
+        Media & Cinema
+      </div>
+
+    </div>
+
+
+    <div
+      class="category-card"
+      data-category="Other"
+    >
+
+      <div class="category-icon">
+        📦
+      </div>
+
+      <div class="category-name">
+        Other
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- BUSINESSES -->
+
+  <h2 class="section-title">
+    Local Businesses
+  </h2>
+
+
+  <div
+    id="businessList"
+    class="business-list"
+  >
+
+    <div class="loading-box">
+      Loading registered businesses...
+    </div>
+
+  </div>
+
+
+
+  <!-- BUSINESS REGISTRATION -->
+
+  <div class="business-banner">
 
     <h2>
-        Explore Categories
+      Are you a business owner?
     </h2>
 
-    <div class="categories">
+    <p>
+      Register your business on LocalLink and let customers discover what you offer.
+    </p>
 
-        <div class="category" onclick="selectCategory('Shopping')">
-            🛍️<br><br>
-            Shopping
-        </div>
+    <a
+      href="business.html"
+      class="business-button"
+    >
+      Register Your Business
+    </a>
 
-        <div class="category" onclick="selectCategory('Food')">
-            🍴<br><br>
-            Food
-        </div>
+  </div>
 
-        <div class="category" onclick="selectCategory('Services')">
-            🔧<br><br>
-            Services
-        </div>
 
-        <div class="category" onclick="selectCategory('Transport')">
-            🚕<br><br>
-            Transport
-        </div>
+</main>
 
-        <div class="category" onclick="selectCategory('Manufacturing')">
-            🏭<br><br>
-            Business & Manufacturing
-        </div>
 
-        <div class="category" onclick="selectCategory('Property')">
-            🏠<br><br>
-            Property
-        </div>
 
-        <div class="category" onclick="selectCategory('Education')">
-            🎓<br><br>
-            Education
-        </div>
-
-        <div class="category" onclick="selectCategory('Professional')">
-            💼<br><br>
-            Professional
-        </div>
-
-        <div class="category" onclick="selectCategory('Agriculture')">
-            🌾<br><br>
-            Agriculture
-        </div>
-
-        <div class="category" onclick="selectCategory('Health')">
-            ❤️<br><br>
-            Health & Wellness
-        </div>
-
-        <div class="category" onclick="selectCategory('Entertainment')">
-            🎮<br><br>
-            Entertainment
-        </div>
-
-        <div class="category" onclick="selectCategory('Media')">
-            🎬<br><br>
-            Media & Cinema
-        </div>
-
-        <div class="category" onclick="selectCategory('Other')">
-            📦<br><br>
-            Other
-        </div>
-
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2>
-        Local Businesses
-    </h2>
-
-    <div id="businessList">
-
-        <div class="loading-box">
-            Loading registered businesses...
-        </div>
-
-    </div>
-
-</section>
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-    <p>
-        <strong>LocalLink</strong>
-    </p>
+  <p>
+    <strong>LocalLink</strong>
+  </p>
 
-    <br>
-
-    <p>
-        Connecting customers with local businesses.
-    </p>
+  <p>
+    Connecting customers with local businesses.
+  </p>
 
 </footer>
 
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-const SUPABASE_URL =
+
+  /* =========================
+     SUPABASE CONNECTION
+  ========================= */
+
+  const SUPABASE_URL =
     "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+  const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
 
-const localLinkSupabase =
+
+  const localLinkSupabase =
     window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
     );
 
 
-/* =========================
-   SPLASH CONTROL
-========================= */
 
-const pageParams =
+  /* =========================
+     SPLASH CONTROL
+  ========================= */
+
+  const pageParams =
     new URLSearchParams(
-        window.location.search
+      window.location.search
     );
 
-const splash =
+
+  const splash =
     document.getElementById("splash");
 
-if (
+
+  if (
     pageParams.get("skipSplash") === "true"
-) {
-    splash.classList.add("skip-splash");
-}
+  ) {
+
+    splash.classList.add(
+      "skip-splash"
+    );
+
+  }
 
 
-/* =========================
-   BUSINESS LIST
-========================= */
 
-const businessList =
-    document.getElementById("businessList");
+  /* =========================
+     ELEMENTS
+  ========================= */
 
-let allBusinesses = [];
+  const businessList =
+    document.getElementById(
+      "businessList"
+    );
 
 
-async function loadBusinesses() {
+  const searchInput =
+    document.getElementById(
+      "searchInput"
+    );
 
-    businessList.innerHTML =
-        '<div class="loading-box">Loading registered businesses...</div>';
+
+  let allBusinesses = [];
+
+  let selectedCategory = "";
+
+
+
+  /* =========================
+     ESCAPE HTML
+  ========================= */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+
+  /* =========================
+     LOAD BUSINESSES
+  ========================= */
+
+  async function loadBusinesses() {
+
+    businessList.innerHTML = `
+      <div class="loading-box">
+        Loading registered businesses...
+      </div>
+    `;
+
 
     const {
-        data,
-        error
+      data,
+      error
     } =
-        await localLinkSupabase
-            .from("businesses")
-            .select(
-                "id, business_name, main_category, sub_category, city, description"
-            )
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
+      await localLinkSupabase
+
+        .from("businesses")
+
+        .select(
+          `
+            id,
+            business_name,
+            main_category,
+            sub_category,
+            city,
+            description
+          `
+        )
+
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
 
 
     if (error) {
 
-        console.error(
-            "Business loading error:",
-            error
-        );
+      console.error(
+        "Business loading error:",
+        error
+      );
 
-        businessList.innerHTML =
-            '<div class="empty-box">' +
-            'Unable to load businesses right now.' +
-            '</div>';
 
-        return;
+      businessList.innerHTML = `
+        <div class="empty-box">
+          Unable to load businesses right now.
+        </div>
+      `;
+
+      return;
     }
 
 
-    allBusinesses = data || [];
+    allBusinesses =
+      data || [];
+
 
     displayBusinesses(
-        allBusinesses
+      allBusinesses
     );
 
-}
+  }
 
 
-/* =========================
-   DISPLAY BUSINESSES
-========================= */
 
-function displayBusinesses(
+  /* =========================
+     DISPLAY BUSINESSES
+  ========================= */
+
+  function displayBusinesses(
     businesses
-) {
-
-    if (!businesses.length) {
-
-        businessList.innerHTML =
-
-            '<div class="empty-box">' +
-
-            '<p>No businesses are registered yet.</p>' +
-
-            '<a href="business.html" class="register-button">' +
-            'Register a Business' +
-            '</a>' +
-
-            '</div>';
-
-        return;
-    }
-
+  ) {
 
     businessList.innerHTML = "";
 
 
-    businesses.forEach(
-        function(business) {
+    if (
+      !businesses ||
+      businesses.length === 0
+    ) {
 
-            const card =
-                document.createElement("div");
+      businessList.innerHTML = `
+        <div class="empty-box">
+          No businesses found.
+        </div>
+      `;
 
-            card.className =
-                "business-card";
-
-
-            const title =
-                document.createElement("h3");
-
-            title.textContent =
-                business.business_name;
-
-
-            const category =
-                document.createElement("div");
-
-            category.className =
-                "business-category";
-
-            category.textContent =
-                business.main_category +
-                " • " +
-                business.sub_category;
-
-
-            const city =
-                document.createElement("div");
-
-            city.className =
-                "business-city";
-
-            city.textContent =
-                "📍 " +
-                business.city;
-
-
-            const description =
-                document.createElement("p");
-
-            description.className =
-                "business-description";
-
-            description.textContent =
-                business.description;
-
-
-            card.appendChild(title);
-            card.appendChild(category);
-            card.appendChild(city);
-            card.appendChild(description);
-
-
-            businessList.appendChild(card);
-
-        }
-    );
-
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchLocalLink() {
-
-    const search =
-        document
-            .getElementById("searchInput")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    if (!search) {
-
-        displayBusinesses(
-            allBusinesses
-        );
-
-        return;
+      return;
     }
 
 
-    const filtered =
-        allBusinesses.filter(
-            function(business) {
 
-                return (
+    businesses.forEach(
+      function(business) {
 
-                    business.business_name
-                        .toLowerCase()
-                        .includes(search)
 
-                    ||
+        const card =
+          document.createElement(
+            "div"
+          );
 
-                    business.main_category
-                        .toLowerCase()
-                        .includes(search)
 
-                    ||
+        card.className =
+          "business-card";
 
-                    business.sub_category
-                        .toLowerCase()
-                        .includes(search)
 
-                    ||
-
-                    business.city
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    business.description
-                        .toLowerCase()
-                        .includes(search)
-
-                );
-
-            }
+        card.setAttribute(
+          "role",
+          "button"
         );
 
 
-    displayBusinesses(
-        filtered
-    );
-
-}
-
-
-/* =========================
-   CATEGORY
-========================= */
-
-function selectCategory(category) {
-
-    const filtered =
-        allBusinesses.filter(
-            function(business) {
-
-                return (
-                    business.main_category
-                    .toLowerCase() ===
-                    category.toLowerCase()
-                );
-
-            }
+        card.setAttribute(
+          "tabindex",
+          "0"
         );
 
 
+        card.setAttribute(
+          "aria-label",
+          "View " +
+          business.business_name
+        );
+
+
+
+        card.innerHTML = `
+
+          <h3>
+            ${escapeHtml(
+              business.business_name
+            )}
+          </h3>
+
+
+          <p class="business-category">
+
+            ${escapeHtml(
+              business.main_category
+            )}
+
+            •
+
+            ${escapeHtml(
+              business.sub_category
+            )}
+
+          </p>
+
+
+          <p class="business-city">
+
+            📍
+
+            ${escapeHtml(
+              business.city
+            )}
+
+          </p>
+
+
+          <p class="business-description">
+
+            ${escapeHtml(
+              business.description
+            )}
+
+          </p>
+
+
+          <button
+            type="button"
+            class="view-business"
+          >
+            View Business
+          </button>
+
+        `;
+
+
+
+        /* =========================
+           OPEN BUSINESS DETAILS
+        ========================= */
+
+        function openBusiness() {
+
+          window.location.href =
+            "business-details.html?id=" +
+            encodeURIComponent(
+              business.id
+            );
+
+        }
+
+
+
+        card.addEventListener(
+          "click",
+          function(event) {
+
+            /*
+              If the user taps the button,
+              the same business page opens.
+            */
+
+            openBusiness();
+
+          }
+        );
+
+
+
+        card.addEventListener(
+          "keydown",
+          function(event) {
+
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+
+              event.preventDefault();
+
+              openBusiness();
+
+            }
+
+          }
+        );
+
+
+        businessList.appendChild(
+          card
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================
+     FILTER BUSINESSES
+  ========================= */
+
+  function filterBusinesses() {
+
+    const searchText =
+      searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const filtered =
+      allBusinesses.filter(
+        function(business) {
+
+
+          const searchableText = [
+
+            business.business_name,
+
+            business.main_category,
+
+            business.sub_category,
+
+            business.city,
+
+            business.description
+
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+
+
+          const matchesSearch =
+            !searchText ||
+            searchableText.includes(
+              searchText
+            );
+
+
+
+          const matchesCategory =
+            !selectedCategory ||
+            business.main_category ===
+            selectedCategory;
+
+
+
+          return (
+            matchesSearch &&
+            matchesCategory
+          );
+
+        }
+      );
+
+
     displayBusinesses(
-        filtered
+      filtered
+    );
+
+  }
+
+
+
+  /* =========================
+     SEARCH
+  ========================= */
+
+  searchInput.addEventListener(
+    "input",
+    function() {
+
+      filterBusinesses();
+
+    }
+  );
+
+
+
+  /* =========================
+     CATEGORY FILTERING
+  ========================= */
+
+  const categoryCards =
+    document.querySelectorAll(
+      ".category-card"
     );
 
 
-    document
-        .getElementById("businessList")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+  categoryCards.forEach(
+    function(card) {
 
-}
+      card.addEventListener(
+        "click",
+        function() {
+
+          selectedCategory =
+            card.dataset.category;
 
 
-/* =========================
-   LOAD REAL DATA
-========================= */
+          searchInput.value = "";
 
-loadBusinesses();
+
+          filterBusinesses();
+
+
+          document
+            .getElementById(
+              "businessList"
+            )
+            .scrollIntoView({
+              behavior: "smooth"
+            });
+
+        }
+      );
+
+    }
+  );
+
+
+
+  /* =========================
+     START
+  ========================= */
+
+  loadBusinesses();
+
 
 </script>
 
