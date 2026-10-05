@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LocalLink | Business Details</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #17202a;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 850px;
+      margin: 30px auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .details-card {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .business-name {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .category {
+      color: #667085;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .section {
+      border-top: 1px solid #eaecf0;
+      padding: 22px 0;
+    }
+
+    .section h2 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      color: #475467;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .info {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-row {
+      padding: 14px;
+      background: #f9fafb;
+      border-radius: 10px;
+    }
+
+    .info-label {
+      display: block;
+      font-size: 13px;
+      color: #667085;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-weight: 600;
+      color: #17202a;
+    }
+
+    .loading,
+    .error {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .error {
+      color: #b42318;
+    }
+
+    footer {
+      margin-top: 60px;
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 600px) {
+      .details-card {
+        padding: 22px;
+      }
+
+      .business-name {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LocalLink</div>
+</header>
+
+<main class="container">
+
+  <a href="index.html?skipSplash=true" class="back">
+    ← Back to LocalLink
+  </a>
+
+  <div id="content">
+    <div class="loading">
+      Loading business details...
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>LocalLink</strong></p>
+  <p>Connecting customers with local businesses.</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
+  const localLinkSupabase =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  const content =
+    document.getElementById("content");
+
+
+  async function loadBusiness() {
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const businessId =
+      params.get("id");
+
+
+    if (!businessId) {
+
+      content.innerHTML = `
+        <div class="error">
+          <strong>Business not found.</strong>
+          <br><br>
+          No business ID was provided.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    const { data, error } =
+      await localLinkSupabase
+        .from("businesses")
+        .select(`
+          id,
+          business_name,
+          contact_name,
+          email,
+          phone,
+          main_category,
+          sub_category,
+          city,
+          address,
+          description,
+          created_at
+        `)
+        .eq("id", businessId)
+        .single();
+
+
+    if (error || !data) {
+
+      console.error(
+        "Business details error:",
+        error
+      );
+
+      content.innerHTML = `
+        <div class="error">
+          <strong>Unable to load this business.</strong>
+          <br><br>
+          The business may not exist or may no longer be available.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    content.innerHTML = `
+
+      <div class="details-card">
+
+        <h1 class="business-name">
+          ${escapeHtml(data.business_name)}
+        </h1>
+
+        <p class="category">
+          ${escapeHtml(data.main_category)}
+          →
+          ${escapeHtml(data.sub_category)}
+        </p>
+
+
+        <div class="section">
+
+          <h2>About the business</h2>
+
+          <p>
+            ${escapeHtml(data.description)}
+          </p>
+
+        </div>
+
+
+        <div class="section">
+
+          <h2>Business information</h2>
+
+          <div class="info">
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Location
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.city)}
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Address
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.address)}
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Category
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.main_category)}
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Subcategory
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.sub_category)}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="section">
+
+          <h2>Contact</h2>
+
+          <div class="info">
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Contact person
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.contact_name)}
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Phone
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.phone)}
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Email
+              </span>
+
+              <span class="info-value">
+                ${escapeHtml(data.email)}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  loadBusiness();
+
+</script>
+
+</body>
+</html>
