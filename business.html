@@ -1,1 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>LocalLink | Business Registration</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #17202a;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 750px;
+      margin: 35px auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #e4e7ec;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      color: #667085;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d0d5dd;
+      border-radius: 9px;
+      font-size: 16px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .submit:hover {
+      background: #374151;
+    }
+
+    .submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 20px;
+      padding: 14px;
+      border-radius: 9px;
+      line-height: 1.5;
+    }
+
+    .success {
+      background: #ecfdf3;
+      color: #067647;
+    }
+
+    .error {
+      background: #fef3f2;
+      color: #b42318;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f3f4f6;
+      border-radius: 9px;
+      color: #4b5563;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 60px;
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .form-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LocalLink</div>
+</header>
+
+<main class="container">
+
+  <a href="index.html?skipSplash=true" class="back">
+    ← Back to LocalLink
+  </a>
+
+  <div class="form-card">
+
+    <h1>Register Your Business</h1>
+
+    <p class="intro">
+      Add information about your business so customers can
+      understand what you offer.
+    </p>
+
+    <div id="message" class="message"></div>
+
+    <form id="businessForm">
+
+      <div class="field">
+        <label for="businessName">Business name</label>
+
+        <input
+          id="businessName"
+          type="text"
+          placeholder="Example: Sahana Textiles"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="contactName">Owner / contact person</label>
+
+        <input
+          id="contactName"
+          type="text"
+          placeholder="Enter contact person's name"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="email">Business email</label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="business@example.com"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="phone">Business phone</label>
+
+        <input
+          id="phone"
+          type="tel"
+          placeholder="Enter business phone number"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="mainCategory">Main category</label>
+
+        <select id="mainCategory" required>
+          <option value="">Select main category</option>
+
+          <option value="Shopping">Shopping</option>
+          <option value="Food">Food</option>
+          <option value="Services">Services</option>
+          <option value="Transport">Transport</option>
+          <option value="Manufacturing">Business & Manufacturing</option>
+          <option value="Property">Property & Local Services</option>
+          <option value="Education">Education</option>
+          <option value="Professional">Professional Services</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Health">Health & Wellness</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Media">Media & Cinema</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="subCategory">Subcategory</label>
+
+        <select id="subCategory" required>
+          <option value="">First select a main category</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="city">City</label>
+
+        <input
+          id="city"
+          type="text"
+          placeholder="Enter city"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="address">Business address</label>
+
+        <textarea
+          id="address"
+          placeholder="Enter the business address"
+          required
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="description">About the business</label>
+
+        <textarea
+          id="description"
+          placeholder="Tell customers what your business offers"
+          required
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        id="submitButton"
+        class="submit"
+      >
+        Register Business
+      </button>
+
+      <div class="notice">
+        Your business information will be stored securely
+        in the LocalLink database and linked to your account.
+      </div>
+
+    </form>
+
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>LocalLink</strong></p>
+  <p>Connecting customers with local businesses.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
+  const localLinkSupabase =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  const categories = {
+
+    Shopping: [
+      "Grocery & Supermarket",
+      "Clothing & Fashion",
+      "Electronics",
+      "Mobile & Accessories",
+      "Furniture",
+      "Home & Kitchen",
+      "Jewellery",
+      "Beauty & Personal Care",
+      "Books & Stationery",
+      "Sports & Fitness",
+      "Hardware & Tools",
+      "Automotive"
+    ],
+
+    Food: [
+      "Restaurant",
+      "Bakery",
+      "Cafe",
+      "Tiffin & Home Food",
+      "Catering",
+      "Food Supplier"
+    ],
+
+    Services: [
+      "Electrician",
+      "Plumber",
+      "Carpenter",
+      "AC & Appliance Repair",
+      "Cleaning",
+      "Painting",
+      "Construction",
+      "Photography",
+      "Tailoring",
+      "Printing",
+      "Computer & Mobile Repair"
+    ],
+
+    Transport: [
+      "Cab / Taxi",
+      "Auto",
+      "Delivery",
+      "Moving & Packers",
+      "Vehicle Rental",
+      "Logistics"
+    ],
+
+    Manufacturing: [
+      "Manufacturer",
+      "Wholesaler",
+      "Distributor",
+      "Industrial Supplier",
+      "Cotton Business",
+      "Oil Business",
+      "Local Manufacturer"
+    ],
+
+    Property: [
+      "Real Estate",
+      "Property Rental",
+      "Property Services",
+      "Interior Design",
+      "Security Services"
+    ],
+
+    Education: [
+      "School",
+      "Tuition",
+      "Coaching",
+      "Skill Training",
+      "Music & Art Classes"
+    ],
+
+    Professional: [
+      "Accounting",
+      "Legal Services",
+      "Consulting",
+      "Marketing",
+      "IT Services",
+      "Design Services"
+    ],
+
+    Agriculture: [
+      "Farmer",
+      "Seeds & Plants",
+      "Fertilizer",
+      "Agricultural Equipment",
+      "Farm Products",
+      "Agri Supplier"
+    ],
+
+    Health: [
+      "Pharmacy",
+      "Fitness",
+      "Yoga",
+      "Wellness",
+      "Optical",
+      "Other Health Services"
+    ],
+
+    Entertainment: [
+      "Events",
+      "Decorations",
+      "Music",
+      "Video",
+      "Gaming",
+      "Other Entertainment"
+    ],
+
+    Media: [
+      "Cinema / Film Production",
+      "Casting & Auditions",
+      "Advertising & Promotions",
+      "Video Production",
+      "Photography",
+      "Acting & Theatre",
+      "Music",
+      "Dance",
+      "Short Films",
+      "Web Series",
+      "Content Creation",
+      "Makeup & Styling",
+      "Costume & Fashion",
+      "Film Equipment & Services",
+      "Event & Media Services"
+    ],
+
+    Other: [
+      "Other Business"
+    ]
+
+  };
+
+
+  const mainCategory =
+    document.getElementById("mainCategory");
+
+  const subCategory =
+    document.getElementById("subCategory");
+
+
+  mainCategory.addEventListener(
+    "change",
+    function() {
+
+      const selected = this.value;
+
+      subCategory.innerHTML = "";
+
+      if (!selected) {
+
+        subCategory.innerHTML =
+          '<option value="">First select a main category</option>';
+
+        return;
+      }
+
+
+      const defaultOption =
+        document.createElement("option");
+
+      defaultOption.value = "";
+
+      defaultOption.textContent =
+        "Select a subcategory";
+
+      subCategory.appendChild(defaultOption);
+
+
+      categories[selected].forEach(
+        function(item) {
+
+          const option =
+            document.createElement("option");
+
+          option.value = item;
+
+          option.textContent = item;
+
+          subCategory.appendChild(option);
+
+        }
+      );
+
+    }
+  );
+
+
+  const form =
+    document.getElementById("businessForm");
+
+  const submitButton =
+    document.getElementById("submitButton");
+
+  const message =
+    document.getElementById("message");
+
+
+  function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+      "message " + type;
+
+    message.style.display = "block";
+
+  }
+
+
+  async function checkLogin() {
+
+    const {
+      data: {
+        session
+      }
+    } =
+      await localLinkSupabase.auth
+        .getSession();
+
+
+    if (!session) {
+
+      showMessage(
+        "Please log in to register a business.",
+        "error"
+      );
+
+      form.style.display = "none";
+
+      return false;
+    }
+
+    return true;
+  }
+
+
+  checkLogin();
+
+
+  form.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      message.style.display = "none";
+
+      submitButton.disabled = true;
+
+      submitButton.textContent =
+        "Saving...";
+
+
+      const {
+        data: {
+          session
+        }
+      } =
+        await localLinkSupabase.auth
+          .getSession();
+
+
+      if (!session) {
+
+        showMessage(
+          "Your login session has expired. Please log in again.",
+          "error"
+        );
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Register Business";
+
+        return;
+      }
+
+
+      const businessData = {
+
+        owner_id: session.user.id,
+
+        business_name:
+          document.getElementById(
+            "businessName"
+          ).value.trim(),
+
+        contact_name:
+          document.getElementById(
+            "contactName"
+          ).value.trim(),
+
+        email:
+          document.getElementById(
+            "email"
+          ).value.trim(),
+
+        phone:
+          document.getElementById(
+            "phone"
+          ).value.trim(),
+
+        main_category:
+          document.getElementById(
+            "mainCategory"
+          ).value,
+
+        sub_category:
+          document.getElementById(
+            "subCategory"
+          ).value,
+
+        city:
+          document.getElementById(
+            "city"
+          ).value.trim(),
+
+        address:
+          document.getElementById(
+            "address"
+          ).value.trim(),
+
+        description:
+          document.getElementById(
+            "description"
+          ).value.trim()
+
+      };
+
+
+      const {
+        data,
+        error
+      } =
+        await localLinkSupabase
+          .from("businesses")
+          .insert([businessData])
+          .select()
+          .single();
+
+
+      if (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Business registration failed: " +
+          error.message,
+          "error"
+        );
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Register Business";
+
+        return;
+      }
+
+
+      console.log(
+        "Business registered:",
+        data
+      );
+
+
+      showMessage(
+        "Business registered successfully!",
+        "success"
+      );
+
+
+      form.reset();
+
+      subCategory.innerHTML =
+        '<option value="">First select a main category</option>';
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        "Register Business";
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
