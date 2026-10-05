@@ -20,24 +20,15 @@ body {
     color: #17202a;
 }
 
-
-/* =========================
-   SPLASH SCREEN
-========================= */
-
 #splash {
     position: fixed;
     inset: 0;
-
     background: #111827;
     color: white;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     z-index: 9999;
-
     animation: splashOut 0.7s ease forwards;
     animation-delay: 2.2s;
 }
@@ -54,19 +45,14 @@ body {
 .splash-logo {
     width: 90px;
     height: 90px;
-
     background: white;
     color: #111827;
-
     border-radius: 24px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 52px;
     font-weight: bold;
-
     margin: 0 auto 20px;
 }
 
@@ -82,11 +68,6 @@ body {
     font-size: 14px;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 header {
     background: #111827;
     color: white;
@@ -96,11 +77,9 @@ header {
 .header-inner {
     max-width: 1100px;
     margin: auto;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 20px;
 }
 
@@ -113,16 +92,12 @@ header {
 .logo-small {
     width: 42px;
     height: 42px;
-
     background: white;
     color: #111827;
-
     border-radius: 11px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 24px;
     font-weight: bold;
 }
@@ -131,11 +106,6 @@ header {
     font-size: 25px;
     font-weight: bold;
 }
-
-
-/* =========================
-   HEADER ACTIONS
-========================= */
 
 .header-actions {
     display: flex;
@@ -160,9 +130,7 @@ header {
 .signup-link {
     background: white;
     color: #111827;
-
     padding: 10px 15px;
-
     border-radius: 8px;
 }
 
@@ -171,16 +139,9 @@ header {
     text-decoration: none;
 }
 
-
-/* =========================
-   HERO
-========================= */
-
 .hero {
     text-align: center;
-
     padding: 65px 20px 45px;
-
     background: white;
 }
 
@@ -192,47 +153,32 @@ header {
 .hero p {
     color: #667085;
     font-size: 17px;
-
     margin-bottom: 28px;
 }
-
-
-/* =========================
-   SEARCH
-========================= */
 
 .search-box {
     width: 92%;
     max-width: 650px;
-
     margin: auto;
-
     display: flex;
     gap: 10px;
 }
 
 .search-box input {
     flex: 1;
-
     padding: 15px;
-
     border: 1px solid #d0d5dd;
     border-radius: 10px;
-
     font-size: 16px;
 }
 
 .search-box button {
     padding: 15px 22px;
-
     border: none;
     border-radius: 10px;
-
     background: #111827;
     color: white;
-
     font-weight: bold;
-
     cursor: pointer;
 }
 
@@ -240,15 +186,9 @@ header {
     background: #374151;
 }
 
-
-/* =========================
-   CATEGORIES
-========================= */
-
 .section {
     width: 92%;
     max-width: 1100px;
-
     margin: 45px auto;
 }
 
@@ -258,26 +198,17 @@ header {
 
 .categories {
     display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(150px, 1fr));
-
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
 }
 
 .category {
     background: white;
-
     border: 1px solid #e4e7ec;
-
     border-radius: 14px;
-
     padding: 22px 15px;
-
     text-align: center;
-
     cursor: pointer;
-
     transition: 0.2s;
 }
 
@@ -285,46 +216,66 @@ header {
     transform: translateY(-3px);
 }
 
+#businessList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
 
-/* =========================
-   BUSINESS AREA
-========================= */
+.business-card {
+    background: white;
+    border: 1px solid #e4e7ec;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.business-card h3 {
+    margin-bottom: 10px;
+}
+
+.business-category {
+    color: #475467;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.business-city {
+    color: #667085;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.business-description {
+    color: #475467;
+    line-height: 1.5;
+}
 
 .empty-box {
     background: white;
-
     border: 1px solid #e4e7ec;
-
     border-radius: 14px;
-
     padding: 35px 20px;
-
     text-align: center;
-
     color: #667085;
 }
 
-.business-area {
+.loading-box {
+    background: white;
+    border: 1px solid #e4e7ec;
+    border-radius: 14px;
+    padding: 35px 20px;
     text-align: center;
-
-    margin-top: 25px;
+    color: #667085;
 }
 
 .register-button {
     display: inline-block;
-
     margin-top: 18px;
-
     padding: 13px 20px;
-
     background: #111827;
-
     color: white;
-
     border-radius: 9px;
-
     text-decoration: none;
-
     font-weight: bold;
 }
 
@@ -332,27 +283,13 @@ header {
     background: #374151;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
 footer {
     margin-top: 70px;
-
     background: #111827;
-
     color: white;
-
     text-align: center;
-
     padding: 30px;
 }
-
-
-/* =========================
-   ANIMATIONS
-========================= */
 
 @keyframes logoIn {
 
@@ -377,11 +314,6 @@ footer {
 
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
 @media(max-width:600px) {
 
     .header-inner {
@@ -395,15 +327,12 @@ footer {
     .logo-small {
         width: 38px;
         height: 38px;
-
         font-size: 21px;
     }
 
     .header-actions {
         gap: 8px;
-
         flex-wrap: wrap;
-
         justify-content: flex-end;
     }
 
@@ -432,7 +361,6 @@ footer {
     .splash-logo {
         width: 75px;
         height: 75px;
-
         font-size: 43px;
     }
 
@@ -445,13 +373,7 @@ footer {
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     SPLASH SCREEN
-========================= -->
 
 <div id="splash">
 
@@ -473,11 +395,6 @@ footer {
 
 </div>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
 
     <div class="header-inner">
@@ -494,29 +411,17 @@ footer {
 
         </div>
 
-
         <div class="header-actions">
 
-            <a
-                href="auth.html"
-                class="login-link"
-            >
+            <a href="auth.html" class="login-link">
                 Log In
             </a>
 
-
-            <a
-                href="auth.html?signup=true"
-                class="signup-link"
-            >
+            <a href="auth.html?signup=true" class="signup-link">
                 Sign Up
             </a>
 
-
-            <a
-                href="business.html"
-                class="business-link"
-            >
+            <a href="business.html" class="business-link">
                 For Businesses
             </a>
 
@@ -525,11 +430,6 @@ footer {
     </div>
 
 </header>
-
-
-<!-- =========================
-     HERO
-========================= -->
 
 <section class="hero">
 
@@ -540,7 +440,6 @@ footer {
     <p>
         Find businesses, services and opportunities around you.
     </p>
-
 
     <div class="search-box">
 
@@ -558,132 +457,75 @@ footer {
 
 </section>
 
-
-<!-- =========================
-     CATEGORIES
-========================= -->
-
 <section class="section">
 
     <h2>
         Explore Categories
     </h2>
 
-
     <div class="categories">
 
-        <div
-            class="category"
-            onclick="selectCategory('Shopping')"
-        >
+        <div class="category" onclick="selectCategory('Shopping')">
             🛍️<br><br>
             Shopping
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Food')"
-        >
+        <div class="category" onclick="selectCategory('Food')">
             🍴<br><br>
             Food
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Services')"
-        >
+        <div class="category" onclick="selectCategory('Services')">
             🔧<br><br>
             Services
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Transport')"
-        >
+        <div class="category" onclick="selectCategory('Transport')">
             🚕<br><br>
             Transport
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Business & Manufacturing')"
-        >
+        <div class="category" onclick="selectCategory('Manufacturing')">
             🏭<br><br>
             Business & Manufacturing
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Property & Local Services')"
-        >
+        <div class="category" onclick="selectCategory('Property')">
             🏠<br><br>
             Property
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Education')"
-        >
+        <div class="category" onclick="selectCategory('Education')">
             🎓<br><br>
             Education
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Professional Services')"
-        >
+        <div class="category" onclick="selectCategory('Professional')">
             💼<br><br>
             Professional
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Agriculture')"
-        >
+        <div class="category" onclick="selectCategory('Agriculture')">
             🌾<br><br>
             Agriculture
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Health & Wellness')"
-        >
+        <div class="category" onclick="selectCategory('Health')">
             ❤️<br><br>
             Health & Wellness
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Entertainment')"
-        >
+        <div class="category" onclick="selectCategory('Entertainment')">
             🎮<br><br>
             Entertainment
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Media, Cinema & Entertainment')"
-        >
+        <div class="category" onclick="selectCategory('Media')">
             🎬<br><br>
             Media & Cinema
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Other')"
-        >
+        <div class="category" onclick="selectCategory('Other')">
             📦<br><br>
             Other
         </div>
@@ -692,50 +534,21 @@ footer {
 
 </section>
 
-
-<!-- =========================
-     BUSINESS LISTINGS
-========================= -->
-
 <section class="section">
 
     <h2>
         Local Businesses
     </h2>
 
+    <div id="businessList">
 
-    <div class="empty-box">
-
-        <p>
-            No businesses are registered yet.
-        </p>
-
-
-        <div class="business-area">
-
-            <p>
-                Businesses will appear here after secure registration
-                and database connection.
-            </p>
-
-
-            <a
-                href="business.html"
-                class="register-button"
-            >
-                Register a Business
-            </a>
-
+        <div class="loading-box">
+            Loading registered businesses...
         </div>
 
     </div>
 
 </section>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
@@ -751,12 +564,22 @@ footer {
 
 </footer>
 
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+const SUPABASE_URL =
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
+const localLinkSupabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
 
 /* =========================
    SPLASH CONTROL
@@ -770,13 +593,158 @@ const pageParams =
 const splash =
     document.getElementById("splash");
 
-
 if (
     pageParams.get("skipSplash") === "true"
 ) {
+    splash.classList.add("skip-splash");
+}
 
-    splash.classList.add(
-        "skip-splash"
+
+/* =========================
+   BUSINESS LIST
+========================= */
+
+const businessList =
+    document.getElementById("businessList");
+
+let allBusinesses = [];
+
+
+async function loadBusinesses() {
+
+    businessList.innerHTML =
+        '<div class="loading-box">Loading registered businesses...</div>';
+
+    const {
+        data,
+        error
+    } =
+        await localLinkSupabase
+            .from("businesses")
+            .select(
+                "id, business_name, main_category, sub_category, city, description"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Business loading error:",
+            error
+        );
+
+        businessList.innerHTML =
+            '<div class="empty-box">' +
+            'Unable to load businesses right now.' +
+            '</div>';
+
+        return;
+    }
+
+
+    allBusinesses = data || [];
+
+    displayBusinesses(
+        allBusinesses
+    );
+
+}
+
+
+/* =========================
+   DISPLAY BUSINESSES
+========================= */
+
+function displayBusinesses(
+    businesses
+) {
+
+    if (!businesses.length) {
+
+        businessList.innerHTML =
+
+            '<div class="empty-box">' +
+
+            '<p>No businesses are registered yet.</p>' +
+
+            '<a href="business.html" class="register-button">' +
+            'Register a Business' +
+            '</a>' +
+
+            '</div>';
+
+        return;
+    }
+
+
+    businessList.innerHTML = "";
+
+
+    businesses.forEach(
+        function(business) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "business-card";
+
+
+            const title =
+                document.createElement("h3");
+
+            title.textContent =
+                business.business_name;
+
+
+            const category =
+                document.createElement("div");
+
+            category.className =
+                "business-category";
+
+            category.textContent =
+                business.main_category +
+                " • " +
+                business.sub_category;
+
+
+            const city =
+                document.createElement("div");
+
+            city.className =
+                "business-city";
+
+            city.textContent =
+                "📍 " +
+                business.city;
+
+
+            const description =
+                document.createElement("p");
+
+            description.className =
+                "business-description";
+
+            description.textContent =
+                business.description;
+
+
+            card.appendChild(title);
+            card.appendChild(category);
+            card.appendChild(city);
+            card.appendChild(description);
+
+
+            businessList.appendChild(card);
+
+        }
     );
 
 }
@@ -792,23 +760,62 @@ function searchLocalLink() {
         document
             .getElementById("searchInput")
             .value
-            .trim();
+            .trim()
+            .toLowerCase();
 
 
     if (!search) {
 
-        alert(
-            "Please enter something to search."
+        displayBusinesses(
+            allBusinesses
         );
 
         return;
     }
 
 
-    alert(
-        "You searched for: " +
-        search +
-        "\n\nReal business results will appear here after the LocalLink database is connected."
+    const filtered =
+        allBusinesses.filter(
+            function(business) {
+
+                return (
+
+                    business.business_name
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    business.main_category
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    business.sub_category
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    business.city
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    business.description
+                        .toLowerCase()
+                        .includes(search)
+
+                );
+
+            }
+        );
+
+
+    displayBusinesses(
+        filtered
     );
 
 }
@@ -820,40 +827,41 @@ function searchLocalLink() {
 
 function selectCategory(category) {
 
-    alert(
-        category +
-        "\n\nBusinesses in this category will appear here once real businesses are registered."
+    const filtered =
+        allBusinesses.filter(
+            function(business) {
+
+                return (
+                    business.main_category
+                    .toLowerCase() ===
+                    category.toLowerCase()
+                );
+
+            }
+        );
+
+
+    displayBusinesses(
+        filtered
     );
+
+
+    document
+        .getElementById("businessList")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
-</script>
 
+/* =========================
+   LOAD REAL DATA
+========================= */
 
-<!-- =========================
-     SUPABASE
-========================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL =
-    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
-
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
-
-
-window.localLinkSupabase =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+loadBusinesses();
 
 </script>
-
 
 </body>
 </html>
