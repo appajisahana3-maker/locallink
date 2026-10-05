@@ -7,6 +7,7 @@
 <title>LocalLink | Local Businesses</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,6 +20,7 @@ body {
     color: #17202a;
 }
 
+
 /* =========================
    SPLASH SCREEN
 ========================= */
@@ -26,6 +28,7 @@ body {
 #splash {
     position: fixed;
     inset: 0;
+
     background: #111827;
     color: white;
 
@@ -79,6 +82,7 @@ body {
     font-size: 14px;
 }
 
+
 /* =========================
    HEADER
 ========================= */
@@ -96,6 +100,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
 }
 
@@ -127,6 +132,7 @@ header {
     font-weight: bold;
 }
 
+
 /* =========================
    HEADER ACTIONS
 ========================= */
@@ -154,7 +160,9 @@ header {
 .signup-link {
     background: white;
     color: #111827;
+
     padding: 10px 15px;
+
     border-radius: 8px;
 }
 
@@ -163,13 +171,16 @@ header {
     text-decoration: none;
 }
 
+
 /* =========================
    HERO
 ========================= */
 
 .hero {
     text-align: center;
+
     padding: 65px 20px 45px;
+
     background: white;
 }
 
@@ -181,8 +192,10 @@ header {
 .hero p {
     color: #667085;
     font-size: 17px;
+
     margin-bottom: 28px;
 }
+
 
 /* =========================
    SEARCH
@@ -191,6 +204,7 @@ header {
 .search-box {
     width: 92%;
     max-width: 650px;
+
     margin: auto;
 
     display: flex;
@@ -199,6 +213,7 @@ header {
 
 .search-box input {
     flex: 1;
+
     padding: 15px;
 
     border: 1px solid #d0d5dd;
@@ -217,12 +232,14 @@ header {
     color: white;
 
     font-weight: bold;
+
     cursor: pointer;
 }
 
 .search-box button:hover {
     background: #374151;
 }
+
 
 /* =========================
    CATEGORIES
@@ -231,6 +248,7 @@ header {
 .section {
     width: 92%;
     max-width: 1100px;
+
     margin: 45px auto;
 }
 
@@ -240,7 +258,10 @@ header {
 
 .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(150px, 1fr));
+
     gap: 15px;
 }
 
@@ -248,6 +269,7 @@ header {
     background: white;
 
     border: 1px solid #e4e7ec;
+
     border-radius: 14px;
 
     padding: 22px 15px;
@@ -263,6 +285,7 @@ header {
     transform: translateY(-3px);
 }
 
+
 /* =========================
    BUSINESS AREA
 ========================= */
@@ -271,6 +294,7 @@ header {
     background: white;
 
     border: 1px solid #e4e7ec;
+
     border-radius: 14px;
 
     padding: 35px 20px;
@@ -282,6 +306,7 @@ header {
 
 .business-area {
     text-align: center;
+
     margin-top: 25px;
 }
 
@@ -293,17 +318,20 @@ header {
     padding: 13px 20px;
 
     background: #111827;
+
     color: white;
 
     border-radius: 9px;
 
     text-decoration: none;
+
     font-weight: bold;
 }
 
 .register-button:hover {
     background: #374151;
 }
+
 
 /* =========================
    FOOTER
@@ -313,12 +341,14 @@ footer {
     margin-top: 70px;
 
     background: #111827;
+
     color: white;
 
     text-align: center;
 
     padding: 30px;
 }
+
 
 /* =========================
    ANIMATIONS
@@ -335,6 +365,7 @@ footer {
         opacity: 1;
         transform: scale(1);
     }
+
 }
 
 @keyframes splashOut {
@@ -343,7 +374,9 @@ footer {
         opacity: 0;
         visibility: hidden;
     }
+
 }
+
 
 /* =========================
    MOBILE
@@ -362,12 +395,15 @@ footer {
     .logo-small {
         width: 38px;
         height: 38px;
+
         font-size: 21px;
     }
 
     .header-actions {
         gap: 8px;
+
         flex-wrap: wrap;
+
         justify-content: flex-end;
     }
 
@@ -396,19 +432,26 @@ footer {
     .splash-logo {
         width: 75px;
         height: 75px;
+
         font-size: 43px;
     }
 
     .splash-name {
         font-size: 30px;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- SPLASH -->
+
+<!-- =========================
+     SPLASH SCREEN
+========================= -->
 
 <div id="splash">
 
@@ -431,7 +474,9 @@ footer {
 </div>
 
 
-<!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -459,12 +504,14 @@ footer {
                 Log In
             </a>
 
+
             <a
                 href="auth.html?signup=true"
                 class="signup-link"
             >
                 Sign Up
             </a>
+
 
             <a
                 href="business.html"
@@ -480,7 +527,9 @@ footer {
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -510,7 +559,9 @@ footer {
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- =========================
+     CATEGORIES
+========================= -->
 
 <section class="section">
 
@@ -518,69 +569,121 @@ footer {
         Explore Categories
     </h2>
 
+
     <div class="categories">
 
-        <div class="category" onclick="selectCategory('Shopping')">
+        <div
+            class="category"
+            onclick="selectCategory('Shopping')"
+        >
             🛍️<br><br>
             Shopping
         </div>
 
-        <div class="category" onclick="selectCategory('Food')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Food')"
+        >
             🍴<br><br>
             Food
         </div>
 
-        <div class="category" onclick="selectCategory('Services')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Services')"
+        >
             🔧<br><br>
             Services
         </div>
 
-        <div class="category" onclick="selectCategory('Transport')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Transport')"
+        >
             🚕<br><br>
             Transport
         </div>
 
-        <div class="category" onclick="selectCategory('Business & Manufacturing')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Business & Manufacturing')"
+        >
             🏭<br><br>
             Business & Manufacturing
         </div>
 
-        <div class="category" onclick="selectCategory('Property & Local Services')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Property & Local Services')"
+        >
             🏠<br><br>
             Property
         </div>
 
-        <div class="category" onclick="selectCategory('Education')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Education')"
+        >
             🎓<br><br>
             Education
         </div>
 
-        <div class="category" onclick="selectCategory('Professional Services')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Professional Services')"
+        >
             💼<br><br>
             Professional
         </div>
 
-        <div class="category" onclick="selectCategory('Agriculture')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Agriculture')"
+        >
             🌾<br><br>
             Agriculture
         </div>
 
-        <div class="category" onclick="selectCategory('Health & Wellness')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Health & Wellness')"
+        >
             ❤️<br><br>
             Health & Wellness
         </div>
 
-        <div class="category" onclick="selectCategory('Entertainment')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Entertainment')"
+        >
             🎮<br><br>
             Entertainment
         </div>
 
-        <div class="category" onclick="selectCategory('Media, Cinema & Entertainment')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Media, Cinema & Entertainment')"
+        >
             🎬<br><br>
             Media & Cinema
         </div>
 
-        <div class="category" onclick="selectCategory('Other')">
+
+        <div
+            class="category"
+            onclick="selectCategory('Other')"
+        >
             📦<br><br>
             Other
         </div>
@@ -590,7 +693,9 @@ footer {
 </section>
 
 
-<!-- BUSINESS LISTINGS -->
+<!-- =========================
+     BUSINESS LISTINGS
+========================= -->
 
 <section class="section">
 
@@ -598,11 +703,13 @@ footer {
         Local Businesses
     </h2>
 
+
     <div class="empty-box">
 
         <p>
             No businesses are registered yet.
         </p>
+
 
         <div class="business-area">
 
@@ -610,6 +717,7 @@ footer {
                 Businesses will appear here after secure registration
                 and database connection.
             </p>
+
 
             <a
                 href="business.html"
@@ -625,7 +733,9 @@ footer {
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -641,6 +751,10 @@ footer {
 
 </footer>
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
@@ -661,7 +775,9 @@ if (
     pageParams.get("skipSplash") === "true"
 ) {
 
-    splash.classList.add("skip-splash");
+    splash.classList.add(
+        "skip-splash"
+    );
 
 }
 
@@ -714,7 +830,9 @@ function selectCategory(category) {
 </script>
 
 
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -723,8 +841,10 @@ function selectCategory(category) {
 const SUPABASE_URL =
     "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
 
 window.localLinkSupabase =
     window.supabase.createClient(
@@ -733,6 +853,7 @@ window.localLinkSupabase =
     );
 
 </script>
+
 
 </body>
 </html>
