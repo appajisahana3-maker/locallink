@@ -28,12 +28,19 @@ body {
     inset: 0;
     background: #111827;
     color: white;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     z-index: 9999;
+
     animation: splashOut 0.7s ease forwards;
     animation-delay: 2.2s;
+}
+
+#splash.skip-splash {
+    display: none;
 }
 
 .splash-content {
@@ -44,8 +51,10 @@ body {
 .splash-logo {
     width: 90px;
     height: 90px;
+
     background: white;
     color: #111827;
+
     border-radius: 24px;
 
     display: flex;
@@ -399,9 +408,7 @@ footer {
 
 <body>
 
-<!-- =========================
-     LOCALINK SPLASH SCREEN
-========================= -->
+<!-- SPLASH -->
 
 <div id="splash">
 
@@ -424,9 +431,7 @@ footer {
 </div>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header>
 
@@ -454,14 +459,12 @@ footer {
                 Log In
             </a>
 
-
             <a
                 href="auth.html?signup=true"
                 class="signup-link"
             >
                 Sign Up
             </a>
-
 
             <a
                 href="business.html"
@@ -477,9 +480,7 @@ footer {
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
@@ -509,9 +510,7 @@ footer {
 </section>
 
 
-<!-- =========================
-     CATEGORIES
-========================= -->
+<!-- CATEGORIES -->
 
 <section class="section">
 
@@ -521,118 +520,67 @@ footer {
 
     <div class="categories">
 
-        <div
-            class="category"
-            onclick="selectCategory('Shopping')"
-        >
+        <div class="category" onclick="selectCategory('Shopping')">
             🛍️<br><br>
             Shopping
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Food')"
-        >
+        <div class="category" onclick="selectCategory('Food')">
             🍴<br><br>
             Food
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Services')"
-        >
+        <div class="category" onclick="selectCategory('Services')">
             🔧<br><br>
             Services
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Transport')"
-        >
+        <div class="category" onclick="selectCategory('Transport')">
             🚕<br><br>
             Transport
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Business & Manufacturing')"
-        >
+        <div class="category" onclick="selectCategory('Business & Manufacturing')">
             🏭<br><br>
             Business & Manufacturing
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Property & Local Services')"
-        >
+        <div class="category" onclick="selectCategory('Property & Local Services')">
             🏠<br><br>
             Property
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Education')"
-        >
+        <div class="category" onclick="selectCategory('Education')">
             🎓<br><br>
             Education
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Professional Services')"
-        >
+        <div class="category" onclick="selectCategory('Professional Services')">
             💼<br><br>
             Professional
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Agriculture')"
-        >
+        <div class="category" onclick="selectCategory('Agriculture')">
             🌾<br><br>
             Agriculture
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Health & Wellness')"
-        >
+        <div class="category" onclick="selectCategory('Health & Wellness')">
             ❤️<br><br>
             Health & Wellness
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Entertainment')"
-        >
+        <div class="category" onclick="selectCategory('Entertainment')">
             🎮<br><br>
             Entertainment
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Media, Cinema & Entertainment')"
-        >
+        <div class="category" onclick="selectCategory('Media, Cinema & Entertainment')">
             🎬<br><br>
             Media & Cinema
         </div>
 
-
-        <div
-            class="category"
-            onclick="selectCategory('Other')"
-        >
+        <div class="category" onclick="selectCategory('Other')">
             📦<br><br>
             Other
         </div>
@@ -642,9 +590,7 @@ footer {
 </section>
 
 
-<!-- =========================
-     BUSINESS LISTINGS
-========================= -->
+<!-- BUSINESS LISTINGS -->
 
 <section class="section">
 
@@ -652,13 +598,11 @@ footer {
         Local Businesses
     </h2>
 
-
     <div class="empty-box">
 
         <p>
             No businesses are registered yet.
         </p>
-
 
         <div class="business-area">
 
@@ -666,7 +610,6 @@ footer {
                 Businesses will appear here after secure registration
                 and database connection.
             </p>
-
 
             <a
                 href="business.html"
@@ -682,9 +625,7 @@ footer {
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -701,21 +642,48 @@ footer {
 </footer>
 
 
-<!-- =========================
-     SEARCH JAVASCRIPT
-========================= -->
-
 <script>
+
+/* =========================
+   SPLASH CONTROL
+========================= */
+
+const pageParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const splash =
+    document.getElementById("splash");
+
+
+if (
+    pageParams.get("skipSplash") === "true"
+) {
+
+    splash.classList.add("skip-splash");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
 
 function searchLocalLink() {
 
     const search =
-        document.getElementById("searchInput").value.trim();
+        document
+            .getElementById("searchInput")
+            .value
+            .trim();
 
 
     if (!search) {
 
-        alert("Please enter something to search.");
+        alert(
+            "Please enter something to search."
+        );
 
         return;
     }
@@ -746,9 +714,7 @@ function selectCategory(category) {
 </script>
 
 
-<!-- =========================
-     SUPABASE
-========================= -->
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -757,10 +723,8 @@ function selectCategory(category) {
 const SUPABASE_URL =
     "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
 
-
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
-
 
 window.localLinkSupabase =
     window.supabase.createClient(
@@ -769,7 +733,6 @@ window.localLinkSupabase =
     );
 
 </script>
-
 
 </body>
 </html>
