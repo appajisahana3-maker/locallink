@@ -1,591 +1,913 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LocalLink | Account</title>
+<meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #17202a;
-    }
+<title>
+    LocalLink | Account
+</title>
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 6%;
-    }
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-    }
+<style>
 
-    .container {
-      width: 92%;
-      max-width: 500px;
-      margin: 40px auto;
-    }
+* {
+    box-sizing: border-box;
 
-    .back {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #111827;
-      text-decoration: none;
-      font-weight: bold;
-    }
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: #f5f7fa;
+
+    color: #17202a;
+}
+
+
+header {
+
+    background: #111827;
+
+    color: white;
+
+    padding: 18px 6%;
+}
+
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+
+.container {
+
+    width: 92%;
+
+    max-width: 500px;
+
+    margin: 40px auto;
+}
+
+
+.back {
+
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: #111827;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+.back:hover {
+
+    text-decoration: underline;
+}
+
+
+.card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 16px;
+
+    border: 1px solid #e4e7ec;
+}
+
+
+h1 {
+
+    margin-bottom: 10px;
+}
+
+
+.intro {
+
+    color: #667085;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+}
+
+
+.field {
+
+    margin-bottom: 18px;
+}
+
+
+label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    font-size: 16px;
+}
+
+
+.main-button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+}
+
+
+.main-button:hover {
+
+    background: #374151;
+}
+
+
+.main-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+.secondary-button {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #111827;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #111827;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+}
+
+
+.secondary-button:hover {
+
+    background: #f3f4f6;
+}
+
+
+.message {
+
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    display: none;
+
+    line-height: 1.5;
+
+    background: #f3f4f6;
+
+    color: #374151;
+}
+
+
+.existing-account {
+
+    display: none;
+
+    margin-top: 10px;
+}
+
+
+.switch {
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #667085;
+
+    line-height: 1.6;
+}
+
+
+.switch button {
+
+    background: none;
+
+    border: none;
+
+    color: #111827;
+
+    padding: 5px;
+
+    width: auto;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+.switch button:hover {
+
+    text-decoration: underline;
+}
+
+
+footer {
+
+    margin-top: 60px;
+
+    background: #111827;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+
+@media(max-width:600px) {
 
     .card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid #e4e7ec;
-    }
 
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    .intro {
-      color: #667085;
-      line-height: 1.5;
-      margin-bottom: 25px;
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d0d5dd;
-      border-radius: 9px;
-      font-size: 16px;
-    }
-
-    .main-button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 9px;
-      background: #111827;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    .main-button:hover {
-      background: #374151;
-    }
-
-    .main-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .secondary-button {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #111827;
-      border-radius: 9px;
-      background: white;
-      color: #111827;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .secondary-button:hover {
-      background: #f3f4f6;
-    }
-
-    .message {
-      margin-top: 18px;
-      padding: 12px;
-      border-radius: 9px;
-      display: none;
-      line-height: 1.5;
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .switch {
-      margin-top: 20px;
-      text-align: center;
-      color: #667085;
-      line-height: 1.6;
-    }
-
-    .switch button {
-      background: none;
-      border: none;
-      color: #111827;
-      padding: 5px;
-      width: auto;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    .switch button:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      margin-top: 60px;
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 30px;
-    }
-
-    @media (max-width: 600px) {
-      .card {
         padding: 24px;
-      }
     }
-  </style>
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
 <header>
-  <div class="logo">LocalLink</div>
+
+    <div class="logo">
+        LocalLink
+    </div>
+
 </header>
+
 
 <main class="container">
 
-  <!-- Always return directly to homepage -->
-  <a href="index.html#home" class="back">
+
+<!-- BACK TO HOMEPAGE -->
+
+<a
+    href="index.html?skipSplash=true"
+    class="back"
+>
     ← Back to LocalLink
-  </a>
+</a>
 
-  <div class="card">
 
-    <h1 id="title">
-      Log in
-    </h1>
+<div class="card">
 
-    <p class="intro" id="intro">
-      Log in to your LocalLink account.
-    </p>
 
-    <form id="authForm">
+<h1 id="title">
+    Log in
+</h1>
 
-      <div class="field">
-        <label for="email">
-          Email
-        </label>
 
-        <input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          required
-        >
-      </div>
+<p
+    class="intro"
+    id="intro"
+>
+    Log in to your LocalLink account.
+</p>
 
-      <div class="field">
-        <label for="password">
-          Password
-        </label>
 
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-          minlength="6"
-          required
-        >
-      </div>
+<form id="authForm">
 
-      <button
-        type="submit"
-        class="main-button"
-        id="submitButton"
-      >
-        Log In
-      </button>
 
-    </form>
+<div class="field">
 
-    <div
-      class="message"
-      id="message"
-    ></div>
+    <label for="email">
+        Email
+    </label>
 
-    <div
-      id="existingAccountArea"
-      style="display:none;"
+
+    <input
+        id="email"
+        type="email"
+        placeholder="you@example.com"
+        required
     >
 
-      <button
+</div>
+
+
+<div class="field">
+
+    <label for="password">
+        Password
+    </label>
+
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+        minlength="6"
+        required
+    >
+
+</div>
+
+
+<button
+    type="submit"
+    class="main-button"
+    id="submitButton"
+>
+    Log In
+</button>
+
+
+</form>
+
+
+<!-- MESSAGE -->
+
+<div
+    class="message"
+    id="message"
+></div>
+
+
+<!-- EXISTING ACCOUNT -->
+
+<div
+    class="existing-account"
+    id="existingAccountArea"
+>
+
+    <button
         type="button"
         class="secondary-button"
         id="loginExistingButton"
-      >
+    >
         Go to Log In
-      </button>
+    </button>
 
-    </div>
+</div>
 
-    <div class="switch">
 
-      <span id="switchText">
+<!-- SWITCH -->
+
+<div class="switch">
+
+    <span id="switchText">
         Don't have an account?
-      </span>
+    </span>
 
-      <button
+
+    <button
         type="button"
         id="switchButton"
-      >
+    >
         Create Account
-      </button>
+    </button>
 
-    </div>
+</div>
 
-  </div>
+
+</div>
 
 </main>
 
+
 <footer>
-  <p><strong>LocalLink</strong></p>
-  <br>
-  <p>Connecting customers with local businesses.</p>
+
+    <p>
+        <strong>LocalLink</strong>
+    </p>
+
+    <br>
+
+    <p>
+        Connecting customers with local businesses.
+    </p>
+
 </footer>
 
 
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
+
+/* =========================
+   SUPABASE
+========================= */
+
 const SUPABASE_URL =
-  "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
 
 
 const localLinkSupabase =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+    window.supabase.createClient(
 
+        SUPABASE_URL,
+
+        SUPABASE_PUBLISHABLE_KEY
+
+    );
+
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const form =
-  document.getElementById("authForm");
+    document.getElementById(
+        "authForm"
+    );
+
 
 const title =
-  document.getElementById("title");
+    document.getElementById(
+        "title"
+    );
+
 
 const intro =
-  document.getElementById("intro");
+    document.getElementById(
+        "intro"
+    );
+
 
 const submitButton =
-  document.getElementById("submitButton");
+    document.getElementById(
+        "submitButton"
+    );
+
 
 const switchText =
-  document.getElementById("switchText");
+    document.getElementById(
+        "switchText"
+    );
+
 
 const switchButton =
-  document.getElementById("switchButton");
+    document.getElementById(
+        "switchButton"
+    );
+
 
 const message =
-  document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
+
 
 const existingAccountArea =
-  document.getElementById("existingAccountArea");
+    document.getElementById(
+        "existingAccountArea"
+    );
+
 
 const loginExistingButton =
-  document.getElementById("loginExistingButton");
+    document.getElementById(
+        "loginExistingButton"
+    );
 
 
 let loginMode = true;
 
 
+/* =========================
+   MESSAGE
+========================= */
+
 function showMessage(text) {
 
-  message.textContent = text;
-  message.style.display = "block";
+    message.textContent = text;
+
+    message.style.display =
+        "block";
 
 }
 
 
 function hideMessage() {
 
-  message.textContent = "";
-  message.style.display = "none";
+    message.textContent = "";
+
+    message.style.display =
+        "none";
 
 }
 
+
+/* =========================
+   LOGIN MODE
+========================= */
 
 function showLogin() {
 
-  loginMode = true;
+    loginMode = true;
 
-  hideMessage();
+    hideMessage();
 
-  existingAccountArea.style.display =
-    "none";
+    existingAccountArea.style.display =
+        "none";
 
-  form.reset();
+    form.reset();
 
-  title.textContent =
-    "Log in";
 
-  intro.textContent =
-    "Log in to your LocalLink account.";
+    title.textContent =
+        "Log in";
 
-  document
-    .getElementById("password")
-    .placeholder =
-    "Enter your password";
 
-  submitButton.textContent =
-    "Log In";
+    intro.textContent =
+        "Log in to your LocalLink account.";
 
-  switchText.textContent =
-    "Don't have an account?";
 
-  switchButton.textContent =
-    "Create Account";
+    document
+        .getElementById("password")
+        .placeholder =
+        "Enter your password";
+
+
+    submitButton.textContent =
+        "Log In";
+
+
+    switchText.textContent =
+        "Don't have an account?";
+
+
+    switchButton.textContent =
+        "Create Account";
 
 }
 
+
+/* =========================
+   SIGNUP MODE
+========================= */
 
 function showSignup() {
 
-  loginMode = false;
+    loginMode = false;
 
-  hideMessage();
+    hideMessage();
 
-  existingAccountArea.style.display =
-    "none";
+    existingAccountArea.style.display =
+        "none";
 
-  form.reset();
+    form.reset();
 
-  title.textContent =
-    "Create your account";
 
-  intro.textContent =
-    "Create a secure LocalLink account to use the platform.";
+    title.textContent =
+        "Create your account";
 
-  document
-    .getElementById("password")
-    .placeholder =
-    "Create a password";
 
-  submitButton.textContent =
-    "Create Account";
+    intro.textContent =
+        "Create a secure LocalLink account to use the platform.";
 
-  switchText.textContent =
-    "Already have an account?";
 
-  switchButton.textContent =
-    "Log In";
+    document
+        .getElementById("password")
+        .placeholder =
+        "Create a password";
+
+
+    submitButton.textContent =
+        "Create Account";
+
+
+    switchText.textContent =
+        "Already have an account?";
+
+
+    switchButton.textContent =
+        "Log In";
 
 }
 
 
-/* Determine login or signup from homepage button */
+/* =========================
+   INITIAL MODE
+========================= */
 
 const params =
-  new URLSearchParams(
-    window.location.search
-  );
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 if (
-  params.get("signup") === "true"
+    params.get("signup") === "true"
 ) {
 
-  showSignup();
+    showSignup();
 
 } else {
 
-  showLogin();
+    showLogin();
 
 }
 
 
-/* Switch between Login and Signup */
+/* =========================
+   SWITCH BUTTON
+========================= */
 
 switchButton.addEventListener(
-  "click",
-  function() {
 
-    if (loginMode) {
+    "click",
 
-      showSignup();
+    function() {
 
-    } else {
+        if (loginMode) {
 
-      showLogin();
+            showSignup();
+
+        } else {
+
+            showLogin();
+
+        }
 
     }
 
-  }
 );
 
 
-/* Existing account button */
+/* =========================
+   EXISTING ACCOUNT BUTTON
+========================= */
 
 loginExistingButton.addEventListener(
-  "click",
-  function() {
 
-    showLogin();
+    "click",
 
-  }
+    function() {
+
+        showLogin();
+
+    }
+
 );
 
 
-/* Form */
+/* =========================
+   FORM SUBMISSION
+========================= */
 
 form.addEventListener(
-  "submit",
-  async function(event) {
 
-    event.preventDefault();
+    "submit",
 
+    async function(event) {
 
-    const email =
-      document
-        .getElementById("email")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("password")
-        .value;
+        event.preventDefault();
 
 
-    submitButton.disabled = true;
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
 
 
-    /*
-      LOGIN
-    */
-
-    if (loginMode) {
-
-      const { error } =
-        await localLinkSupabase.auth
-          .signInWithPassword({
-
-            email: email,
-
-            password: password
-
-          });
+        const password =
+            document
+                .getElementById("password")
+                .value;
 
 
-      if (error) {
-
-        showMessage(
-          "Login failed: " +
-          error.message
-        );
-
-        submitButton.disabled = false;
-
-        return;
-
-      }
+        submitButton.disabled =
+            true;
 
 
-      /*
-        Successful login
-      */
+        /* =====================
+           LOGIN
+        ===================== */
 
-      window.location.href =
-        "index.html";
+        if (loginMode) {
 
-      return;
+
+            const { error } =
+
+                await localLinkSupabase
+                    .auth
+                    .signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+            if (error) {
+
+                showMessage(
+                    "Login failed: " +
+                    error.message
+                );
+
+
+                submitButton.disabled =
+                    false;
+
+
+                return;
+
+            }
+
+
+            /*
+              Successful login.
+              Skip splash.
+            */
+
+            window.location.href =
+                "index.html?skipSplash=true";
+
+
+            return;
+
+        }
+
+
+        /* =====================
+           CREATE ACCOUNT
+        ===================== */
+
+        const { data, error } =
+
+            await localLinkSupabase
+                .auth
+                .signUp({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+        /* =====================
+           SIGNUP ERROR
+        ===================== */
+
+        if (error) {
+
+            showMessage(
+                "This account may already exist. " +
+                "If you already registered, please log in."
+            );
+
+
+            existingAccountArea.style.display =
+                "block";
+
+
+            submitButton.disabled =
+                false;
+
+
+            return;
+
+        }
+
+
+        /*
+          Supabase can return a user
+          with zero identities when
+          the email already exists.
+        */
+
+        if (
+
+            data &&
+
+            data.user &&
+
+            data.user.identities &&
+
+            data.user.identities.length === 0
+
+        ) {
+
+            showMessage(
+                "An account with this email already exists. " +
+                "Please log in instead."
+            );
+
+
+            existingAccountArea.style.display =
+                "block";
+
+
+            submitButton.disabled =
+                false;
+
+
+            return;
+
+        }
+
+
+        /* =====================
+           NEW ACCOUNT
+        ===================== */
+
+        if (data) {
+
+            /*
+              New account created.
+              Go directly to homepage.
+            */
+
+            window.location.href =
+                "index.html?skipSplash=true";
+
+
+            return;
+
+        }
+
+
+        submitButton.disabled =
+            false;
 
     }
 
-
-    /*
-      CREATE ACCOUNT
-    */
-
-    const { data, error } =
-      await localLinkSupabase.auth
-        .signUp({
-
-          email: email,
-
-          password: password
-
-        });
-
-
-    /*
-      Signup rejected
-    */
-
-    if (error) {
-
-      showMessage(
-        "This account may already exist. " +
-        "If you already registered, please log in."
-      );
-
-      existingAccountArea.style.display =
-        "block";
-
-      submitButton.disabled = false;
-
-      return;
-
-    }
-
-
-    /*
-      Account successfully created.
-      Go directly to homepage.
-    */
-
-    if (data) {
-
-      window.location.href =
-        "index.html";
-
-      return;
-
-    }
-
-
-    submitButton.disabled = false;
-
-  }
 );
 
 </script>
 
 </body>
 </html>
-
-
-  
