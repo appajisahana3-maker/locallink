@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LocalLink | Edit Business</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #17202a;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 750px;
+      margin: 35px auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #e4e7ec;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      color: #667085;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d0d5dd;
+      border-radius: 9px;
+      font-size: 16px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .save {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .save:hover {
+      background: #374151;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 9px;
+      line-height: 1.5;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #667085;
+    }
+
+    @media (max-width: 600px) {
+      .form-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LocalLink</div>
+</header>
+
+
+<main class="container">
+
+  <a href="dashboard.html" class="back">
+    ← Back to My LocalLink
+  </a>
+
+
+  <div id="loading" class="loading">
+    Loading business information...
+  </div>
+
+
+  <div id="formContainer" style="display:none;">
+
+    <div class="form-card">
+
+      <h1>Edit Business</h1>
+
+      <p class="intro">
+        Update your business information. Changes will be
+        saved to your LocalLink business profile.
+      </p>
+
+
+      <div id="successMessage" class="message success"></div>
+
+      <div id="errorMessage" class="message error"></div>
+
+
+      <form id="editForm">
+
+
+        <div class="field">
+
+          <label for="businessName">
+            Business name
+          </label>
+
+          <input
+            id="businessName"
+            type="text"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="contactName">
+            Owner / contact person
+          </label>
+
+          <input
+            id="contactName"
+            type="text"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="email">
+            Business email
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="phone">
+            Business phone
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="mainCategory">
+            Main category
+          </label>
+
+          <select id="mainCategory" required>
+
+            <option value="">
+              Select main category
+            </option>
+
+            <option value="Shopping">
+              Shopping
+            </option>
+
+            <option value="Food">
+              Food
+            </option>
+
+            <option value="Services">
+              Services
+            </option>
+
+            <option value="Transport">
+              Transport
+            </option>
+
+            <option value="Manufacturing">
+              Business & Manufacturing
+            </option>
+
+            <option value="Property">
+              Property & Local Services
+            </option>
+
+            <option value="Education">
+              Education
+            </option>
+
+            <option value="Professional">
+              Professional Services
+            </option>
+
+            <option value="Agriculture">
+              Agriculture
+            </option>
+
+            <option value="Health">
+              Health & Wellness
+            </option>
+
+            <option value="Entertainment">
+              Entertainment
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="subCategory">
+            Subcategory
+          </label>
+
+          <select id="subCategory" required>
+
+            <option value="">
+              Select a subcategory
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="city">
+            City
+          </label>
+
+          <input
+            id="city"
+            type="text"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="address">
+            Business address
+          </label>
+
+          <textarea
+            id="address"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="description">
+            About the business
+          </label>
+
+          <textarea
+            id="description"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="save"
+          id="saveButton"
+        >
+          Save Changes
+        </button>
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  const SUPABASE_URL =
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
+
+  const localLinkSupabase =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  const categories = {
+
+    Shopping: [
+      "Grocery & Supermarket",
+      "Clothing & Fashion",
+      "Electronics",
+      "Mobile & Accessories",
+      "Furniture",
+      "Home & Kitchen",
+      "Jewellery",
+      "Beauty & Personal Care",
+      "Books & Stationery",
+      "Sports & Fitness",
+      "Hardware & Tools",
+      "Automotive"
+    ],
+
+    Food: [
+      "Restaurant",
+      "Bakery",
+      "Cafe",
+      "Tiffin & Home Food",
+      "Catering",
+      "Food Supplier"
+    ],
+
+    Services: [
+      "Electrician",
+      "Plumber",
+      "Carpenter",
+      "AC & Appliance Repair",
+      "Cleaning",
+      "Painting",
+      "Construction",
+      "Photography",
+      "Tailoring",
+      "Printing",
+      "Computer & Mobile Repair"
+    ],
+
+    Transport: [
+      "Cab / Taxi",
+      "Auto",
+      "Delivery",
+      "Moving & Packers",
+      "Vehicle Rental",
+      "Logistics"
+    ],
+
+    Manufacturing: [
+      "Manufacturer",
+      "Wholesaler",
+      "Distributor",
+      "Industrial Supplier",
+      "Cotton Business",
+      "Oil Business",
+      "Local Manufacturer"
+    ],
+
+    Property: [
+      "Real Estate",
+      "Property Rental",
+      "Property Services",
+      "Interior Design",
+      "Security Services"
+    ],
+
+    Education: [
+      "School",
+      "Tuition",
+      "Coaching",
+      "Skill Training",
+      "Music & Art Classes"
+    ],
+
+    Professional: [
+      "Accounting",
+      "Legal Services",
+      "Consulting",
+      "Marketing",
+      "IT Services",
+      "Design Services"
+    ],
+
+    Agriculture: [
+      "Farmer",
+      "Seeds & Plants",
+      "Fertilizer",
+      "Agricultural Equipment",
+      "Farm Products",
+      "Agri Supplier"
+    ],
+
+    Health: [
+      "Pharmacy",
+      "Fitness",
+      "Yoga",
+      "Wellness",
+      "Optical",
+      "Other Health Services"
+    ],
+
+    Entertainment: [
+      "Events",
+      "Decorations",
+      "Music",
+      "Video",
+      "Gaming",
+      "Other Entertainment"
+    ],
+
+    Other: [
+      "Other Business"
+    ]
+
+  };
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const businessId =
+    params.get("id");
+
+
+  const loading =
+    document.getElementById("loading");
+
+  const formContainer =
+    document.getElementById("formContainer");
+
+  const editForm =
+    document.getElementById("editForm");
+
+  const successMessage =
+    document.getElementById("successMessage");
+
+  const errorMessage =
+    document.getElementById("errorMessage");
+
+  const saveButton =
+    document.getElementById("saveButton");
+
+  const mainCategory =
+    document.getElementById("mainCategory");
+
+  const subCategory =
+    document.getElementById("subCategory");
+
+
+  function showError(message) {
+
+    errorMessage.textContent = message;
+
+    errorMessage.style.display = "block";
+
+  }
+
+
+  function showSuccess(message) {
+
+    successMessage.textContent = message;
+
+    successMessage.style.display = "block";
+
+  }
+
+
+  function populateSubcategories(
+    selectedCategory,
+    selectedSubcategory = ""
+  ) {
+
+    subCategory.innerHTML = "";
+
+    const defaultOption =
+      document.createElement("option");
+
+    defaultOption.value = "";
+
+    defaultOption.textContent =
+      "Select a subcategory";
+
+    subCategory.appendChild(
+      defaultOption
+    );
+
+
+    if (!categories[selectedCategory]) {
+      return;
+    }
+
+
+    categories[selectedCategory].forEach(
+      function(item) {
+
+        const option =
+          document.createElement("option");
+
+        option.value = item;
+
+        option.textContent = item;
+
+        if (item === selectedSubcategory) {
+          option.selected = true;
+        }
+
+        subCategory.appendChild(option);
+
+      }
+    );
+
+  }
+
+
+  mainCategory.addEventListener(
+    "change",
+    function() {
+
+      populateSubcategories(
+        this.value
+      );
+
+    }
+  );
+
+
+  async function loadBusiness() {
+
+    if (!businessId) {
+
+      showError(
+        "No business was selected."
+      );
+
+      loading.style.display = "none";
+
+      return;
+
+    }
+
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } = await localLinkSupabase.auth.getSession();
+
+
+    if (sessionError || !sessionData.session) {
+
+      window.location.href =
+        "auth.html";
+
+      return;
+
+    }
+
+
+    const userId =
+      sessionData.session.user.id;
+
+
+    const {
+      data: business,
+      error
+    } = await localLinkSupabase
+      .from("businesses")
+      .select(`
+        id,
+        owner_id,
+        business_name,
+        contact_name,
+        email,
+        phone,
+        main_category,
+        sub_category,
+        city,
+        address,
+        description
+      `)
+      .eq("id", businessId)
+      .eq("owner_id", userId)
+      .maybeSingle();
+
+
+    if (error) {
+
+      console.error(error);
+
+      showError(
+        "Unable to load this business."
+      );
+
+      loading.style.display = "none";
+
+      return;
+
+    }
+
+
+    if (!business) {
+
+      showError(
+        "This business does not exist or you do not have permission to edit it."
+      );
+
+      loading.style.display = "none";
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "businessName"
+    ).value =
+      business.business_name || "";
+
+
+    document.getElementById(
+      "contactName"
+    ).value =
+      business.contact_name || "";
+
+
+    document.getElementById(
+      "email"
+    ).value =
+      business.email || "";
+
+
+    document.getElementById(
+      "phone"
+    ).value =
+      business.phone || "";
+
+
+    mainCategory.value =
+      business.main_category || "";
+
+
+    populateSubcategories(
+      business.main_category,
+      business.sub_category
+    );
+
+
+    document.getElementById(
+      "city"
+    ).value =
+      business.city || "";
+
+
+    document.getElementById(
+      "address"
+    ).value =
+      business.address || "";
+
+
+    document.getElementById(
+      "description"
+    ).value =
+      business.description || "";
+
+
+    loading.style.display = "none";
+
+    formContainer.style.display = "block";
+
+  }
+
+
+  editForm.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      successMessage.style.display =
+        "none";
+
+      errorMessage.style.display =
+        "none";
+
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } = await localLinkSupabase.auth.getSession();
+
+
+      if (
+        sessionError ||
+        !sessionData.session
+      ) {
+
+        window.location.href =
+          "auth.html";
+
+        return;
+
+      }
+
+
+      const userId =
+        sessionData.session.user.id;
+
+
+      saveButton.disabled = true;
+
+      saveButton.textContent =
+        "Saving...";
+
+
+      const updates = {
+
+        business_name:
+          document.getElementById(
+            "businessName"
+          ).value.trim(),
+
+        contact_name:
+          document.getElementById(
+            "contactName"
+          ).value.trim(),
+
+        email:
+          document.getElementById(
+            "email"
+          ).value.trim(),
+
+        phone:
+          document.getElementById(
+            "phone"
+          ).value.trim(),
+
+        main_category:
+          mainCategory.value,
+
+        sub_category:
+          subCategory.value,
+
+        city:
+          document.getElementById(
+            "city"
+          ).value.trim(),
+
+        address:
+          document.getElementById(
+            "address"
+          ).value.trim(),
+
+        description:
+          document.getElementById(
+            "description"
+          ).value.trim(),
+
+        updated_at:
+          new Date().toISOString()
+
+      };
+
+
+      const {
+        error
+      } = await localLinkSupabase
+        .from("businesses")
+        .update(updates)
+        .eq("id", businessId)
+        .eq("owner_id", userId);
+
+
+      if (error) {
+
+        console.error(error);
+
+        showError(
+          "The changes could not be saved. Please try again."
+        );
+
+        saveButton.disabled = false;
+
+        saveButton.textContent =
+          "Save Changes";
+
+        return;
+
+      }
+
+
+      showSuccess(
+        "Business information updated successfully."
+      );
+
+
+      saveButton.disabled = false;
+
+      saveButton.textContent =
+        "Save Changes";
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+
+  loadBusiness();
+
+</script>
+
+</body>
+</html>
