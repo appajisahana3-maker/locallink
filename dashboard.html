@@ -28,7 +28,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
     }
 
     .logo {
@@ -233,107 +232,175 @@
 <body>
 
 <header>
-  <div class="logo">LocalLink</div>
 
-  <button class="logout" id="logoutButton">
+  <div class="logo">
+    LocalLink
+  </div>
+
+  <button
+    class="logout"
+    id="logoutButton"
+  >
     Log Out
   </button>
+
 </header>
 
 
 <main class="container">
 
-  <a href="index.html?skipSplash=true" class="back">
+  <a
+    href="index.html?skipSplash=true"
+    class="back"
+  >
     ← Back to LocalLink
   </a>
 
 
-  <div id="errorMessage" class="error"></div>
+  <div
+    id="errorMessage"
+    class="error"
+  ></div>
 
 
-  <div id="loading" class="loading">
+  <div
+    id="loading"
+    class="loading"
+  >
     Loading your LocalLink account...
   </div>
 
 
-  <div id="dashboard" style="display:none;">
+  <div
+    id="dashboard"
+    style="display:none;"
+  >
+
+    <!-- ACCOUNT -->
 
     <section class="welcome">
 
-      <h1>My LocalLink</h1>
+      <h1>
+        My LocalLink
+      </h1>
 
-      <p class="email" id="userEmail"></p>
+      <p
+        class="email"
+        id="userEmail"
+      ></p>
 
     </section>
 
+
+    <!-- BUSINESSES -->
 
     <section class="section">
 
       <div class="section-header">
 
-        <h2>My Businesses</h2>
+        <h2>
+          My Businesses
+        </h2>
 
-        <a href="business.html" class="add-button">
+        <a
+          href="business.html"
+          class="add-button"
+        >
           + Add Business
         </a>
 
       </div>
 
 
-      <div id="businessList">
-
-      </div>
+      <div id="businessList"></div>
 
     </section>
 
+
+    <!-- WEBSITES -->
 
     <section class="section">
 
       <div class="section-header">
 
-        <h2>My Websites</h2>
+        <h2>
+          My Websites
+        </h2>
 
       </div>
 
 
       <div class="future">
 
-        <strong>Website management is coming next.</strong>
+        <strong>
+          Website management
+        </strong>
 
         <br><br>
 
-        Once your LocalLink business website is actually
-        created, this section will show your real websites.
+        Your LocalLink websites will appear here
+        after we build the real website system.
 
         <br><br>
 
-        You will then be able to edit, publish, unpublish,
-        and permanently delete your own websites.
+        You will eventually be able to:
+
+        <br>
+
+        • Edit your website
+
+        <br>
+
+        • Publish or unpublish it
+
+        <br>
+
+        • Delete your website
+
+        <br>
+
+        • Create websites for your businesses
 
         <br><br>
 
-        No fake website controls are shown before the
-        website system actually exists.
+        These controls will only appear when the
+        underlying website features are actually
+        available.
 
       </div>
 
     </section>
 
 
+    <!-- ACCOUNT SETTINGS -->
+
     <section class="section">
 
       <div class="section-header">
 
-        <h2>Account</h2>
+        <h2>
+          Account
+        </h2>
 
       </div>
 
 
       <div class="future">
 
-        Your account settings and secure permanent account
-        deletion will be added after the account-management
-        system is implemented.
+        <strong>
+          Account management
+        </strong>
+
+        <br><br>
+
+        Secure account settings and permanent
+        account deletion will be added later.
+
+        <br><br>
+
+        Account deletion will use a secure
+        server-side process so your Supabase
+        secret key is never exposed in the browser.
 
       </div>
 
@@ -346,9 +413,13 @@
 
 <footer>
 
-  <p><strong>LocalLink</strong></p>
+  <p>
+    <strong>LocalLink</strong>
+  </p>
 
-  <p>Connecting customers with local businesses.</p>
+  <p>
+    Connecting customers with local businesses.
+  </p>
 
 </footer>
 
@@ -370,33 +441,48 @@
 
 
   const loading =
-    document.getElementById("loading");
+    document.getElementById(
+      "loading"
+    );
 
   const dashboard =
-    document.getElementById("dashboard");
+    document.getElementById(
+      "dashboard"
+    );
 
   const errorMessage =
-    document.getElementById("errorMessage");
+    document.getElementById(
+      "errorMessage"
+    );
 
   const userEmail =
-    document.getElementById("userEmail");
+    document.getElementById(
+      "userEmail"
+    );
 
   const businessList =
-    document.getElementById("businessList");
+    document.getElementById(
+      "businessList"
+    );
 
 
   function showError(message) {
 
-    errorMessage.textContent = message;
+    errorMessage.textContent =
+      message;
 
-    errorMessage.style.display = "block";
+    errorMessage.style.display =
+      "block";
 
   }
 
 
   function escapeHTML(value) {
 
-    if (value === null || value === undefined) {
+    if (
+      value === null ||
+      value === undefined
+    ) {
       return "";
     }
 
@@ -412,17 +498,23 @@
 
   async function loadDashboard() {
 
-    loading.style.display = "block";
+    loading.style.display =
+      "block";
 
-    dashboard.style.display = "none";
+    dashboard.style.display =
+      "none";
 
-    errorMessage.style.display = "none";
+    errorMessage.style.display =
+      "none";
 
 
     const {
       data: sessionData,
       error: sessionError
-    } = await localLinkSupabase.auth.getSession();
+    } =
+      await localLinkSupabase
+        .auth
+        .getSession();
 
 
     if (sessionError) {
@@ -431,7 +523,8 @@
         "Unable to check your login session."
       );
 
-      loading.style.display = "none";
+      loading.style.display =
+        "none";
 
       return;
 
@@ -453,68 +546,96 @@
 
 
     userEmail.textContent =
-      session.user.email || "Logged-in user";
+      session.user.email ||
+      "Logged-in user";
 
 
     const {
       data: businesses,
       error: businessError
-    } = await localLinkSupabase
-      .from("businesses")
-      .select(`
-        id,
-        business_name,
-        main_category,
-        sub_category,
-        city,
-        address,
-        description,
-        created_at
-      `)
-      .eq("owner_id", session.user.id)
-      .order("created_at", {
-        ascending: false
-      });
+    } =
+      await localLinkSupabase
+        .from("businesses")
+        .select(`
+          id,
+          business_name,
+          main_category,
+          sub_category,
+          city,
+          address,
+          description,
+          created_at
+        `)
+        .eq(
+          "owner_id",
+          session.user.id
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
 
 
     if (businessError) {
 
-      console.error(businessError);
-
-      showError(
-        "Could not load your businesses. Please try again."
+      console.error(
+        businessError
       );
 
-      loading.style.display = "none";
+      showError(
+        "Could not load your businesses."
+      );
+
+      loading.style.display =
+        "none";
 
       return;
 
     }
 
 
-    renderBusinesses(businesses || []);
+    renderBusinesses(
+      businesses || []
+    );
 
 
-    loading.style.display = "none";
+    loading.style.display =
+      "none";
 
-    dashboard.style.display = "block";
+    dashboard.style.display =
+      "block";
 
   }
 
 
-  function renderBusinesses(businesses) {
+  function renderBusinesses(
+    businesses
+  ) {
 
-    businessList.innerHTML = "";
+    businessList.innerHTML =
+      "";
 
 
-    if (businesses.length === 0) {
+    if (
+      businesses.length === 0
+    ) {
 
       businessList.innerHTML = `
+
         <div class="empty">
-          <strong>You don't have a business yet.</strong>
+
+          <strong>
+            You don't have a business yet.
+          </strong>
+
           <br><br>
+
           Add your first business to LocalLink.
+
         </div>
+
       `;
 
       return;
@@ -522,80 +643,129 @@
     }
 
 
-    businesses.forEach(function(business) {
+    businesses.forEach(
+      function(business) {
 
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "business-card";
-
-
-      card.innerHTML = `
-
-        <div class="business-name">
-          ${escapeHTML(business.business_name)}
-        </div>
-
-        <div class="category">
-          ${escapeHTML(business.main_category)}
-          •
-          ${escapeHTML(business.sub_category)}
-        </div>
-
-        <div class="location">
-          ${escapeHTML(business.city)}
-        </div>
-
-        <div class="actions">
-
-          <a
-            class="action view"
-            href="business-details.html?id=${encodeURIComponent(business.id)}"
-          >
-            View Business
-          </a>
-
-          <a
-            class="action edit"
-            href="business.html?edit=${encodeURIComponent(business.id)}"
-          >
-            Edit
-          </a>
-
-          <button
-            class="action delete"
-            data-id="${escapeHTML(business.id)}"
-            data-name="${escapeHTML(business.business_name)}"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      `;
-
-
-      const deleteButton =
-        card.querySelector(".delete");
-
-
-      deleteButton.addEventListener(
-        "click",
-        function() {
-
-          deleteBusiness(
-            business.id,
-            business.business_name
+        const card =
+          document.createElement(
+            "div"
           );
 
-        }
-      );
+        card.className =
+          "business-card";
 
 
-      businessList.appendChild(card);
+        card.innerHTML = `
 
-    });
+          <div class="business-name">
+
+            ${escapeHTML(
+              business.business_name
+            )}
+
+          </div>
+
+
+          <div class="category">
+
+            ${escapeHTML(
+              business.main_category
+            )}
+
+            •
+
+            ${escapeHTML(
+              business.sub_category
+            )}
+
+          </div>
+
+
+          <div class="location">
+
+            ${escapeHTML(
+              business.city
+            )}
+
+          </div>
+
+
+          <div class="actions">
+
+
+            <a
+
+              class="action view"
+
+              href="business-details.html?id=${encodeURIComponent(
+                business.id
+              )}"
+
+            >
+
+              View Business
+
+            </a>
+
+
+            <a
+
+              class="action edit"
+
+              href="edit-business.html?id=${encodeURIComponent(
+                business.id
+              )}"
+
+            >
+
+              Edit
+
+            </a>
+
+
+            <button
+
+              class="action delete"
+
+              type="button"
+
+            >
+
+              Delete
+
+            </button>
+
+
+          </div>
+
+        `;
+
+
+        const deleteButton =
+          card.querySelector(
+            ".delete"
+          );
+
+
+        deleteButton.addEventListener(
+          "click",
+          function() {
+
+            deleteBusiness(
+              business.id,
+              business.business_name
+            );
+
+          }
+        );
+
+
+        businessList.appendChild(
+          card
+        );
+
+      }
+    );
 
   }
 
@@ -607,10 +777,14 @@
 
     const confirmed =
       confirm(
+
         "Delete \"" +
         businessName +
         "\" permanently?\n\n" +
-        "This will remove this business from LocalLink."
+
+        "This will remove this business " +
+        "from LocalLink."
+
       );
 
 
@@ -621,7 +795,10 @@
 
     const {
       data: sessionData
-    } = await localLinkSupabase.auth.getSession();
+    } =
+      await localLinkSupabase
+        .auth
+        .getSession();
 
 
     const session =
@@ -640,16 +817,25 @@
 
     const {
       error
-    } = await localLinkSupabase
-      .from("businesses")
-      .delete()
-      .eq("id", businessId)
-      .eq("owner_id", session.user.id);
+    } =
+      await localLinkSupabase
+        .from("businesses")
+        .delete()
+        .eq(
+          "id",
+          businessId
+        )
+        .eq(
+          "owner_id",
+          session.user.id
+        );
 
 
     if (error) {
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       alert(
         "The business could not be deleted."
@@ -671,14 +857,19 @@
 
 
   document
-    .getElementById("logoutButton")
+    .getElementById(
+      "logoutButton"
+    )
     .addEventListener(
       "click",
       async function() {
 
         const {
           error
-        } = await localLinkSupabase.auth.signOut();
+        } =
+          await localLinkSupabase
+            .auth
+            .signOut();
 
 
         if (error) {
@@ -705,3 +896,5 @@
 
 </body>
 </html>
+
+
