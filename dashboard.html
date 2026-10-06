@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,6 +137,7 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      margin-bottom: 20px;
     }
 
     .action {
@@ -162,6 +164,95 @@
       color: #991b1b;
       border: none;
       cursor: pointer;
+    }
+
+    /* PHOTOS */
+
+    .photos-area {
+      border-top: 1px solid #eaecf0;
+      padding-top: 18px;
+    }
+
+    .photos-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .photos-description {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .photo-upload-box {
+      background: #f9fafb;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .photo-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      background: white;
+      margin-bottom: 10px;
+    }
+
+    .upload-button {
+      width: 100%;
+      border: none;
+      background: #111827;
+      color: white;
+      padding: 11px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .upload-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .upload-status {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .photo-item {
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f3f4f6;
+      border: 1px solid #e4e7ec;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .no-photos {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f9fafb;
+      border-radius: 9px;
+      color: #667085;
+      font-size: 14px;
     }
 
     .empty {
@@ -206,6 +297,7 @@
     }
 
     @media (max-width: 600px) {
+
       .section,
       .welcome {
         padding: 20px;
@@ -224,6 +316,10 @@
       .actions .action {
         flex: 1;
         text-align: center;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -738,6 +834,50 @@
 
           </div>
 
+
+          <!-- PHOTOS -->
+
+          <div class="photos-area">
+
+            <div class="photos-title">
+              Business Photos
+            </div>
+
+            <div class="photos-description">
+
+              Upload real photos of your business,
+              products, services, or work.
+
+            </div>
+
+
+            <div class="photo-upload-box">
+
+              <input
+                type="file"
+                class="photo-input"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+              >
+
+
+              <button
+                type="button"
+                class="upload-button"
+              >
+                Upload Photos
+              </button>
+
+
+              <div class="upload-status"></div>
+
+            </div>
+
+
+            <div class="photo-grid"></div>
+
+          </div>
+
         `;
 
 
@@ -760,12 +900,451 @@
         );
 
 
+        const photoInput =
+          card.querySelector(
+            ".photo-input"
+          );
+
+
+        const uploadButton =
+          card.querySelector(
+            ".upload-button"
+          );
+
+
+        const uploadStatus =
+          card.querySelector(
+            ".upload-status"
+          );
+
+
+        const photoGrid =
+          card.querySelector(
+            ".photo-grid"
+          );
+
+
+        const uploadBox =
+          card.querySelector(
+            ".photo-upload-box"
+          );
+
+
+        uploadButton.addEventListener(
+          "click",
+          function() {
+
+            uploadBusinessPhotos(
+              business.id,
+              photoInput,
+              uploadButton,
+              uploadStatus,
+              photoGrid
+            );
+
+          }
+        );
+
+
+        loadBusinessPhotos(
+          business.id,
+          photoGrid
+        );
+
+
         businessList.appendChild(
           card
         );
 
       }
     );
+
+  }
+
+
+  async function loadBusinessPhotos(
+    businessId,
+    photoGrid
+  ) {
+
+    photoGrid.innerHTML = "";
+
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await localLinkSupabase
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError ||
+      !sessionData.session
+    ) {
+
+      return;
+
+    }
+
+
+    const userId =
+      sessionData.session.user.id;
+
+
+    const folder =
+      userId +
+      "/" +
+      businessId;
+
+
+    const {
+      data: files,
+      error
+    } =
+      await localLinkSupabase
+        .storage
+        .from("business-photos")
+        .list(
+          folder,
+          {
+            limit: 100,
+            sortBy: {
+              column: "created_at",
+              order: "desc"
+            }
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Photo list error:",
+        error
+      );
+
+      photoGrid.innerHTML = `
+
+        <div class="no-photos">
+
+          Photos could not be loaded yet.
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    if (
+      !files ||
+      files.length === 0
+    ) {
+
+      photoGrid.innerHTML = `
+
+        <div class="no-photos">
+
+          No photos uploaded yet.
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    files.forEach(
+      function(file) {
+
+        if (!file.name) {
+          return;
+        }
+
+
+        const fullPath =
+          folder +
+          "/" +
+          file.name;
+
+
+        const {
+          data: publicUrlData
+        } =
+          localLinkSupabase
+            .storage
+            .from("business-photos")
+            .getPublicUrl(
+              fullPath
+            );
+
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "photo-item";
+
+
+        const image =
+          document.createElement(
+            "img"
+          );
+
+
+        image.src =
+          publicUrlData.publicUrl;
+
+
+        image.alt =
+          "Business photo";
+
+
+        image.loading =
+          "lazy";
+
+
+        item.appendChild(
+          image
+        );
+
+
+        photoGrid.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+  async function uploadBusinessPhotos(
+    businessId,
+    photoInput,
+    uploadButton,
+    uploadStatus,
+    photoGrid
+  ) {
+
+    const files =
+      Array.from(
+        photoInput.files || []
+      );
+
+
+    if (files.length === 0) {
+
+      uploadStatus.textContent =
+        "Please choose at least one image.";
+
+      uploadStatus.style.color =
+        "#991b1b";
+
+      return;
+
+    }
+
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await localLinkSupabase
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError ||
+      !sessionData.session
+    ) {
+
+      window.location.href =
+        "auth.html";
+
+      return;
+
+    }
+
+
+    const userId =
+      sessionData.session.user.id;
+
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ];
+
+
+    for (
+      const file of files
+    ) {
+
+      if (
+        !allowedTypes.includes(
+          file.type
+        )
+      ) {
+
+        uploadStatus.textContent =
+          "Only JPG, PNG, and WebP images are allowed.";
+
+        uploadStatus.style.color =
+          "#991b1b";
+
+        return;
+
+      }
+
+
+      if (
+        file.size >
+        10 * 1024 * 1024
+      ) {
+
+        uploadStatus.textContent =
+          "Each image must be 10 MB or smaller.";
+
+        uploadStatus.style.color =
+          "#991b1b";
+
+        return;
+
+      }
+
+    }
+
+
+    uploadButton.disabled =
+      true;
+
+
+    uploadStatus.textContent =
+      "Uploading photos...";
+
+
+    uploadStatus.style.color =
+      "#475467";
+
+
+    let uploaded =
+      0;
+
+
+    for (
+      const file of files
+    ) {
+
+      const extension =
+        file.name
+          .split(".")
+          .pop()
+          .toLowerCase();
+
+
+      const uniqueName =
+        Date.now() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .substring(2, 10) +
+        "." +
+        extension;
+
+
+      const filePath =
+        userId +
+        "/" +
+        businessId +
+        "/" +
+        uniqueName;
+
+
+      const {
+        error
+      } =
+        await localLinkSupabase
+          .storage
+          .from("business-photos")
+          .upload(
+            filePath,
+            file,
+            {
+              cacheControl: "3600",
+              upsert: false,
+              contentType: file.type
+            }
+          );
+
+
+      if (error) {
+
+        console.error(
+          "Photo upload error:",
+          error
+        );
+
+
+        uploadStatus.textContent =
+          "A photo could not be uploaded: " +
+          error.message;
+
+        uploadStatus.style.color =
+          "#991b1b";
+
+
+        uploadButton.disabled =
+          false;
+
+        return;
+
+      }
+
+
+      uploaded++;
+
+      uploadStatus.textContent =
+        "Uploaded " +
+        uploaded +
+        " of " +
+        files.length +
+        " photo(s)...";
+
+    }
+
+
+    uploadStatus.textContent =
+      uploaded +
+      " photo(s) uploaded successfully.";
+
+
+    uploadStatus.style.color =
+      "#166534";
+
+
+    photoInput.value =
+      "";
+
+
+    await loadBusinessPhotos(
+      businessId,
+      photoGrid
+    );
+
+
+    uploadButton.disabled =
+      false;
 
   }
 
@@ -896,5 +1475,4 @@
 
 </body>
 </html>
-
 
