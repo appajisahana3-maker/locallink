@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +58,8 @@
       font-weight: bold;
     }
 
-    .welcome {
+    .welcome,
+    .section {
       background: white;
       padding: 28px;
       border-radius: 16px;
@@ -74,14 +74,6 @@
     .email {
       color: #667085;
       word-break: break-word;
-    }
-
-    .section {
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      border: 1px solid #e4e7ec;
-      margin-bottom: 25px;
     }
 
     .section-header {
@@ -166,8 +158,6 @@
       cursor: pointer;
     }
 
-    /* PHOTOS */
-
     .photos-area {
       border-top: 1px solid #eaecf0;
       padding-top: 18px;
@@ -227,11 +217,12 @@
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 12px;
       margin-top: 18px;
     }
 
     .photo-item {
+      position: relative;
       aspect-ratio: 1 / 1;
       border-radius: 10px;
       overflow: hidden;
@@ -244,6 +235,25 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .photo-delete {
+      position: absolute;
+      right: 7px;
+      bottom: 7px;
+      border: none;
+      background: rgba(127, 29, 29, 0.92);
+      color: white;
+      padding: 7px 9px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .photo-delete:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .no-photos {
@@ -298,8 +308,8 @@
 
     @media (max-width: 600px) {
 
-      .section,
-      .welcome {
+      .welcome,
+      .section {
         padding: 20px;
       }
 
@@ -320,6 +330,11 @@
 
       .photo-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .photo-delete {
+        font-size: 11px;
+        padding: 6px 7px;
       }
     }
   </style>
@@ -372,8 +387,6 @@
     style="display:none;"
   >
 
-    <!-- ACCOUNT -->
-
     <section class="welcome">
 
       <h1>
@@ -387,8 +400,6 @@
 
     </section>
 
-
-    <!-- BUSINESSES -->
 
     <section class="section">
 
@@ -412,8 +423,6 @@
 
     </section>
 
-
-    <!-- WEBSITES -->
 
     <section class="section">
 
@@ -467,8 +476,6 @@
 
     </section>
 
-
-    <!-- ACCOUNT SETTINGS -->
 
     <section class="section">
 
@@ -537,29 +544,19 @@
 
 
   const loading =
-    document.getElementById(
-      "loading"
-    );
+    document.getElementById("loading");
 
   const dashboard =
-    document.getElementById(
-      "dashboard"
-    );
+    document.getElementById("dashboard");
 
   const errorMessage =
-    document.getElementById(
-      "errorMessage"
-    );
+    document.getElementById("errorMessage");
 
   const userEmail =
-    document.getElementById(
-      "userEmail"
-    );
+    document.getElementById("userEmail");
 
   const businessList =
-    document.getElementById(
-      "businessList"
-    );
+    document.getElementById("businessList");
 
 
   function showError(message) {
@@ -743,9 +740,7 @@
       function(business) {
 
         const card =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         card.className =
           "business-card";
@@ -754,11 +749,9 @@
         card.innerHTML = `
 
           <div class="business-name">
-
             ${escapeHTML(
               business.business_name
             )}
-
           </div>
 
 
@@ -788,54 +781,35 @@
 
           <div class="actions">
 
-
             <a
-
               class="action view"
-
               href="business-details.html?id=${encodeURIComponent(
                 business.id
               )}"
-
             >
-
               View Business
-
             </a>
 
 
             <a
-
               class="action edit"
-
               href="edit-business.html?id=${encodeURIComponent(
                 business.id
               )}"
-
             >
-
               Edit
-
             </a>
 
 
             <button
-
               class="action delete"
-
               type="button"
-
             >
-
               Delete
-
             </button>
-
 
           </div>
 
-
-          <!-- PHOTOS -->
 
           <div class="photos-area">
 
@@ -882,9 +856,7 @@
 
 
         const deleteButton =
-          card.querySelector(
-            ".delete"
-          );
+          card.querySelector(".delete");
 
 
         deleteButton.addEventListener(
@@ -901,33 +873,19 @@
 
 
         const photoInput =
-          card.querySelector(
-            ".photo-input"
-          );
+          card.querySelector(".photo-input");
 
 
         const uploadButton =
-          card.querySelector(
-            ".upload-button"
-          );
+          card.querySelector(".upload-button");
 
 
         const uploadStatus =
-          card.querySelector(
-            ".upload-status"
-          );
+          card.querySelector(".upload-status");
 
 
         const photoGrid =
-          card.querySelector(
-            ".photo-grid"
-          );
-
-
-        const uploadBox =
-          card.querySelector(
-            ".photo-upload-box"
-          );
+          card.querySelector(".photo-grid");
 
 
         uploadButton.addEventListener(
@@ -983,9 +941,7 @@
       sessionError ||
       !sessionData.session
     ) {
-
       return;
-
     }
 
 
@@ -1028,9 +984,7 @@
       photoGrid.innerHTML = `
 
         <div class="no-photos">
-
           Photos could not be loaded yet.
-
         </div>
 
       `;
@@ -1048,9 +1002,7 @@
       photoGrid.innerHTML = `
 
         <div class="no-photos">
-
           No photos uploaded yet.
-
         </div>
 
       `;
@@ -1086,40 +1038,60 @@
 
 
         const item =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         item.className =
           "photo-item";
 
 
         const image =
-          document.createElement(
-            "img"
-          );
-
+          document.createElement("img");
 
         image.src =
           publicUrlData.publicUrl;
 
-
         image.alt =
           "Business photo";
-
 
         image.loading =
           "lazy";
 
 
+        const deletePhotoButton =
+          document.createElement("button");
+
+        deletePhotoButton.type =
+          "button";
+
+        deletePhotoButton.className =
+          "photo-delete";
+
+        deletePhotoButton.textContent =
+          "Delete";
+
+
+        deletePhotoButton.addEventListener(
+          "click",
+          function() {
+
+            deleteBusinessPhoto(
+              fullPath,
+              businessId,
+              photoGrid,
+              deletePhotoButton
+            );
+
+          }
+        );
+
+
+        item.appendChild(image);
+
         item.appendChild(
-          image
+          deletePhotoButton
         );
 
-
-        photoGrid.appendChild(
-          item
-        );
+        photoGrid.appendChild(item);
 
       }
     );
@@ -1141,7 +1113,9 @@
       );
 
 
-    if (files.length === 0) {
+    if (
+      files.length === 0
+    ) {
 
       uploadStatus.textContent =
         "Please choose at least one image.";
@@ -1233,7 +1207,6 @@
     uploadStatus.textContent =
       "Uploading photos...";
 
-
     uploadStatus.style.color =
       "#475467";
 
@@ -1295,14 +1268,12 @@
           error
         );
 
-
         uploadStatus.textContent =
           "A photo could not be uploaded: " +
           error.message;
 
         uploadStatus.style.color =
           "#991b1b";
-
 
         uploadButton.disabled =
           false;
@@ -1313,6 +1284,7 @@
 
 
       uploaded++;
+
 
       uploadStatus.textContent =
         "Uploaded " +
@@ -1327,7 +1299,6 @@
     uploadStatus.textContent =
       uploaded +
       " photo(s) uploaded successfully.";
-
 
     uploadStatus.style.color =
       "#166534";
@@ -1345,6 +1316,66 @@
 
     uploadButton.disabled =
       false;
+
+  }
+
+
+  async function deleteBusinessPhoto(
+    fullPath,
+    businessId,
+    photoGrid,
+    deleteButton
+  ) {
+
+    const confirmed =
+      confirm(
+        "Delete this photo permanently?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    deleteButton.disabled =
+      true;
+
+
+    const {
+      error
+    } =
+      await localLinkSupabase
+        .storage
+        .from("business-photos")
+        .remove([
+          fullPath
+        ]);
+
+
+    if (error) {
+
+      console.error(
+        "Photo deletion error:",
+        error
+      );
+
+      alert(
+        "The photo could not be deleted."
+      );
+
+      deleteButton.disabled =
+        false;
+
+      return;
+
+    }
+
+
+    await loadBusinessPhotos(
+      businessId,
+      photoGrid
+    );
 
   }
 
@@ -1436,9 +1467,7 @@
 
 
   document
-    .getElementById(
-      "logoutButton"
-    )
+    .getElementById("logoutButton")
     .addEventListener(
       "click",
       async function() {
@@ -1475,4 +1504,5 @@
 
 </body>
 </html>
+
 
