@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LocalLink | Business Details</title>
+  <title>LocalLink | Business</title>
 
   <style>
     * {
@@ -15,98 +15,59 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #17202a;
+      background:
+        radial-gradient(circle at 10% 0%, #e8eefc 0%, transparent 32%),
+        radial-gradient(circle at 90% 20%, #eef2ff 0%, transparent 28%),
+        #f6f8fb;
+      color: #101828;
+      min-height: 100vh;
     }
 
     header {
-      background: #111827;
-      color: white;
       padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(17, 24, 39, 0.94);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(15px);
     }
 
     .logo {
       font-size: 25px;
-      font-weight: bold;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .future-mark {
+      font-size: 12px;
+      opacity: 0.65;
+      letter-spacing: 2px;
     }
 
     .container {
       width: 92%;
-      max-width: 850px;
-      margin: 30px auto;
+      max-width: 900px;
+      margin: 28px auto 70px;
     }
 
     .back {
       display: inline-block;
-      margin-bottom: 20px;
-      color: #111827;
+      margin-bottom: 22px;
+      color: #344054;
       text-decoration: none;
-      font-weight: bold;
-    }
-
-    .details-card {
-      background: white;
-      border: 1px solid #e4e7ec;
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    .business-name {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .category {
-      color: #667085;
-      font-size: 16px;
-      margin-bottom: 25px;
-    }
-
-    .section {
-      border-top: 1px solid #eaecf0;
-      padding: 22px 0;
-    }
-
-    .section h2 {
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
-
-    .section p {
-      color: #475467;
-      line-height: 1.7;
-      white-space: pre-wrap;
-    }
-
-    .info {
-      display: grid;
-      gap: 14px;
-    }
-
-    .info-row {
-      padding: 14px;
-      background: #f9fafb;
-      border-radius: 10px;
-    }
-
-    .info-label {
-      display: block;
-      font-size: 13px;
-      color: #667085;
-      margin-bottom: 4px;
-    }
-
-    .info-value {
-      font-weight: 600;
-      color: #17202a;
+      font-weight: 700;
     }
 
     .loading,
     .error {
       background: white;
       border: 1px solid #e4e7ec;
-      border-radius: 16px;
-      padding: 30px;
+      border-radius: 24px;
+      padding: 35px;
       text-align: center;
       line-height: 1.6;
     }
@@ -115,8 +76,237 @@
       color: #b42318;
     }
 
+    /* Main identity */
+
+    .identity {
+      position: relative;
+      overflow: hidden;
+      background: #111827;
+      color: white;
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 20px 60px rgba(16, 24, 40, 0.16);
+    }
+
+    .identity::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      right: -80px;
+      top: -80px;
+    }
+
+    .identity::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      right: 30px;
+      top: 30px;
+    }
+
+    .identity-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .identity-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      opacity: 0.55;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .business-name {
+      font-size: clamp(32px, 7vw, 58px);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .category-line {
+      color: #d0d5dd;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .location-chip {
+      display: inline-flex;
+      margin-top: 20px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* Adaptive capabilities */
+
+    .capabilities {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .capability {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 125px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .capability:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+    }
+
+    .capability-number {
+      font-size: 11px;
+      color: #98a2b3;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    .capability-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .capability-text {
+      color: #667085;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Sections */
+
+    .section {
+      margin-top: 18px;
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 24px;
+      padding: 27px;
+    }
+
+    .section-label {
+      color: #98a2b3;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      margin-bottom: 13px;
+    }
+
+    .section p {
+      color: #475467;
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
+    /* Truth layer */
+
+    .truth {
+      display: grid;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    .truth-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 14px;
+    }
+
+    .truth-label {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .truth-value {
+      font-weight: 700;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    /* Information */
+
+    .info {
+      display: grid;
+      gap: 11px;
+    }
+
+    .info-row {
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 14px;
+    }
+
+    .info-label {
+      display: block;
+      font-size: 12px;
+      color: #667085;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-weight: 700;
+      color: #17202a;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    /* Future website area */
+
+    .future-box {
+      background: #111827;
+      color: white;
+      border-radius: 24px;
+      padding: 25px;
+      margin-top: 18px;
+    }
+
+    .future-box .section-label {
+      color: #98a2b3;
+    }
+
+    .future-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .future-box p {
+      color: #d0d5dd;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .future-status {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-size: 12px;
+      color: #d0d5dd;
+    }
+
     footer {
-      margin-top: 60px;
       background: #111827;
       color: white;
       text-align: center;
@@ -124,13 +314,32 @@
       line-height: 1.7;
     }
 
+    footer p:last-child {
+      color: #98a2b3;
+      font-size: 13px;
+    }
+
     @media (max-width: 600px) {
-      .details-card {
+
+      .identity {
+        padding: 27px;
+        border-radius: 25px;
+      }
+
+      .capabilities {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
         padding: 22px;
       }
 
-      .business-name {
-        font-size: 26px;
+      .truth-row {
+        flex-direction: column;
+      }
+
+      .truth-value {
+        text-align: left;
       }
     }
   </style>
@@ -139,26 +348,49 @@
 <body>
 
 <header>
-  <div class="logo">LocalLink</div>
+
+  <div class="logo">
+    LocalLink
+  </div>
+
+  <div class="future-mark">
+    2095
+  </div>
+
 </header>
+
 
 <main class="container">
 
-  <a href="index.html?skipSplash=true" class="back">
+  <a
+    href="index.html?skipSplash=true"
+    class="back"
+  >
     ← Back to LocalLink
   </a>
 
+
   <div id="content">
+
     <div class="loading">
-      Loading business details...
+      Loading business...
     </div>
+
   </div>
 
 </main>
 
+
 <footer>
-  <p><strong>LocalLink</strong></p>
-  <p>Connecting customers with local businesses.</p>
+
+  <p>
+    <strong>LocalLink</strong>
+  </p>
+
+  <p>
+    Local business information, presented honestly.
+  </p>
+
 </footer>
 
 
@@ -172,6 +404,7 @@
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
 
+
   const localLinkSupabase =
     window.supabase.createClient(
       SUPABASE_URL,
@@ -183,10 +416,258 @@
     document.getElementById("content");
 
 
+  /*
+    These are interface descriptions only.
+
+    They do NOT pretend that ordering,
+    booking, payment, reviews, etc. already work.
+  */
+
+  function getCapabilities(mainCategory, subCategory) {
+
+    const category =
+      String(mainCategory || "").toLowerCase();
+
+    const sub =
+      String(subCategory || "").toLowerCase();
+
+
+    if (
+      category.includes("food") ||
+      sub.includes("restaurant") ||
+      sub.includes("bakery") ||
+      sub.includes("cafe")
+    ) {
+
+      return [
+        [
+          "01",
+          "What they offer",
+          "Food, products and services supplied by this business."
+        ],
+        [
+          "02",
+          "Customer information",
+          "Discover the business, location and available information."
+        ],
+        [
+          "03",
+          "Direct contact",
+          "Use the real contact information supplied by the business."
+        ],
+        [
+          "04",
+          "Future commerce",
+          "Ordering and delivery can be connected here when those systems are built."
+        ]
+      ];
+
+    }
+
+
+    if (
+      category.includes("manufacturing") ||
+      sub.includes("manufacturer") ||
+      sub.includes("wholesaler") ||
+      sub.includes("distributor")
+    ) {
+
+      return [
+        [
+          "01",
+          "Products & supply",
+          "Understand what this business manufactures or supplies."
+        ],
+        [
+          "02",
+          "Business enquiry",
+          "A future enquiry system can connect customers and suppliers."
+        ],
+        [
+          "03",
+          "Business identity",
+          "View the real information supplied by the business."
+        ],
+        [
+          "04",
+          "Future commerce",
+          "Wholesale ordering can be connected when that system is built."
+        ]
+      ];
+
+    }
+
+
+    if (
+      category.includes("education") ||
+      sub.includes("school") ||
+      sub.includes("tuition") ||
+      sub.includes("coaching")
+    ) {
+
+      return [
+        [
+          "01",
+          "Learning",
+          "Explore the educational services offered by this business."
+        ],
+        [
+          "02",
+          "Programs",
+          "Courses and programs can be displayed here."
+        ],
+        [
+          "03",
+          "Direct contact",
+          "Use the real contact information supplied by the business."
+        ],
+        [
+          "04",
+          "Future admissions",
+          "Online enquiries and applications can be connected later."
+        ]
+      ];
+
+    }
+
+
+    if (
+      category.includes("transport") ||
+      sub.includes("cab") ||
+      sub.includes("taxi") ||
+      sub.includes("delivery") ||
+      sub.includes("logistics")
+    ) {
+
+      return [
+        [
+          "01",
+          "Transport service",
+          "Understand the transport service offered by this business."
+        ],
+        [
+          "02",
+          "Service area",
+          "Service-area information can be displayed here."
+        ],
+        [
+          "03",
+          "Direct contact",
+          "Use the real contact information supplied by the business."
+        ],
+        [
+          "04",
+          "Future booking",
+          "Booking can be connected when the real booking system is built."
+        ]
+      ];
+
+    }
+
+
+    if (
+      category.includes("entertainment") ||
+      category.includes("media") ||
+      sub.includes("events") ||
+      sub.includes("video") ||
+      sub.includes("music")
+    ) {
+
+      return [
+        [
+          "01",
+          "Media & work",
+          "Show the creative work and services offered by this business."
+        ],
+        [
+          "02",
+          "Portfolio",
+          "Photos and videos can become part of the business profile."
+        ],
+        [
+          "03",
+          "Direct contact",
+          "Use the real contact information supplied by the business."
+        ],
+        [
+          "04",
+          "Future applications",
+          "Auditions, enquiries and submissions can be connected later."
+        ]
+      ];
+
+    }
+
+
+    return [
+      [
+        "01",
+        "What they offer",
+        "Understand the products or services offered by this business."
+      ],
+      [
+        "02",
+        "Business identity",
+        "View the real information supplied by the business."
+      ],
+      [
+        "03",
+        "Direct contact",
+        "Use the real contact information supplied by the business."
+      ],
+      [
+        "04",
+        "Future services",
+        "More business tools can be connected here as LocalLink grows."
+      ]
+    ];
+
+  }
+
+
+  function renderCapabilities(mainCategory, subCategory) {
+
+    const capabilities =
+      getCapabilities(
+        mainCategory,
+        subCategory
+      );
+
+
+    return capabilities.map(function(item) {
+
+      return `
+
+        <div class="capability">
+
+          <div class="capability-number">
+            ${item[0]}
+          </div>
+
+          <div class="capability-title">
+            ${escapeHtml(item[1])}
+          </div>
+
+          <div class="capability-text">
+            ${escapeHtml(item[2])}
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+  }
+
+
   async function loadBusiness() {
 
     const params =
-      new URLSearchParams(window.location.search);
+      new URLSearchParams(
+        window.location.search
+      );
+
 
     const businessId =
       params.get("id");
@@ -195,11 +676,19 @@
     if (!businessId) {
 
       content.innerHTML = `
+
         <div class="error">
-          <strong>Business not found.</strong>
+
+          <strong>
+            Business not found.
+          </strong>
+
           <br><br>
+
           No business ID was provided.
+
         </div>
+
       `;
 
       return;
@@ -233,155 +722,304 @@
         error
       );
 
+
       content.innerHTML = `
+
         <div class="error">
-          <strong>Unable to load this business.</strong>
+
+          <strong>
+            Unable to load this business.
+          </strong>
+
           <br><br>
-          The business may not exist or may no longer be available.
+
+          The business may not exist
+          or may no longer be available.
+
         </div>
+
       `;
 
       return;
     }
 
 
+    const capabilities =
+      renderCapabilities(
+        data.main_category,
+        data.sub_category
+      );
+
+
     content.innerHTML = `
 
-      <div class="details-card">
+      <!-- BUSINESS IDENTITY -->
 
-        <h1 class="business-name">
-          ${escapeHtml(data.business_name)}
-        </h1>
+      <section class="identity">
 
-        <p class="category">
-          ${escapeHtml(data.main_category)}
-          →
-          ${escapeHtml(data.sub_category)}
-        </p>
+        <div class="identity-content">
 
+          <div class="identity-label">
+            LOCAL BUSINESS
+          </div>
 
-        <div class="section">
+          <h1 class="business-name">
+            ${escapeHtml(data.business_name)}
+          </h1>
 
-          <h2>About the business</h2>
-
-          <p>
-            ${escapeHtml(data.description)}
+          <p class="category-line">
+            ${escapeHtml(data.main_category)}
+            <br>
+            ${escapeHtml(data.sub_category)}
           </p>
 
+          <div class="location-chip">
+            ◉ ${escapeHtml(data.city)}
+          </div>
+
         </div>
 
-
-        <div class="section">
-
-          <h2>Business information</h2>
-
-          <div class="info">
-
-            <div class="info-row">
-
-              <span class="info-label">
-                Location
-              </span>
-
-              <span class="info-value">
-                ${escapeHtml(data.city)}
-              </span>
-
-            </div>
+      </section>
 
 
-            <div class="info-row">
+      <!-- ADAPTIVE CAPABILITIES -->
 
-              <span class="info-label">
-                Address
-              </span>
+      <section>
 
-              <span class="info-value">
-                ${escapeHtml(data.address)}
-              </span>
+        <div style="margin: 25px 0 14px;">
 
-            </div>
+          <div class="section-label">
+            BUSINESS INTERFACE
+          </div>
+
+          <h2>
+            What this business can offer
+          </h2>
+
+        </div>
+
+        <div class="capabilities">
+
+          ${capabilities}
+
+        </div>
+
+      </section>
 
 
-            <div class="info-row">
+      <!-- ABOUT -->
 
-              <span class="info-label">
-                Category
-              </span>
+      <section class="section">
 
-              <span class="info-value">
-                ${escapeHtml(data.main_category)}
-              </span>
+        <div class="section-label">
+          THE BUSINESS
+        </div>
 
-            </div>
+        <h2>
+          About
+        </h2>
+
+        <p>
+          ${escapeHtml(data.description)}
+        </p>
+
+      </section>
 
 
-            <div class="info-row">
+      <!-- HONESTY / TRUST -->
 
-              <span class="info-label">
-                Subcategory
-              </span>
+      <section class="section">
 
-              <span class="info-value">
-                ${escapeHtml(data.sub_category)}
-              </span>
+        <div class="section-label">
+          INFORMATION ORIGIN
+        </div>
 
-            </div>
+        <h2>
+          Know what you're seeing
+        </h2>
+
+        <div class="truth">
+
+          <div class="truth-row">
+
+            <span class="truth-label">
+              Business information
+            </span>
+
+            <span class="truth-value">
+              Supplied by business
+            </span>
+
+          </div>
+
+
+          <div class="truth-row">
+
+            <span class="truth-label">
+              Business name
+            </span>
+
+            <span class="truth-value">
+              ${escapeHtml(data.business_name)}
+            </span>
+
+          </div>
+
+
+          <div class="truth-row">
+
+            <span class="truth-label">
+              Category
+            </span>
+
+            <span class="truth-value">
+              ${escapeHtml(data.main_category)}
+            </span>
+
+          </div>
+
+
+          <div class="truth-row">
+
+            <span class="truth-label">
+              AI-created information
+            </span>
+
+            <span class="truth-value">
+              None shown
+            </span>
 
           </div>
 
         </div>
 
-
-        <div class="section">
-
-          <h2>Contact</h2>
-
-          <div class="info">
-
-            <div class="info-row">
-
-              <span class="info-label">
-                Contact person
-              </span>
-
-              <span class="info-value">
-                ${escapeHtml(data.contact_name)}
-              </span>
-
-            </div>
+      </section>
 
 
-            <div class="info-row">
+      <!-- LOCATION -->
 
-              <span class="info-label">
-                Phone
-              </span>
+      <section class="section">
 
-              <span class="info-value">
-                ${escapeHtml(data.phone)}
-              </span>
+        <div class="section-label">
+          WHERE
+        </div>
 
-            </div>
+        <h2>
+          Location
+        </h2>
+
+        <div class="info">
+
+          <div class="info-row">
+
+            <span class="info-label">
+              City
+            </span>
+
+            <span class="info-value">
+              ${escapeHtml(data.city)}
+            </span>
+
+          </div>
 
 
-            <div class="info-row">
+          <div class="info-row">
 
-              <span class="info-label">
-                Email
-              </span>
+            <span class="info-label">
+              Address
+            </span>
 
-              <span class="info-value">
-                ${escapeHtml(data.email)}
-              </span>
-
-            </div>
+            <span class="info-value">
+              ${escapeHtml(data.address)}
+            </span>
 
           </div>
 
         </div>
 
-      </div>
+      </section>
+
+
+      <!-- CONTACT -->
+
+      <section class="section">
+
+        <div class="section-label">
+          CONNECTION
+        </div>
+
+        <h2>
+          Contact
+        </h2>
+
+        <div class="info">
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Contact person
+            </span>
+
+            <span class="info-value">
+              ${escapeHtml(data.contact_name)}
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Phone
+            </span>
+
+            <span class="info-value">
+              ${escapeHtml(data.phone)}
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Email
+            </span>
+
+            <span class="info-value">
+              ${escapeHtml(data.email)}
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FUTURE WEBSITE -->
+
+      <section class="future-box">
+
+        <div class="section-label">
+          LOCAL LINK WEBSITE
+        </div>
+
+        <h2>
+          This business can grow beyond a profile.
+        </h2>
+
+        <p>
+          A complete public business website will eventually
+          live here, with products, services, media and
+          business-specific tools.
+        </p>
+
+        <span class="future-status">
+          Website not created yet
+        </span>
+
+      </section>
 
     `;
 
