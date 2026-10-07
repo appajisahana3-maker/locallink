@@ -1,1 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Account | LocalLink</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #17202a;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 700px;
+      margin: 35px auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e4e7ec;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #667085;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .row {
+      padding: 16px 0;
+      border-bottom: 1px solid #eaecf0;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #667085;
+      margin-bottom: 5px;
+    }
+
+    .value {
+      font-size: 16px;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .logout {
+      background: #111827;
+      color: white;
+    }
+
+    .logout:hover {
+      background: #374151;
+    }
+
+    .danger {
+      background: #b42318;
+      color: white;
+    }
+
+    .danger:hover {
+      background: #912018;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 9px;
+      line-height: 1.5;
+    }
+
+    .info {
+      background: #f3f4f6;
+      color: #475467;
+    }
+
+    .error {
+      background: #fef3f2;
+      color: #b42318;
+    }
+
+    .warning {
+      margin-top: 15px;
+      padding: 14px;
+      background: #fffaeb;
+      border: 1px solid #fedf89;
+      border-radius: 9px;
+      color: #7a2e0e;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 60px;
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LocalLink</div>
+</header>
+
+<main class="container">
+
+  <a href="dashboard.html" class="back">
+    ← Back to My LocalLink
+  </a>
+
+  <div class="card">
+
+    <h1>My Account</h1>
+
+    <p class="intro">
+      Manage your LocalLink account and account settings.
+    </p>
+
+    <div class="row">
+      <div class="label">Email</div>
+      <div class="value" id="email">Loading...</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Account ID</div>
+      <div class="value" id="userId">Loading...</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Account status</div>
+      <div class="value" id="status">Checking...</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Account actions</h2>
+
+    <button
+      type="button"
+      class="button logout"
+      id="logoutButton"
+    >
+      Log Out
+    </button>
+
+    <div class="warning">
+      <strong>Delete account</strong><br><br>
+
+      Account deletion is permanent. Your LocalLink account
+      and data connected to it may be permanently removed.
+
+      We will connect this button to secure server-side account
+      deletion before allowing it to perform the action.
+    </div>
+
+    <button
+      type="button"
+      class="button danger"
+      id="deleteButton"
+    >
+      Delete My Account
+    </button>
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>LocalLink</strong></p>
+  <p>Connecting customers with local businesses.</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://vyfuuvsuewzsoyjdfjfu.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_9if2DNlYzWq4GtmQjOx9BQ_nqCdHCEm";
+
+  const localLinkSupabase =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  const emailElement =
+    document.getElementById("email");
+
+  const userIdElement =
+    document.getElementById("userId");
+
+  const statusElement =
+    document.getElementById("status");
+
+  const messageElement =
+    document.getElementById("message");
+
+  const logoutButton =
+    document.getElementById("logoutButton");
+
+  const deleteButton =
+    document.getElementById("deleteButton");
+
+
+  function showMessage(text, type = "info") {
+
+    messageElement.textContent = text;
+
+    messageElement.className =
+      "message " + type;
+
+    messageElement.style.display = "block";
+  }
+
+
+  async function loadAccount() {
+
+    const {
+      data,
+      error
+    } =
+      await localLinkSupabase.auth.getUser();
+
+
+    if (
+      error ||
+      !data ||
+      !data.user
+    ) {
+
+      window.location.href =
+        "auth.html";
+
+      return;
+    }
+
+
+    const user = data.user;
+
+
+    emailElement.textContent =
+      user.email || "Not available";
+
+    userIdElement.textContent =
+      user.id;
+
+    statusElement.textContent =
+      "Active";
+
+  }
+
+
+  logoutButton.addEventListener(
+    "click",
+    async function() {
+
+      logoutButton.disabled = true;
+
+      logoutButton.textContent =
+        "Logging out...";
+
+
+      const {
+        error
+      } =
+        await localLinkSupabase.auth.signOut();
+
+
+      if (error) {
+
+        showMessage(
+          "Could not log out. Please try again.",
+          "error"
+        );
+
+        logoutButton.disabled = false;
+
+        logoutButton.textContent =
+          "Log Out";
+
+        return;
+      }
+
+
+      window.location.href =
+        "index.html?skipSplash=true";
+
+    }
+  );
+
+
+  deleteButton.addEventListener(
+    "click",
+    function() {
+
+      showMessage(
+        "Account deletion is not connected yet. We will add secure server-side deletion next.",
+        "info"
+      );
+
+    }
+  );
+
+
+  loadAccount();
+
+</script>
+
+</body>
+</html>
+
 
