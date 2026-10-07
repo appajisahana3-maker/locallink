@@ -42,15 +42,9 @@
       letter-spacing: -0.5px;
     }
 
-    .future-mark {
-      font-size: 12px;
-      opacity: 0.65;
-      letter-spacing: 2px;
-    }
-
     .container {
       width: 92%;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 28px auto 70px;
     }
 
@@ -76,7 +70,9 @@
       color: #b42318;
     }
 
-    /* Main identity */
+    /* =========================
+       BUSINESS IDENTITY
+    ========================= */
 
     .identity {
       position: relative;
@@ -84,30 +80,30 @@
       background: #111827;
       color: white;
       border-radius: 30px;
-      padding: 34px;
+      padding: 38px;
       box-shadow: 0 20px 60px rgba(16, 24, 40, 0.16);
     }
 
     .identity::before {
       content: "";
       position: absolute;
-      width: 260px;
-      height: 260px;
+      width: 300px;
+      height: 300px;
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 50%;
-      right: -80px;
-      top: -80px;
+      right: -100px;
+      top: -100px;
     }
 
     .identity::after {
       content: "";
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 170px;
+      height: 170px;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 50%;
-      right: 30px;
-      top: 30px;
+      right: 40px;
+      top: 40px;
     }
 
     .identity-content {
@@ -146,7 +142,143 @@
       background: rgba(255,255,255,0.06);
     }
 
-    /* Adaptive capabilities */
+    /* =========================
+       PHOTO SHOWCASE
+    ========================= */
+
+    .photo-section {
+      margin-top: 18px;
+      background: #0b1220;
+      color: white;
+      border-radius: 28px;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .photo-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .photo-heading-label {
+      color: #98a2b3;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .photo-heading h2 {
+      font-size: 26px;
+      line-height: 1.1;
+    }
+
+    .photo-heading p {
+      color: #98a2b3;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 350px;
+      text-align: right;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      grid-template-rows: 230px 150px;
+      gap: 10px;
+    }
+
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #182230;
+      cursor: pointer;
+    }
+
+    .photo-card:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .photo-number {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      color: white;
+    }
+
+    .photo-empty {
+      padding: 35px 20px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 18px;
+      color: #98a2b3;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       PHOTO VIEWER
+    ========================= */
+
+    .viewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 100;
+      padding: 25px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .viewer.open {
+      display: flex;
+    }
+
+    .viewer img {
+      max-width: 95vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .viewer-close {
+      position: fixed;
+      right: 20px;
+      top: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       ADAPTIVE CAPABILITIES
+    ========================= */
 
     .capabilities {
       margin-top: 18px;
@@ -188,7 +320,9 @@
       line-height: 1.5;
     }
 
-    /* Sections */
+    /* =========================
+       SECTIONS
+    ========================= */
 
     .section {
       margin-top: 18px;
@@ -217,7 +351,9 @@
       white-space: pre-wrap;
     }
 
-    /* Truth layer */
+    /* =========================
+       TRUST LAYER
+    ========================= */
 
     .truth {
       display: grid;
@@ -245,7 +381,9 @@
       text-align: right;
     }
 
-    /* Information */
+    /* =========================
+       INFORMATION
+    ========================= */
 
     .info {
       display: grid;
@@ -272,7 +410,9 @@
       word-break: break-word;
     }
 
-    /* Future website area */
+    /* =========================
+       FUTURE WEBSITE
+    ========================= */
 
     .future-box {
       background: #111827;
@@ -319,11 +459,34 @@
       font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+
+      .container {
+        width: 94%;
+      }
 
       .identity {
         padding: 27px;
         border-radius: 25px;
+      }
+
+      .photo-section {
+        padding: 18px;
+        border-radius: 23px;
+      }
+
+      .photo-heading {
+        display: block;
+      }
+
+      .photo-heading p {
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 120px;
       }
 
       .capabilities {
@@ -342,6 +505,19 @@
         text-align: left;
       }
     }
+
+    @media (max-width: 450px) {
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 240px 150px 150px;
+      }
+
+      .photo-card:first-child {
+        grid-row: auto;
+      }
+
+    }
   </style>
 </head>
 
@@ -351,10 +527,6 @@
 
   <div class="logo">
     LocalLink
-  </div>
-
-  <div class="future-mark">
-    2095
   </div>
 
 </header>
@@ -394,6 +566,31 @@
 </footer>
 
 
+<!-- PHOTO VIEWER -->
+
+<div
+  id="photoViewer"
+  class="viewer"
+>
+
+  <button
+    id="viewerClose"
+    class="viewer-close"
+    type="button"
+    aria-label="Close photo"
+  >
+    ×
+  </button>
+
+  <img
+    id="viewerImage"
+    src=""
+    alt="Business photo"
+  >
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -417,10 +614,9 @@
 
 
   /*
-    These are interface descriptions only.
-
-    They do NOT pretend that ordering,
-    booking, payment, reviews, etc. already work.
+    These descriptions describe possible capabilities.
+    They do NOT claim that ordering, booking,
+    payment or reviews already work.
   */
 
   function getCapabilities(mainCategory, subCategory) {
@@ -661,6 +857,407 @@
   }
 
 
+  /*
+    Load the real photos belonging to this business.
+
+    Folder structure:
+
+    business-photos/
+      USER_ID/
+        BUSINESS_ID/
+          PHOTO.jpg
+  */
+
+  async function loadBusinessPhotos(businessId) {
+
+    try {
+
+      const {
+        data: sessionData
+      } =
+        await localLinkSupabase
+          .auth
+          .getSession();
+
+
+      /*
+        The public bucket lets customers see the
+        actual image using getPublicUrl().
+
+        We first obtain the business owner ID
+        from the businesses table.
+      */
+
+      const {
+        data: businessOwner,
+        error: ownerError
+      } =
+        await localLinkSupabase
+          .from("businesses")
+          .select("owner_id")
+          .eq("id", businessId)
+          .single();
+
+
+      if (ownerError || !businessOwner) {
+
+        console.error(
+          "Unable to find photo owner:",
+          ownerError
+        );
+
+        return [];
+
+      }
+
+
+      const ownerId =
+        businessOwner.owner_id;
+
+
+      const folder =
+        `${ownerId}/${businessId}`;
+
+
+      const {
+        data: files,
+        error
+      } =
+        await localLinkSupabase
+          .storage
+          .from("business-photos")
+          .list(folder, {
+            limit: 100,
+            offset: 0,
+            sortBy: {
+              column: "created_at",
+              order: "asc"
+            }
+          });
+
+
+      if (error) {
+
+        console.error(
+          "Photo list error:",
+          error
+        );
+
+        return [];
+
+      }
+
+
+      if (!files || files.length === 0) {
+
+        return [];
+
+      }
+
+
+      const imageFiles =
+        files.filter(function(file) {
+
+          return (
+            file &&
+            file.name &&
+            !file.name.endsWith("/")
+          );
+
+        });
+
+
+      return imageFiles.map(function(file) {
+
+        const fullPath =
+          `${folder}/${file.name}`;
+
+
+        const {
+          data
+        } =
+          localLinkSupabase
+            .storage
+            .from("business-photos")
+            .getPublicUrl(fullPath);
+
+
+        return {
+          name: file.name,
+          url: data.publicUrl
+        };
+
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Unexpected photo error:",
+        error
+      );
+
+      return [];
+
+    }
+
+  }
+
+
+  function getPhotoDescription(
+    mainCategory,
+    subCategory
+  ) {
+
+    const category =
+      String(mainCategory || "").toLowerCase();
+
+    const sub =
+      String(subCategory || "").toLowerCase();
+
+
+    if (
+      category.includes("food") ||
+      sub.includes("restaurant") ||
+      sub.includes("bakery") ||
+      sub.includes("cafe")
+    ) {
+
+      return "Real photos from this business.";
+
+    }
+
+
+    if (
+      category.includes("entertainment") ||
+      category.includes("media")
+    ) {
+
+      return "A visual portfolio from this business.";
+
+    }
+
+
+    if (
+      category.includes("manufacturing")
+    ) {
+
+      return "Real products, work or facilities from this business.";
+
+    }
+
+
+    return "Real photos provided by this business.";
+
+  }
+
+
+  function renderPhotos(
+    photos,
+    mainCategory,
+    subCategory
+  ) {
+
+    if (!photos || photos.length === 0) {
+
+      return `
+
+        <section class="photo-section">
+
+          <div class="photo-heading">
+
+            <div>
+
+              <div class="photo-heading-label">
+                VISUAL IDENTITY
+              </div>
+
+              <h2>
+                Business showcase
+              </h2>
+
+            </div>
+
+          </div>
+
+          <div class="photo-empty">
+
+            No business photos have been added yet.
+
+            <br>
+
+            Photos uploaded by the business
+            will appear here automatically.
+
+          </div>
+
+        </section>
+
+      `;
+
+    }
+
+
+    const visiblePhotos =
+      photos.slice(0, 3);
+
+
+    const cards =
+      visiblePhotos.map(function(photo, index) {
+
+        return `
+
+          <div
+            class="photo-card"
+            data-photo-url="${escapeHtml(photo.url)}"
+          >
+
+            <img
+              src="${escapeHtml(photo.url)}"
+              alt="Photo ${index + 1} from this business"
+              loading="${index === 0 ? "eager" : "lazy"}"
+            >
+
+            <div class="photo-number">
+              ${index + 1} / ${photos.length}
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+
+    return `
+
+      <section class="photo-section">
+
+        <div class="photo-heading">
+
+          <div>
+
+            <div class="photo-heading-label">
+              VISUAL IDENTITY
+            </div>
+
+            <h2>
+              Business showcase
+            </h2>
+
+          </div>
+
+          <p>
+            ${escapeHtml(
+              getPhotoDescription(
+                mainCategory,
+                subCategory
+              )
+            )}
+          </p>
+
+        </div>
+
+
+        <div class="photo-grid">
+
+          ${cards}
+
+        </div>
+
+      </section>
+
+    `;
+
+  }
+
+
+  function activatePhotoViewer() {
+
+    const viewer =
+      document.getElementById("photoViewer");
+
+    const viewerImage =
+      document.getElementById("viewerImage");
+
+    const closeButton =
+      document.getElementById("viewerClose");
+
+
+    document
+      .querySelectorAll(".photo-card")
+      .forEach(function(card) {
+
+        card.addEventListener(
+          "click",
+          function() {
+
+            const url =
+              card.dataset.photoUrl;
+
+
+            if (!url) {
+              return;
+            }
+
+
+            viewerImage.src =
+              url;
+
+
+            viewer.classList.add("open");
+
+          }
+        );
+
+      });
+
+
+    closeButton.addEventListener(
+      "click",
+      function() {
+
+        viewer.classList.remove("open");
+
+        viewerImage.src = "";
+
+      }
+    );
+
+
+    viewer.addEventListener(
+      "click",
+      function(event) {
+
+        if (event.target === viewer) {
+
+          viewer.classList.remove("open");
+
+          viewerImage.src = "";
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          viewer.classList.remove("open");
+
+          viewerImage.src = "";
+
+        }
+
+      }
+    );
+
+  }
+
+
   async function loadBusiness() {
 
     const params =
@@ -692,14 +1289,19 @@
       `;
 
       return;
+
     }
 
 
-    const { data, error } =
+    const {
+      data,
+      error
+    } =
       await localLinkSupabase
         .from("businesses")
         .select(`
           id,
+          owner_id,
           business_name,
           contact_name,
           email,
@@ -741,7 +1343,19 @@
       `;
 
       return;
+
     }
+
+
+    /*
+      Load the real photos after the business
+      itself has been successfully found.
+    */
+
+    const photos =
+      await loadBusinessPhotos(
+        businessId
+      );
 
 
     const capabilities =
@@ -780,6 +1394,15 @@
         </div>
 
       </section>
+
+
+      <!-- REAL BUSINESS PHOTOS -->
+
+      ${renderPhotos(
+        photos,
+        data.main_category,
+        data.sub_category
+      )}
 
 
       <!-- ADAPTIVE CAPABILITIES -->
@@ -1023,6 +1646,14 @@
 
     `;
 
+
+    /*
+      Activate the real photo viewer only after
+      the business content has been rendered.
+    */
+
+    activatePhotoViewer();
+
   }
 
 
@@ -1044,3 +1675,4 @@
 
 </body>
 </html>
+
