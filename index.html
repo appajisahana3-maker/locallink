@@ -14,11 +14,20 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #f5f7fa;
       color: #17202a;
     }
+
+    body.sidebar-open {
+      overflow: hidden;
+    }
+
 
     /* =========================
        SPLASH SCREEN
@@ -92,6 +101,12 @@
       gap: 20px;
     }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .logo {
       font-size: 25px;
       font-weight: bold;
@@ -101,6 +116,7 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .nav a {
@@ -117,13 +133,249 @@
 
 
     /* =========================
+       MENU BUTTON
+    ========================= */
+
+    .menu-button {
+      width: 44px;
+      height: 44px;
+
+      border: 1px solid #4b5563;
+      background: #1f2937;
+
+      color: white;
+
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 23px;
+
+      cursor: pointer;
+
+      flex-shrink: 0;
+    }
+
+    .menu-button:hover {
+      background: #374151;
+    }
+
+
+    /* =========================
+       SIDE BAR OVERLAY
+    ========================= */
+
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.48);
+
+      z-index: 5000;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+    }
+
+    .sidebar-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+    /* =========================
+       SIDE BAR
+    ========================= */
+
+    .sidebar {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: min(330px, 86%);
+
+      height: 100%;
+
+      background: white;
+
+      z-index: 5001;
+
+      transform: translateX(-100%);
+
+      transition:
+        transform 0.25s ease;
+
+      overflow-y: auto;
+
+      box-shadow:
+        8px 0 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+
+    .sidebar-header {
+      background: #111827;
+      color: white;
+
+      padding: 22px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .sidebar-logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .sidebar-subtitle {
+      color: #d1d5db;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .close-sidebar {
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid #4b5563;
+
+      background: #1f2937;
+
+      color: white;
+
+      border-radius: 9px;
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+      flex-shrink: 0;
+    }
+
+    .close-sidebar:hover {
+      background: #374151;
+    }
+
+
+    .sidebar-content {
+      padding: 15px;
+    }
+
+
+    .sidebar-section-title {
+      color: #667085;
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.7px;
+
+      padding: 15px 12px 8px;
+    }
+
+
+    .sidebar-link {
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      width: 100%;
+
+      padding: 13px 12px;
+
+      border-radius: 10px;
+
+      color: #17202a;
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+      margin-bottom: 4px;
+
+      transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+    }
+
+    .sidebar-link:hover {
+      background: #f3f4f6;
+    }
+
+    .sidebar-link:active {
+      transform: scale(0.98);
+    }
+
+    .sidebar-icon {
+      width: 28px;
+
+      text-align: center;
+
+      font-size: 20px;
+
+      flex-shrink: 0;
+    }
+
+
+    .sidebar-divider {
+      height: 1px;
+
+      background: #eaecf0;
+
+      margin: 12px 0;
+    }
+
+
+    .sidebar-note {
+      margin: 15px 5px;
+
+      padding: 15px;
+
+      background: #f9fafb;
+
+      border: 1px solid #e4e7ec;
+
+      border-radius: 10px;
+
+      color: #667085;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================
        HERO
     ========================= */
 
     .hero {
       background: #111827;
       color: white;
+
       padding: 55px 6% 70px;
+
       text-align: center;
     }
 
@@ -139,8 +391,11 @@
 
     .hero p {
       color: #d1d5db;
+
       font-size: 18px;
+
       line-height: 1.6;
+
       margin-bottom: 28px;
     }
 
@@ -151,10 +406,15 @@
 
     .search-box input {
       width: 100%;
+
       padding: 16px 18px;
+
       border: none;
+
       border-radius: 12px;
+
       font-size: 17px;
+
       outline: none;
     }
 
@@ -165,12 +425,15 @@
 
     .container {
       width: 92%;
+
       max-width: 1200px;
+
       margin: 40px auto;
     }
 
     .section-title {
       font-size: 30px;
+
       margin-bottom: 25px;
     }
 
@@ -181,15 +444,22 @@
 
     .categories {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
       gap: 18px;
+
       margin-bottom: 55px;
     }
 
     .category-card {
       background: white;
+
       border: 1px solid #e4e7ec;
+
       border-radius: 16px;
+
       padding: 30px 15px;
 
       text-align: center;
@@ -203,16 +473,21 @@
 
     .category-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+      box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.08);
     }
 
     .category-icon {
       font-size: 32px;
+
       margin-bottom: 18px;
     }
 
     .category-name {
       font-size: 18px;
+
       font-weight: 600;
     }
 
@@ -223,14 +498,20 @@
 
     .business-list {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
       gap: 20px;
     }
 
     .business-card {
       background: white;
+
       border: 1px solid #e4e7ec;
+
       border-radius: 16px;
+
       padding: 25px;
 
       cursor: pointer;
@@ -243,36 +524,49 @@
 
     .business-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+      box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.08);
+
       border-color: #98a2b3;
     }
 
     .business-card h3 {
       font-size: 23px;
+
       margin-bottom: 10px;
     }
 
     .business-category {
       color: #475467;
+
       font-size: 16px;
+
       margin-bottom: 12px;
     }
 
     .business-city {
       color: #667085;
+
       font-size: 16px;
+
       margin-bottom: 15px;
     }
 
     .business-description {
       color: #475467;
+
       line-height: 1.6;
+
       margin-bottom: 20px;
     }
 
     .view-business {
       border: none;
+
       background: #111827;
+
       color: white;
 
       padding: 11px 16px;
@@ -280,6 +574,7 @@
       border-radius: 8px;
 
       font-size: 14px;
+
       font-weight: bold;
 
       cursor: pointer;
@@ -297,10 +592,15 @@
     .loading-box,
     .empty-box {
       background: white;
+
       border: 1px solid #e4e7ec;
+
       border-radius: 14px;
+
       padding: 25px;
+
       text-align: center;
+
       color: #667085;
 
       grid-column: 1 / -1;
@@ -315,6 +615,7 @@
       margin-top: 50px;
 
       background: #111827;
+
       color: white;
 
       padding: 35px;
@@ -326,12 +627,15 @@
 
     .business-banner h2 {
       margin-bottom: 10px;
+
       font-size: 27px;
     }
 
     .business-banner p {
       color: #d1d5db;
+
       line-height: 1.6;
+
       margin-bottom: 20px;
     }
 
@@ -339,6 +643,7 @@
       display: inline-block;
 
       background: white;
+
       color: #111827;
 
       text-decoration: none;
@@ -359,6 +664,7 @@
       margin-top: 60px;
 
       background: #111827;
+
       color: white;
 
       text-align: center;
@@ -370,6 +676,7 @@
 
     footer p:first-child {
       font-size: 20px;
+
       margin-bottom: 5px;
     }
 
@@ -385,7 +692,8 @@
     @media (max-width: 800px) {
 
       .categories {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
       .business-list {
@@ -401,21 +709,30 @@
 
     @media (max-width: 600px) {
 
+      header {
+        padding: 15px 5%;
+      }
+
       .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: space-between;
       }
 
       .nav {
-        width: 100%;
+        display: none;
       }
 
-      .nav a {
-        background: #1f2937;
+      .logo {
+        font-size: 24px;
       }
 
       .categories {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+          repeat(2, 1fr);
+
         gap: 12px;
       }
 
@@ -465,6 +782,186 @@
 </div>
 
 
+<!-- =========================
+     SIDEBAR OVERLAY
+========================= -->
+
+<div
+  id="sidebarOverlay"
+  class="sidebar-overlay"
+></div>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside
+  id="sidebar"
+  class="sidebar"
+  aria-label="LocalLink navigation"
+>
+
+  <div class="sidebar-header">
+
+    <div>
+
+      <div class="sidebar-logo">
+        LocalLink
+      </div>
+
+      <div class="sidebar-subtitle">
+        Local business platform
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      id="closeSidebar"
+      class="close-sidebar"
+      aria-label="Close menu"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="sidebar-content">
+
+
+    <div class="sidebar-section-title">
+      Explore
+    </div>
+
+
+    <a
+      href="index.html?skipSplash=true"
+      class="sidebar-link"
+    >
+
+      <span class="sidebar-icon">🏠</span>
+
+      <span>Home</span>
+
+    </a>
+
+
+    <a
+      href="#categories"
+      class="sidebar-link sidebar-close-link"
+    >
+
+      <span class="sidebar-icon">📂</span>
+
+      <span>Categories</span>
+
+    </a>
+
+
+    <a
+      href="#businesses"
+      class="sidebar-link sidebar-close-link"
+    >
+
+      <span class="sidebar-icon">🔎</span>
+
+      <span>Find Businesses</span>
+
+    </a>
+
+
+    <div class="sidebar-divider"></div>
+
+
+    <div class="sidebar-section-title">
+      My LocalLink
+    </div>
+
+
+    <a
+      href="dashboard.html"
+      class="sidebar-link"
+    >
+
+      <span class="sidebar-icon">🏢</span>
+
+      <span>My Businesses</span>
+
+    </a>
+
+
+    <a
+      href="account.html"
+      class="sidebar-link"
+    >
+
+      <span class="sidebar-icon">👤</span>
+
+      <span>My Account</span>
+
+    </a>
+
+
+    <a
+      href="dashboard.html"
+      class="sidebar-link"
+    >
+
+      <span class="sidebar-icon">🌐</span>
+
+      <span>My Websites</span>
+
+    </a>
+
+
+    <div class="sidebar-divider"></div>
+
+
+    <div class="sidebar-section-title">
+      Business
+    </div>
+
+
+    <a
+      href="business.html"
+      class="sidebar-link"
+    >
+
+      <span class="sidebar-icon">🏪</span>
+
+      <span>Register Business</span>
+
+    </a>
+
+
+    <a
+      href="auth.html"
+      class="sidebar-link"
+    >
+
+      <span class="sidebar-icon">🔐</span>
+
+      <span>Log In / Sign Up</span>
+
+    </a>
+
+
+    <div class="sidebar-note">
+
+      <strong>LocalLink</strong><br><br>
+
+      Connect with local businesses,
+      services and opportunities.
+
+    </div>
+
+  </div>
+
+</aside>
+
 
 <!-- =========================
      HEADER
@@ -474,9 +971,27 @@
 
   <div class="header-inner">
 
-    <div class="logo">
-      LocalLink
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        id="menuButton"
+        class="menu-button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        ☰
+      </button>
+
+
+      <div class="logo">
+        LocalLink
+      </div>
+
     </div>
+
 
     <nav class="nav">
 
@@ -487,8 +1002,6 @@
       <a href="auth.html?signup=true">
         Sign Up
       </a>
-
-      <!-- NEW: OWNER DASHBOARD -->
 
       <a href="dashboard.html">
         My LocalLink
@@ -503,7 +1016,6 @@
   </div>
 
 </header>
-
 
 
 <!-- =========================
@@ -539,7 +1051,6 @@
 </section>
 
 
-
 <!-- =========================
      MAIN
 ========================= -->
@@ -549,244 +1060,250 @@
 
   <!-- CATEGORIES -->
 
-  <h2 class="section-title">
-    Explore Categories
-  </h2>
+  <section id="categories">
+
+    <h2 class="section-title">
+      Explore Categories
+    </h2>
 
 
-  <div class="categories">
+    <div class="categories">
 
 
-    <div
-      class="category-card"
-      data-category="Shopping"
-    >
+      <div
+        class="category-card"
+        data-category="Shopping"
+      >
 
-      <div class="category-icon">
-        🛍️
+        <div class="category-icon">
+          🛍️
+        </div>
+
+        <div class="category-name">
+          Shopping
+        </div>
+
       </div>
 
-      <div class="category-name">
-        Shopping
+
+      <div
+        class="category-card"
+        data-category="Food"
+      >
+
+        <div class="category-icon">
+          🍴
+        </div>
+
+        <div class="category-name">
+          Food
+        </div>
+
       </div>
+
+
+      <div
+        class="category-card"
+        data-category="Services"
+      >
+
+        <div class="category-icon">
+          🔧
+        </div>
+
+        <div class="category-name">
+          Services
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Transport"
+      >
+
+        <div class="category-icon">
+          🚕
+        </div>
+
+        <div class="category-name">
+          Transport
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Manufacturing"
+      >
+
+        <div class="category-icon">
+          🏭
+        </div>
+
+        <div class="category-name">
+          Business & Manufacturing
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Property"
+      >
+
+        <div class="category-icon">
+          🏠
+        </div>
+
+        <div class="category-name">
+          Property & Local Services
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Education"
+      >
+
+        <div class="category-icon">
+          🎓
+        </div>
+
+        <div class="category-name">
+          Education
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Professional"
+      >
+
+        <div class="category-icon">
+          💼
+        </div>
+
+        <div class="category-name">
+          Professional Services
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Agriculture"
+      >
+
+        <div class="category-icon">
+          🌾
+        </div>
+
+        <div class="category-name">
+          Agriculture
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Health"
+      >
+
+        <div class="category-icon">
+          🏥
+        </div>
+
+        <div class="category-name">
+          Health & Wellness
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Entertainment"
+      >
+
+        <div class="category-icon">
+          🎮
+        </div>
+
+        <div class="category-name">
+          Entertainment
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Media"
+      >
+
+        <div class="category-icon">
+          🎬
+        </div>
+
+        <div class="category-name">
+          Media & Cinema
+        </div>
+
+      </div>
+
+
+      <div
+        class="category-card"
+        data-category="Other"
+      >
+
+        <div class="category-icon">
+          📦
+        </div>
+
+        <div class="category-name">
+          Other
+        </div>
+
+      </div>
+
 
     </div>
 
-
-    <div
-      class="category-card"
-      data-category="Food"
-    >
-
-      <div class="category-icon">
-        🍴
-      </div>
-
-      <div class="category-name">
-        Food
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Services"
-    >
-
-      <div class="category-icon">
-        🔧
-      </div>
-
-      <div class="category-name">
-        Services
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Transport"
-    >
-
-      <div class="category-icon">
-        🚕
-      </div>
-
-      <div class="category-name">
-        Transport
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Manufacturing"
-    >
-
-      <div class="category-icon">
-        🏭
-      </div>
-
-      <div class="category-name">
-        Business & Manufacturing
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Property"
-    >
-
-      <div class="category-icon">
-        🏠
-      </div>
-
-      <div class="category-name">
-        Property & Local Services
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Education"
-    >
-
-      <div class="category-icon">
-        🎓
-      </div>
-
-      <div class="category-name">
-        Education
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Professional"
-    >
-
-      <div class="category-icon">
-        💼
-      </div>
-
-      <div class="category-name">
-        Professional Services
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Agriculture"
-    >
-
-      <div class="category-icon">
-        🌾
-      </div>
-
-      <div class="category-name">
-        Agriculture
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Health"
-    >
-
-      <div class="category-icon">
-        🏥
-      </div>
-
-      <div class="category-name">
-        Health & Wellness
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Entertainment"
-    >
-
-      <div class="category-icon">
-        🎮
-      </div>
-
-      <div class="category-name">
-        Entertainment
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Media"
-    >
-
-      <div class="category-icon">
-        🎬
-      </div>
-
-      <div class="category-name">
-        Media & Cinema
-      </div>
-
-    </div>
-
-
-    <div
-      class="category-card"
-      data-category="Other"
-    >
-
-      <div class="category-icon">
-        📦
-      </div>
-
-      <div class="category-name">
-        Other
-      </div>
-
-    </div>
-
-
-  </div>
-
+  </section>
 
 
   <!-- BUSINESSES -->
 
-  <h2 class="section-title">
-    Local Businesses
-  </h2>
+  <section id="businesses">
+
+    <h2 class="section-title">
+      Local Businesses
+    </h2>
 
 
-  <div
-    id="businessList"
-    class="business-list"
-  >
+    <div
+      id="businessList"
+      class="business-list"
+    >
 
-    <div class="loading-box">
-      Loading registered businesses...
+      <div class="loading-box">
+        Loading registered businesses...
+      </div>
+
     </div>
 
-  </div>
-
+  </section>
 
 
   <!-- BUSINESS REGISTRATION -->
@@ -814,7 +1331,6 @@
 </main>
 
 
-
 <!-- =========================
      FOOTER
 ========================= -->
@@ -830,7 +1346,6 @@
   </p>
 
 </footer>
-
 
 
 <!-- =========================
@@ -861,7 +1376,6 @@
     );
 
 
-
   /* =========================
      SPLASH CONTROL
   ========================= */
@@ -887,6 +1401,122 @@
   }
 
 
+  /* =========================
+     SIDEBAR
+  ========================= */
+
+  const sidebar =
+    document.getElementById(
+      "sidebar"
+    );
+
+  const sidebarOverlay =
+    document.getElementById(
+      "sidebarOverlay"
+    );
+
+  const menuButton =
+    document.getElementById(
+      "menuButton"
+    );
+
+  const closeSidebar =
+    document.getElementById(
+      "closeSidebar"
+    );
+
+
+  function openSidebar() {
+
+    sidebar.classList.add("open");
+
+    sidebarOverlay.classList.add("open");
+
+    document.body.classList.add(
+      "sidebar-open"
+    );
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+  }
+
+
+  function closeSidebarMenu() {
+
+    sidebar.classList.remove("open");
+
+    sidebarOverlay.classList.remove("open");
+
+    document.body.classList.remove(
+      "sidebar-open"
+    );
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }
+
+
+  menuButton.addEventListener(
+    "click",
+    openSidebar
+  );
+
+
+  closeSidebar.addEventListener(
+    "click",
+    closeSidebarMenu
+  );
+
+
+  sidebarOverlay.addEventListener(
+    "click",
+    closeSidebarMenu
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeSidebarMenu();
+
+      }
+
+    }
+  );
+
+
+  const sidebarCloseLinks =
+    document.querySelectorAll(
+      ".sidebar-close-link"
+    );
+
+
+  sidebarCloseLinks.forEach(
+    function(link) {
+
+      link.addEventListener(
+        "click",
+        function() {
+
+          closeSidebarMenu();
+
+        }
+      );
+
+    }
+  );
+
 
   /* =========================
      ELEMENTS
@@ -907,7 +1537,6 @@
   let allBusinesses = [];
 
   let selectedCategory = "";
-
 
 
   /* =========================
@@ -939,7 +1568,6 @@
       );
 
   }
-
 
 
   /* =========================
@@ -1011,7 +1639,6 @@
   }
 
 
-
   /* =========================
      DISPLAY BUSINESSES
   ========================= */
@@ -1036,7 +1663,6 @@
 
       return;
     }
-
 
 
     businesses.forEach(
@@ -1070,7 +1696,6 @@
           "View " +
           business.business_name
         );
-
 
 
         card.innerHTML = `
@@ -1127,7 +1752,6 @@
         `;
 
 
-
         /* =========================
            OPEN BUSINESS DETAILS
         ========================= */
@@ -1143,7 +1767,6 @@
         }
 
 
-
         card.addEventListener(
           "click",
           function() {
@@ -1152,7 +1775,6 @@
 
           }
         );
-
 
 
         card.addEventListener(
@@ -1182,7 +1804,6 @@
     );
 
   }
-
 
 
   /* =========================
@@ -1220,7 +1841,6 @@
             .toLowerCase();
 
 
-
           const matchesSearch =
             !searchText ||
             searchableText.includes(
@@ -1228,12 +1848,10 @@
             );
 
 
-
           const matchesCategory =
             !selectedCategory ||
             business.main_category ===
             selectedCategory;
-
 
 
           return (
@@ -1252,7 +1870,6 @@
   }
 
 
-
   /* =========================
      SEARCH
   ========================= */
@@ -1265,7 +1882,6 @@
 
     }
   );
-
 
 
   /* =========================
@@ -1297,7 +1913,7 @@
 
           document
             .getElementById(
-              "businessList"
+              "businesses"
             )
             .scrollIntoView({
               behavior: "smooth"
@@ -1308,7 +1924,6 @@
 
     }
   );
-
 
 
   /* =========================
@@ -1322,3 +1937,7 @@
 
 </body>
 </html>
+
+
+
+
