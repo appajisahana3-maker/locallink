@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -21,6 +21,10 @@
         #f6f8fb;
       color: #101828;
       min-height: 100vh;
+    }
+
+    body.viewer-open {
+      overflow: hidden;
     }
 
     header {
@@ -197,6 +201,15 @@
       border-radius: 18px;
       background: #182230;
       cursor: pointer;
+
+      /*
+        Important for phones:
+        normal tap interaction instead of
+        waiting for a long press.
+      */
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     .photo-card:first-child {
@@ -209,6 +222,13 @@
       display: block;
       object-fit: cover;
       transition: transform 0.35s ease;
+
+      /*
+        Let the parent receive the tap.
+      */
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     .photo-card:hover img {
@@ -225,6 +245,7 @@
       backdrop-filter: blur(8px);
       font-size: 11px;
       color: white;
+      pointer-events: none;
     }
 
     .photo-empty {
@@ -244,36 +265,67 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.88);
-      z-index: 100;
-      padding: 25px;
+      background: rgba(0,0,0,0.94);
+      z-index: 1000;
+      padding: 20px;
+
       align-items: center;
       justify-content: center;
+
+      touch-action: manipulation;
     }
 
     .viewer.open {
       display: flex;
     }
 
-    .viewer img {
+    .viewer-image {
       max-width: 95vw;
       max-height: 88vh;
+
+      width: auto;
+      height: auto;
+
       object-fit: contain;
+
       border-radius: 12px;
+
+      user-select: none;
+      pointer-events: none;
+      -webkit-user-drag: none;
     }
 
     .viewer-close {
       position: fixed;
-      right: 20px;
+      right: 18px;
       top: 18px;
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(255,255,255,0.25);
+
+      width: 50px;
+      height: 50px;
+
+      border: 1px solid rgba(255,255,255,0.35);
       border-radius: 50%;
-      background: rgba(0,0,0,0.5);
+
+      background: rgba(0,0,0,0.72);
       color: white;
-      font-size: 22px;
+
+      font-size: 30px;
+      line-height: 1;
+
       cursor: pointer;
+
+      z-index: 1100;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .viewer-close:active {
+      transform: scale(0.94);
     }
 
     /* =========================
@@ -459,6 +511,10 @@
       font-size: 13px;
     }
 
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 700px) {
 
       .container {
@@ -503,6 +559,20 @@
 
       .truth-value {
         text-align: left;
+      }
+
+      .viewer {
+        padding: 12px;
+      }
+
+      .viewer-image {
+        max-width: 96vw;
+        max-height: 82vh;
+      }
+
+      .viewer-close {
+        right: 14px;
+        top: 14px;
       }
     }
 
@@ -566,11 +636,14 @@
 </footer>
 
 
-<!-- PHOTO VIEWER -->
+<!-- =========================
+     PHOTO VIEWER
+========================= -->
 
 <div
   id="photoViewer"
   class="viewer"
+  aria-hidden="true"
 >
 
   <button
@@ -584,6 +657,7 @@
 
   <img
     id="viewerImage"
+    class="viewer-image"
     src=""
     alt="Business photo"
   >
@@ -613,11 +687,9 @@
     document.getElementById("content");
 
 
-  /*
-    These descriptions describe possible capabilities.
-    They do NOT claim that ordering, booking,
-    payment or reviews already work.
-  */
+  /* =========================
+     BUSINESS CAPABILITIES
+  ========================= */
 
   function getCapabilities(mainCategory, subCategory) {
 
@@ -857,36 +929,13 @@
   }
 
 
-  /*
-    Load the real photos belonging to this business.
-
-    Folder structure:
-
-    business-photos/
-      USER_ID/
-        BUSINESS_ID/
-          PHOTO.jpg
-  */
+  /* =========================
+     LOAD REAL BUSINESS PHOTOS
+  ========================= */
 
   async function loadBusinessPhotos(businessId) {
 
     try {
-
-      const {
-        data: sessionData
-      } =
-        await localLinkSupabase
-          .auth
-          .getSession();
-
-
-      /*
-        The public bucket lets customers see the
-        actual image using getPublicUrl().
-
-        We first obtain the business owner ID
-        from the businesses table.
-      */
 
       const {
         data: businessOwner,
@@ -1109,6 +1158,9 @@
           <div
             class="photo-card"
             data-photo-url="${escapeHtml(photo.url)}"
+            role="button"
+            tabindex="0"
+            aria-label="Open business photo ${index + 1}"
           >
 
             <img
@@ -1171,6 +1223,10 @@
   }
 
 
+  /* =========================
+     PHOTO VIEWER
+  ========================= */
+
   function activatePhotoViewer() {
 
     const viewer =
@@ -1183,28 +1239,104 @@
       document.getElementById("viewerClose");
 
 
+    function openPhoto(url) {
+
+      if (!url) {
+        return;
+      }
+
+
+      viewerImage.src = url;
+
+      viewer.classList.add("open");
+
+      viewer.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      document.body.classList.add(
+        "viewer-open"
+      );
+
+    }
+
+
+    function closePhoto() {
+
+      viewer.classList.remove("open");
+
+      viewer.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      viewerImage.src = "";
+
+      document.body.classList.remove(
+        "viewer-open"
+      );
+
+    }
+
+
+    /*
+      Use click rather than image interaction.
+
+      Because the image itself has
+      pointer-events:none, the card receives
+      the tap immediately on mobile.
+    */
+
     document
       .querySelectorAll(".photo-card")
       .forEach(function(card) {
 
         card.addEventListener(
           "click",
-          function() {
+          function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
 
             const url =
-              card.dataset.photoUrl;
+              card.getAttribute(
+                "data-photo-url"
+              );
 
 
-            if (!url) {
-              return;
+            openPhoto(url);
+
+          }
+        );
+
+
+        /*
+          Keyboard accessibility.
+        */
+
+        card.addEventListener(
+          "keydown",
+          function(event) {
+
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+
+              event.preventDefault();
+
+              const url =
+                card.getAttribute(
+                  "data-photo-url"
+                );
+
+
+              openPhoto(url);
+
             }
-
-
-            viewerImage.src =
-              url;
-
-
-            viewer.classList.add("open");
 
           }
         );
@@ -1212,17 +1344,28 @@
       });
 
 
+    /*
+      CLOSE BUTTON
+    */
+
     closeButton.addEventListener(
       "click",
-      function() {
+      function(event) {
 
-        viewer.classList.remove("open");
+        event.preventDefault();
 
-        viewerImage.src = "";
+        event.stopPropagation();
+
+        closePhoto();
 
       }
     );
 
+
+    /*
+      Tapping the dark background closes
+      the viewer.
+    */
 
     viewer.addEventListener(
       "click",
@@ -1230,9 +1373,7 @@
 
         if (event.target === viewer) {
 
-          viewer.classList.remove("open");
-
-          viewerImage.src = "";
+          closePhoto();
 
         }
 
@@ -1240,15 +1381,20 @@
     );
 
 
+    /*
+      Escape key closes it.
+    */
+
     document.addEventListener(
       "keydown",
       function(event) {
 
-        if (event.key === "Escape") {
+        if (
+          event.key === "Escape" &&
+          viewer.classList.contains("open")
+        ) {
 
-          viewer.classList.remove("open");
-
-          viewerImage.src = "";
+          closePhoto();
 
         }
 
@@ -1257,6 +1403,10 @@
 
   }
 
+
+  /* =========================
+     LOAD BUSINESS
+  ========================= */
 
   async function loadBusiness() {
 
@@ -1348,8 +1498,8 @@
 
 
     /*
-      Load the real photos after the business
-      itself has been successfully found.
+      Get the real photos belonging
+      to this exact business.
     */
 
     const photos =
@@ -1648,14 +1798,18 @@
 
 
     /*
-      Activate the real photo viewer only after
-      the business content has been rendered.
+      Activate photo interactions
+      after the HTML exists.
     */
 
     activatePhotoViewer();
 
   }
 
+
+  /* =========================
+     HTML SAFETY
+  ========================= */
 
   function escapeHtml(value) {
 
@@ -1669,10 +1823,14 @@
   }
 
 
+  /* =========================
+     START
+  ========================= */
+
   loadBusiness();
 
 </script>
 
 </body>
-</html>
-
+</html>      
+            
